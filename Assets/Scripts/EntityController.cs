@@ -43,17 +43,8 @@ public class EntityController : MonoBehaviour {
 		Destroy(this.gameObject);
 	}
 
-    void OnCollisionEnter2D(Collision2D coll) {
-        if (coll.transform.parent) {
-            Sneeze s = coll.transform.parent.GetComponent<Sneeze>();
-            if (s != null) {
-                Debug.Log(s.owner);
-            }
-        }
-      
-        // Add to sneezes
-        //if (coll.gameObject.tag == "Enemy") {
-        //    coll.gameObject.SendMessage("ApplyDamage", 10);
-        //}
+    void OnParticleCollision(GameObject coll)
+    {
+        Debug.Log("Entity hit by: " + coll.gameObject.tag);
     }
 }

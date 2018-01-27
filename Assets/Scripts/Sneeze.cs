@@ -4,16 +4,12 @@ using UnityEngine;
 
 public class Sneeze : DischargeController {
 
-	public PlayerController owner;
-
     void Start() {
-        Debug.Log("Sneeze");
+        Debug.Log("Sneezed");
     }
 
     void Update() {
 
     }
 }
-
-
 

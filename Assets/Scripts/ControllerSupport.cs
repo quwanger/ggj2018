@@ -67,6 +67,8 @@ public class ControllerSupport : MonoBehaviour
             if (rightTriggerInUse == false)
             {
                 timePressed = Time.time;
+        
+                // Start player charge bar
 
                 Debug.Log("RT Pressed");
 
@@ -81,7 +83,7 @@ public class ControllerSupport : MonoBehaviour
                 Debug.Log("RT Released");
                 Debug.Log("RT Held for: " + timePressed);
 
-                currPlayerController.Cough();
+                currPlayerController.Cough(timePressed);
             }
         }
 
@@ -90,6 +92,8 @@ public class ControllerSupport : MonoBehaviour
             if (leftTriggerInUse == false)
             {
                 timePressed = Time.time;
+
+                // Stop player charge bar
 
                 Debug.Log("LT Pressed");
 
@@ -105,7 +109,7 @@ public class ControllerSupport : MonoBehaviour
                 Debug.Log("LT Released");
                 Debug.Log("LT Held for: " + timePressed);
 
-                currPlayerController.Sneeze();
+                currPlayerController.Sneeze(timePressed);
             }
         }
     }
