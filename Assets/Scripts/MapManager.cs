@@ -41,6 +41,11 @@ public class MapManager : MonoBehaviour {
     private const float SPRITE_HEIGHT_ORTHO_SIZE = 5f;  //this value is the orthographic size of the camera... don't ask
     private const float SPRITE_WIDTH_ORTHO_SIZE = SPRITE_HEIGHT_ORTHO_SIZE * (SCREEN_WIDTH / SCREEN_HEIGHT);
 
+
+    [SerializeField]
+    private bool _enableTileReplace = true;
+    public bool EnableTileReplace { get { return _enableTileReplace; } }
+
     [SerializeField]
     private Transform _mapParent;
 
@@ -67,7 +72,7 @@ public class MapManager : MonoBehaviour {
 
                 Vector3 tilePosition = new Vector3(posX, posY, 0);
                 MapTile tempMapTile = Instantiate(_baseMapTile, tilePosition, Quaternion.identity, _mapParent);
-                tempMapTile.Init(tilePosition, GetTileSlideDirection(i, j));
+                tempMapTile.Init(this, tilePosition, GetTileSlideDirection(i, j));
                 _currentMapTiles[(i- WIDTH_STARTING_POSITION) * (j - HEIGHT_STARTING_POSITION)] = tempMapTile;
             }
         }
@@ -93,5 +98,24 @@ public class MapManager : MonoBehaviour {
         }
 
         return TileSlideDirection.None;
+    }
+
+    public void TriggerReplaceStore(MapTile mapTile)
+    {
+        StartCoroutine("ReplaceStore", mapTile);
+    }
+
+    IEnumerator ReplaceStore(MapTile mapTile)
+    {
+        yield return new WaitForSeconds(0.15f);
+        mapTile.StoreName = "Store " + Random.Range(1, 100).ToString();
+        StartCoroutine("AnimateStoreBackIn", mapTile);
+    }
+
+    IEnumerator AnimateStoreBackIn(MapTile mapTile)
+    {
+        yield return new WaitForSeconds(0.3f);
+        mapTile.TriggerAnimation(mapTile.SlideDirection, true);
+        mapTile.Init(this, mapTile.TilePosition, mapTile.SlideDirection);
     }
 }

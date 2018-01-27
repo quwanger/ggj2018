@@ -35,4 +35,18 @@ public class EntityController : MonoBehaviour {
 	virtual public void OnDieAnimEnd() {
 		Destroy(this.gameObject);
 	}
+
+    void OnCollisionEnter2D(Collision2D coll) {
+        if (coll.transform.parent) {
+            Sneeze s = coll.transform.parent.GetComponent<Sneeze>();
+            if (s != null) {
+                Debug.Log(s.owner);
+            }
+        }
+      
+        // Add to sneezes
+        //if (coll.gameObject.tag == "Enemy") {
+        //    coll.gameObject.SendMessage("ApplyDamage", 10);
+        //}
+    }
 }

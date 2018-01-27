@@ -18,6 +18,7 @@ public class PlayerController : EntityController
         if (Input.GetKeyDown(KeyCode.Space)) {
             Sneeze s = Instantiate(sneezePrefab, transform.position, transform.rotation);
             s.owner = this;
+            Debug.Log("Pressed Space");
             // s.timestamp = ms since epoch, not sure c# library
         }
     }
