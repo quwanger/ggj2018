@@ -11,14 +11,15 @@ public class ControllerSupport : MonoBehaviour
     protected float x;
     protected float y;
 
-    private PlayerController currPlayerController; 
+    private PlayerController currPlayerController;
 
     protected Rigidbody2D rb;
     public int myPlayerID;
 
     float timePressed = 0f;
 
-    void Start () {
+    void Start()
+    {
         //get player tag
         string myTag = this.tag;
         myPlayerID = Convert.ToInt32(myTag.Substring(myTag.Length - 1, 1));
@@ -27,8 +28,9 @@ public class ControllerSupport : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         currPlayerController = GetComponent<PlayerController>();
     }
-	
-	void Update () {
+
+    void Update()
+    {
         //move the player by getting the normalized vector created by the joystick
         Vector3 mydir = new Vector2(x, y).normalized;
         movePlayer();
@@ -53,9 +55,10 @@ public class ControllerSupport : MonoBehaviour
         //this moves the player directly; do not use unless player controller is not available. 
         /*rb.AddForce(dir * moveSpeed);
         rb.velocity = Vector3.ClampMagnitude(rb.velocity, 30.0f);*/
-    
+
         currPlayerController.Move(dir);
-        if(x == 0) {
+        if (x == 0)
+        {
             currPlayerController.StopMove();
         }
     }
@@ -64,53 +67,30 @@ public class ControllerSupport : MonoBehaviour
     private bool leftTriggerInUse = false;
 
 
-    void keyPressedTimer() {
-        Debug.Log(Input.GetAxis(string.Concat("TriggersR_", myPlayerID)));
-        
-        if (Input.GetAxis(string.Concat("TriggersR_", myPlayerID)) != 0)
+    void keyPressedTimer()
+    {
+        if (Input.GetButtonDown(string.Concat("A_", myPlayerID)))
         {
-            if (rightTriggerInUse == false)
-            {
-                timePressed = Time.time;
-        
-                // Start player charge bar
-                Debug.Log("Pressed TriggersR_" + myPlayerID);
-
-                rightTriggerInUse = true;
-            }
-        }
-        if (Input.GetAxis(string.Concat("TriggersR_", myPlayerID)) == 0)
-        {
-            if (rightTriggerInUse) {
-                rightTriggerInUse = false;
-                timePressed = Time.time - timePressed;
-                Debug.Log("Released TriggersR_"+ myPlayerID);
-
-                currPlayerController.Cough(timePressed);
-            }
+            timePressed = Time.time;
         }
 
-        if (Input.GetAxis(string.Concat("TriggersL_", myPlayerID)) != 0)
+        if (Input.GetButtonUp(string.Concat("A_", myPlayerID)))
         {
-            if (leftTriggerInUse == false)
-            {
-                timePressed = Time.time;
-
-                // Stop player charge bar
-                Debug.Log("Pressed TriggersL_"+ myPlayerID);
-
-                leftTriggerInUse = true;
-            }
+            timePressed = Time.time - timePressed;
+            Debug.Log("Player " + myPlayerID + " Pressed A for : " + timePressed + " Seconds");
+            currPlayerController.Cough(timePressed);
         }
-        if (Input.GetAxis(string.Concat("TriggersL_", myPlayerID)) == 0)
+
+        if(Input.GetButtonDown(string.Concat("X_", myPlayerID)))
         {
-            if (leftTriggerInUse)
-            {
-                leftTriggerInUse = false;
-                timePressed = Time.time - timePressed;
-                currPlayerController.Sneeze(timePressed);
-                Debug.Log("Released TriggersL_"+ myPlayerID);
-            }
+            timePressed = Time.time;
+        }
+
+        if (Input.GetButtonUp(string.Concat("X_", myPlayerID)))
+        {
+            timePressed = Time.time - timePressed;
+            Debug.Log("Player " + myPlayerID + " Pressed X for : " + timePressed + " Seconds");
+            currPlayerController.Sneeze(timePressed);
         }
     }
 }
