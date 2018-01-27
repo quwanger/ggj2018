@@ -2,11 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MapTile : MonoBehaviour {
-
-    private const float MIN_LIFESPAN = 1f;
-    private const float MAX_LIFESPAN = 5f;
-
+public class MapTile : MonoBehaviour
+{
     private Animator _animator;
 
     private MapManager _mapManager;
@@ -21,9 +18,22 @@ public class MapTile : MonoBehaviour {
     private float _tileLifeCounter;
     private bool _isDying = false;
 
+    private float _liquidationDuration;
+
+    private bool _inLiquidation = false;
+    public bool InLiquidation { get { return _inLiquidation; } }
+
     [SerializeField]
     private string _storeName;
     public string StoreName { get { return _storeName; } set { _storeName = value; } }
+
+    [SerializeField]
+    private SpriteRenderer _storefrontSpriteRenderer;
+
+    [SerializeField]
+    private GameObject _announcementGameObject;
+    [SerializeField]
+    private SpriteRenderer _announcementSpriteRenderer;
 
     [SerializeField]
     private TextMesh _textName;
@@ -32,6 +42,9 @@ public class MapTile : MonoBehaviour {
     [SerializeField]
     private TextMesh _textSlideDirection;
 
+    [SerializeField]
+    private List<Sprite> _announcements = new List<Sprite>();
+
     public void Awake()
     {
         _animator = GetComponent<Animator>();
@@ -39,25 +52,42 @@ public class MapTile : MonoBehaviour {
 
     public void Update()
     {
-        if (_isDying && _slideDirection != MapManager.TileSlideDirection.None && _mapManager.EnableTileReplace)
+        if (_slideDirection != MapManager.TileSlideDirection.None && _mapManager.EnableTileReplace)
         {
-            _tileLifeCounter -= Time.deltaTime;
-
-            if (_tileLifeCounter < 0)
+            if (_isDying)
             {
-                TriggerExtinction();
+                _tileLifeCounter -= Time.deltaTime;
+
+                if (_tileLifeCounter < 0)
+                {
+                    TriggerLiquidation();
+                }
+            }
+            else if(_inLiquidation)
+            {
+                _liquidationDuration -= Time.deltaTime;
+
+                if (_liquidationDuration < 0)
+                {
+                    TriggerStoreClosing();
+                }
             }
         }
     }
 
-    public void Init(MapManager mapManager, Vector3 tilePosition, MapManager.TileSlideDirection slideDirection)
+    public void Init(MapManager mapManager, Vector3 tilePosition, MapManager.TileSlideDirection slideDirection, Sprite storeSprite)
     {
         _mapManager = mapManager;
         _tilePosition = tilePosition;
         _slideDirection = slideDirection;
+        _storefrontSpriteRenderer.sprite = storeSprite;
 
-        _tileLifeCounter = Random.Range(MIN_LIFESPAN, MAX_LIFESPAN);
+        _announcementGameObject.SetActive(false);
+
+        ResetLifeSpan();
         _isDying = true;
+
+        _liquidationDuration = Random.Range(mapManager.MinLiquidationTime, mapManager.MaxLiquidationTime);
 
         //TODO: set text (this will be removed)
         _textName.text = _storeName;
@@ -86,9 +116,30 @@ public class MapTile : MonoBehaviour {
         }
     }
 
-    private void TriggerExtinction()
+    private void ResetLifeSpan()
     {
-        _isDying = false;
+        _tileLifeCounter = Random.Range(_mapManager.MinExpireTime, _mapManager.MaxExpireTime);
+    }
+
+    private void TriggerLiquidation()
+    {
+        if (_mapManager.StoresInLiquidation.Count < _mapManager.MaxStoresInLiquidation)
+        {
+            _mapManager.TriggerLiquidation(this);
+            _isDying = false;
+            _inLiquidation = true;
+            _announcementGameObject.SetActive(true);
+            _announcementSpriteRenderer.sprite = _announcements[Random.Range(0, _announcements.Count)];
+        }
+        else
+        {
+            ResetLifeSpan();
+        }
+    }
+
+    private void TriggerStoreClosing()
+    {
+        _inLiquidation = false;
         TriggerAnimation(_slideDirection, false);
         _mapManager.TriggerReplaceStore(this);
     }
