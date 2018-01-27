@@ -6,7 +6,9 @@ public class EntityController : MonoBehaviour {
 
 	public float speed;
 
-	public List<Sneeze> sneezes;
+	//cough tracking
+	public int powerOfLastCough;
+	public string winningPlayerTag;
 
 	protected Rigidbody2D _rigidBody;
 	protected Animator _animator;
@@ -17,18 +19,30 @@ public class EntityController : MonoBehaviour {
 		_animator = GetComponent<Animator>();
 	}
 
-	virtual public void Move(Vector2 direction) {
+	virtual public void Move(Vector2 direction, float speedModifier = 1.0f) {
 
-		_rigidBody.AddForce(direction * speed * Time.deltaTime * 60);
+		_animator.SetBool("walking", true);
+
+		if(direction.x > 0) transform.localScale = new Vector2(-1, 1);
+		else transform.localScale = new Vector2(1, 1);
+
+		_rigidBody.AddForce(direction * speed * speedModifier * Time.deltaTime * 60);
 	}
 
-	virtual protected void Sneeze() {
-
-		_animator.SetTrigger("Sneeze");
+	virtual public void Sneeze(float timePressed = 1.0f) {
+ 
+        _animator.SetTrigger("Sneeze");
 		// return GameObject.Instantiate(projectile, shootPoint.position, transform.rotation);
 	}
 
-	virtual protected void Die() {
+    virtual public void Cough(float timePressed = 1.0f)
+    {
+
+        _animator.SetTrigger("Cough");
+        // return GameObject.Instantiate(projectile, shootPoint.position, transform.rotation);
+    }
+
+    virtual protected void Die() {
 		_animator.SetTrigger("Die");
 	}
 
@@ -36,17 +50,8 @@ public class EntityController : MonoBehaviour {
 		Destroy(this.gameObject);
 	}
 
-    void OnCollisionEnter2D(Collision2D coll) {
-        if (coll.transform.parent) {
-            Sneeze s = coll.transform.parent.GetComponent<Sneeze>();
-            if (s != null) {
-                Debug.Log(s.owner);
-            }
-        }
-      
-        // Add to sneezes
-        //if (coll.gameObject.tag == "Enemy") {
-        //    coll.gameObject.SendMessage("ApplyDamage", 10);
-        //}
+    void OnParticleCollision(GameObject coll)
+    {
+        Debug.Log("Entity hit by: " + coll.gameObject.tag);
     }
 }

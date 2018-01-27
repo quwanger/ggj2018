@@ -2,21 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sneeze : MonoBehaviour {
-
-	public PlayerController owner;
-	public float timestamp;
-	public int power;
-
-    void Awake () {
-
-    }
+public class Sneeze : DischargeController {
 
     void Start() {
-        Debug.Log("Sneeze");
+        Debug.Log("Sneezed");
     }
 
     void Update() {
 
     }
 }
+

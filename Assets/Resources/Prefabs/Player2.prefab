@@ -22,10 +22,9 @@ GameObject:
   - component: {fileID: 114966335671794918}
   - component: {fileID: 114349172407741762}
   - component: {fileID: 50109277203477284}
-  - component: {fileID: 61676112178914362}
   - component: {fileID: 95298370425425698}
   - component: {fileID: 58531526486632350}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player2
   m_TagString: player2
   m_Icon: {fileID: 0}
@@ -40,7 +39,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4347322121799384}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +55,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4317842841088894}
   - component: {fileID: 212191878212251320}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: New Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -139,31 +138,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0.3}
   serializedVersion: 2
   m_Radius: 0.25
---- !u!61 &61676112178914362
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1046268740809332}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.30084193}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.5302129, y: 0.54272056}
-  m_EdgeRadius: 0
 --- !u!95 &95298370425425698
 Animator:
   serializedVersion: 3
@@ -204,10 +178,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 40
-  sneezes: []
-  sneezePrefab: {fileID: 114483896591540074, guid: 12dcda8f9c257b345b6917172e71568a,
+  powerOfLastCough: 0
+  winningPlayerTag: 
+  sneezePrefab: {fileID: 114449235467577754, guid: 12dcda8f9c257b345b6917172e71568a,
     type: 2}
-  sneezePower: 1
+  coughPrefab: {fileID: 114600290910305600, guid: e914736f3b104cc4ab44cd270ba751cd,
+    type: 2}
 --- !u!212 &212191878212251320
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -239,7 +215,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 8
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
