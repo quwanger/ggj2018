@@ -13,6 +13,8 @@ public class SpawnerController : MonoBehaviour {
 
 	public List<NpcController> spawnedNpcs;
 
+	public Transform tempGoal;
+
 	// Use this for initialization
 	void Start () {
 		spawnedNpcs = new List<NpcController>();
@@ -30,7 +32,7 @@ public class SpawnerController : MonoBehaviour {
 			yield return new WaitForSeconds(Random.Range(rateOffset + rateLowerLimit, rateOffset + rateUpperLimit));
 			NpcController n = Instantiate(npcToSpawn, transform.position, Quaternion.identity);
 			n.timeout = 10.0f;
-			n.targetGoal = new Vector2(0.0f, transform.position.y);
+			n.targetGoal = tempGoal.position;
 			spawnedNpcs.Add(n);
 		}
 	}

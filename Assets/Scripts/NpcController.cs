@@ -5,11 +5,10 @@ using UnityEngine;
 public class NpcController : EntityController
 {
 	public float timeout;
-	public Vector2? targetGoal;
+	public Vector2 targetGoal = Vector2.zero;
 
 	// Use this for initialization
 	void Start () {
-		targetGoal = null;
 		StartCoroutine("Timeout");	
 	}
 	
@@ -17,11 +16,11 @@ public class NpcController : EntityController
 	void Update () {
 		
 		Debug.Log(targetGoal);
-		if (targetGoal != null) {
-			if(Vector2.Distance(transform.position, (Vector2)targetGoal) <= 0.5f) {
-				targetGoal = null;
+		if (targetGoal != Vector2.zero) {
+			if(Vector2.Distance(transform.position, targetGoal) <= 0.5f) {
+				targetGoal = Vector2.zero;
 			} else {
-				Vector2 direction = (Vector2)transform.position - (Vector2)targetGoal;
+				Vector2 direction = targetGoal - (Vector2)transform.position;
 				direction.Normalize();
 				Debug.Log(direction);
 				Move(direction);
