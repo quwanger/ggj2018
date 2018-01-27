@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour {
         List<PlayerController> players = new List<PlayerController>();
 
         // to-do should be dynamic based on active players
-        int numOfPlayers = 1;
+        int numOfPlayers = 4;
         for(int i = 0; i < numOfPlayers; i++) {
            players.Add(Instantiate(playerPrefabs[i], transform.position, transform.rotation));
 
