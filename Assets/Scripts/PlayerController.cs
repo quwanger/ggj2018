@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : EntityController
-{
+public class PlayerController : EntityController {
 
 	// Use this for initialization
 	void Start () {
@@ -35,6 +34,6 @@ public class PlayerController : EntityController
 
 	void Sneeze () {
 		// Instansiate sneeze gameobject
-		
+
 	}
 }
