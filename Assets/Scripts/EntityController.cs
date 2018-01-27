@@ -6,7 +6,7 @@ public class EntityController : MonoBehaviour {
 
 	public float speed;
 
-	public List<Sneeze> sneezeCount;
+	public List<Sneeze> sneezes;
 
 	protected Rigidbody2D _rigidBody;
 	protected Animator _animator;
@@ -17,7 +17,7 @@ public class EntityController : MonoBehaviour {
 		_animator = GetComponent<Animator>();
 	}
 
-	virtual protected void Move(Vector2 direction) {
+	virtual public void Move(Vector2 direction) {
 
 		_rigidBody.AddForce(direction * speed * Time.deltaTime * 60);
 	}
