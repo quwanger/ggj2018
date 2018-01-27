@@ -10,12 +10,13 @@ public class ControllerSupport : MonoBehaviour
     //global vars
     protected float x;
     protected float y;
-    protected float moveSpeed = 6;
 
     private PlayerController currPlayerController; 
 
     protected Rigidbody2D rb;
     int myPlayerID;
+
+    float timePressed = 0f;
 
     void Start () {
         //get player tag
@@ -31,6 +32,9 @@ public class ControllerSupport : MonoBehaviour
         //move the player by getting the normalized vector created by the joystick
         Vector3 mydir = new Vector2(x, y).normalized;
         movePlayer();
+
+        //get keypresses.
+        keyPressedTimer();
     }
 
     void movePlayer()
@@ -51,5 +55,62 @@ public class ControllerSupport : MonoBehaviour
         rb.velocity = Vector3.ClampMagnitude(rb.velocity, 30.0f);*/
     
         currPlayerController.Move(dir);
+    }
+
+    private bool rightTriggerInUse = false;
+    private bool leftTriggerInUse = false;
+
+
+    void keyPressedTimer() {
+        if (Input.GetAxis(string.Concat("TriggersR_", myPlayerID)) != 0)
+        {
+            if (rightTriggerInUse == false)
+            {
+                timePressed = Time.time;
+        
+                // Start player charge bar
+
+                Debug.Log("RT Pressed");
+
+                rightTriggerInUse = true;
+            }
+        }
+        if (Input.GetAxis(string.Concat("TriggersR_", myPlayerID)) == 0)
+        {
+            if (rightTriggerInUse) {
+                rightTriggerInUse = false;
+                timePressed = Time.time - timePressed;
+                Debug.Log("RT Released");
+                Debug.Log("RT Held for: " + timePressed);
+
+                currPlayerController.Cough(timePressed);
+            }
+        }
+
+        if (Input.GetAxis(string.Concat("TriggersL_", myPlayerID)) != 0)
+        {
+            if (leftTriggerInUse == false)
+            {
+                timePressed = Time.time;
+
+                // Stop player charge bar
+
+                Debug.Log("LT Pressed");
+
+                leftTriggerInUse = true;
+            }
+        }
+        if (Input.GetAxis(string.Concat("TriggersL_", myPlayerID)) == 0)
+        {
+            if (leftTriggerInUse)
+            {
+                leftTriggerInUse = false;
+                timePressed = Time.time - timePressed;
+                Debug.Log("LT Released");
+                Debug.Log("LT Held for: " + timePressed);
+
+                currPlayerController.Sneeze(timePressed);
+            }
+        }
     }
 }
