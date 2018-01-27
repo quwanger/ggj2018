@@ -17,6 +17,8 @@ public class ControllerSupport : MonoBehaviour
     protected Rigidbody2D rb;
     int myPlayerID;
 
+    float timePressed = 0f;
+
     void Start () {
         //get player tag
         string myTag = this.tag;
@@ -31,6 +33,9 @@ public class ControllerSupport : MonoBehaviour
         //move the player by getting the normalized vector created by the joystick
         Vector3 mydir = new Vector2(x, y).normalized;
         movePlayer();
+
+        //get keypresses.
+        keyPressedTimer();
     }
 
     void movePlayer()
@@ -51,5 +56,19 @@ public class ControllerSupport : MonoBehaviour
         rb.velocity = Vector3.ClampMagnitude(rb.velocity, 30.0f);*/
     
         currPlayerController.Move(dir);
+    }
+
+    void keyPressedTimer()
+    {
+        if (Input.GetButtonDown(string.Concat("A_", myPlayerID)))
+        {
+            timePressed = Time.time;
+        }
+
+        if (Input.GetButtonUp(string.Concat("A_", myPlayerID)))
+        {
+            timePressed = Time.time - timePressed;
+            Debug.Log("Player " + myPlayerID + " Pressed A for : " + timePressed + " Seconds");
+        }
     }
 }
