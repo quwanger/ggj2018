@@ -67,7 +67,7 @@ public class MapManager : MonoBehaviour {
 
                 Vector3 tilePosition = new Vector3(posX, posY, 0);
                 MapTile tempMapTile = Instantiate(_baseMapTile, tilePosition, Quaternion.identity, _mapParent);
-                tempMapTile.Init(tilePosition, GetTileSlideDirection(i, j));
+                tempMapTile.Init(this, tilePosition, GetTileSlideDirection(i, j));
                 _currentMapTiles[(i- WIDTH_STARTING_POSITION) * (j - HEIGHT_STARTING_POSITION)] = tempMapTile;
             }
         }
@@ -93,5 +93,17 @@ public class MapManager : MonoBehaviour {
         }
 
         return TileSlideDirection.None;
+    }
+
+    public void ReplaceStore(MapTile mapTile)
+    {
+        StartCoroutine("AnimateStoreBackIn", mapTile);
+    }
+
+    IEnumerator AnimateStoreBackIn(MapTile mapTile)
+    {
+        yield return new WaitForSeconds(0.3f);
+        mapTile.TriggerAnimation(mapTile.SlideDirection, true);
+        mapTile.Init(this, mapTile.TilePosition, mapTile.SlideDirection);
     }
 }
