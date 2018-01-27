@@ -6,7 +6,7 @@ public class EntityController : MonoBehaviour {
 
 	public float speed;
 
-	public List<Sneeze> sneezeCount;
+	public List<Sneeze> sneezes;
 
 	protected Rigidbody2D _rigidBody;
 	protected Animator _animator;
