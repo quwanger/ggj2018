@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  sneezeCount: []
+  sneezes: []
   timeout: 0
   targetGoal: {x: 0, y: 0}
 --- !u!212 &212932188983689254

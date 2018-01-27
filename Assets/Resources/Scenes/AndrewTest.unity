@@ -157,7 +157,7 @@ Prefab:
         type: 2}
       propertyPath: tempGoal
       value: 
-      objectReference: {fileID: 616235627}
+      objectReference: {fileID: 240933661}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d8b742fbdfbe28542ac0a272f6518278, type: 2}
   m_IsPrefabParent: 0
@@ -376,7 +376,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 40
-  sneezeCount: []
+  sneezes: []
+  sneezePrefab: {fileID: 0}
+  sneezePower: 1
 --- !u!4 &211152572
 Transform:
   m_ObjectHideFlags: 0
@@ -390,7 +392,35 @@ Transform:
   m_Children:
   - {fileID: 1058617464}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &240933660
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 240933661}
+  m_Layer: 0
+  m_Name: test npc goal
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &240933661
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 240933660}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.81, y: -3.67, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &255533839
 GameObject:
@@ -962,7 +992,7 @@ Transform:
   m_Children:
   - {fileID: 603931027}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1248073521
 MonoBehaviour:
@@ -976,7 +1006,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 40
-  sneezeCount: []
+  sneezes: []
+  sneezePrefab: {fileID: 0}
+  sneezePower: 1
 --- !u!1 &1504040058
 GameObject:
   m_ObjectHideFlags: 0
@@ -1215,7 +1247,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 40
-  sneezeCount: []
+  sneezes: []
+  sneezePrefab: {fileID: 0}
+  sneezePower: 1
 --- !u!1 &1619349254
 GameObject:
   m_ObjectHideFlags: 0
@@ -1454,7 +1488,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 40
-  sneezeCount: []
+  sneezes: []
+  sneezePrefab: {fileID: 0}
+  sneezePower: 1
 --- !u!1 &1850398974
 GameObject:
   m_ObjectHideFlags: 0

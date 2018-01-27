@@ -56,3 +56,4 @@ MonoBehaviour:
   rateUpperLimit: 5
   rateOffset: 0
   spawnedNpcs: []
+  tempGoal: {fileID: 0}
