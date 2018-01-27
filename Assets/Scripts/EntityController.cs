@@ -21,9 +21,7 @@ public class EntityController : MonoBehaviour {
 
 	virtual public void Move(Vector2 direction, float speedModifier = 1.0f) {
 
-		Debug.Log(_animator.GetBool("walking"));
 		if(!_animator.GetBool("walking")) {
-			Debug.Log("walking");
 			_animator.SetBool("walking", true);
 		}
 

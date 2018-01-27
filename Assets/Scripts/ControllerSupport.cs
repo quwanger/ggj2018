@@ -14,7 +14,7 @@ public class ControllerSupport : MonoBehaviour
     private PlayerController currPlayerController; 
 
     protected Rigidbody2D rb;
-    int myPlayerID;
+    public int myPlayerID;
 
     float timePressed = 0f;
 
@@ -65,6 +65,8 @@ public class ControllerSupport : MonoBehaviour
 
 
     void keyPressedTimer() {
+        Debug.Log(Input.GetAxis(string.Concat("TriggersR_", myPlayerID)));
+        
         if (Input.GetAxis(string.Concat("TriggersR_", myPlayerID)) != 0)
         {
             if (rightTriggerInUse == false)
@@ -72,6 +74,7 @@ public class ControllerSupport : MonoBehaviour
                 timePressed = Time.time;
         
                 // Start player charge bar
+                Debug.Log("Pressed TriggersR_" + myPlayerID);
 
                 rightTriggerInUse = true;
             }
@@ -81,6 +84,7 @@ public class ControllerSupport : MonoBehaviour
             if (rightTriggerInUse) {
                 rightTriggerInUse = false;
                 timePressed = Time.time - timePressed;
+                Debug.Log("Released TriggersR_"+ myPlayerID);
 
                 currPlayerController.Cough(timePressed);
             }
@@ -93,6 +97,7 @@ public class ControllerSupport : MonoBehaviour
                 timePressed = Time.time;
 
                 // Stop player charge bar
+                Debug.Log("Pressed TriggersL_"+ myPlayerID);
 
                 leftTriggerInUse = true;
             }
@@ -104,6 +109,7 @@ public class ControllerSupport : MonoBehaviour
                 leftTriggerInUse = false;
                 timePressed = Time.time - timePressed;
                 currPlayerController.Sneeze(timePressed);
+                Debug.Log("Released TriggersL_"+ myPlayerID);
             }
         }
     }
