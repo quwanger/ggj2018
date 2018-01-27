@@ -165,6 +165,7 @@ MonoBehaviour:
   _escalatorSprites:
   - {fileID: 21300000, guid: 601dd5724e0976540b4f6e5a7baff2d4, type: 3}
   - {fileID: 21300000, guid: 2e4719b4eabe6b74f8ff3da5875cc6b1, type: 3}
+  - {fileID: 21300000, guid: d4fc9e43a075d2a4c9b6c8e133866dc3, type: 3}
   _escalatorSpriteRenderer: {fileID: 212681941260872376}
 --- !u!212 &212681941260872376
 SpriteRenderer:

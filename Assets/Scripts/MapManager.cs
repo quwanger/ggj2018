@@ -32,6 +32,10 @@ public class MapManager : MonoBehaviour {
     public bool EnableTileReplace { get { return _enableTileReplace; } }
 
     [SerializeField]
+    private int _maxStoresInLiquidation;
+    public int MaxStoresInLiquidation { get { return _maxStoresInLiquidation; } }
+
+    [SerializeField]
     private float _minExpireTime;
     public float MinExpireTime { get { return _minExpireTime; } }
     [SerializeField]
@@ -44,6 +48,16 @@ public class MapManager : MonoBehaviour {
     [SerializeField]
     private float _maxLiquidationTime;
     public float MaxLiquidationTime { get { return _maxLiquidationTime; } }
+
+    [SerializeField]
+    private float _minEscalatorTime;
+    public float MinEscalatorTime { get { return _minEscalatorTime; } }
+    [SerializeField]
+    private float _maxEscalatorTime;
+    public float MaxEscalatorTime { get { return _maxEscalatorTime; } }
+    [SerializeField]
+    private float _escalatorShutdownTime;
+    public float EscalatorShutdownTime { get { return _escalatorShutdownTime; } }
 
     [SerializeField]
     private Transform _mapParent;
@@ -61,6 +75,9 @@ public class MapManager : MonoBehaviour {
 
     private List<Sprite> _availableStorefronts = new List<Sprite>();
     private List<Sprite> _storefrontsInUse = new List<Sprite>();
+
+    private List<MapTile> _storesInLiquidation = new List<MapTile>();
+    public List<MapTile> StoresInLiquidation { get { return _storesInLiquidation; } }
 
     private MapTile[] _currentMapTiles = new MapTile[12];
     private List<Escalator> _currentEscalators = new List<Escalator>();
@@ -170,9 +187,10 @@ public class MapManager : MonoBehaviour {
         if (spawnEscalator)
         {
             Escalator tempEscalator = Instantiate(_escalator, escalatorSpawn.SpawnPosition, Quaternion.identity, _escalatorParent);
+            tempEscalator.transform.parent.SetAsFirstSibling();
             escalatorSpawn.IsTaken = true;
             _currentEscalators.Add(tempEscalator);
-            tempEscalator.Init(Random.Range(0, 2) > 0 ? Escalator.EscalatorDirectionVertical.Up : Escalator.EscalatorDirectionVertical.Down, Random.Range(0, 2) > 0 ? Escalator.EscalatorDirectionHorizontal.Right : Escalator.EscalatorDirectionHorizontal.Left);
+            tempEscalator.Init(this, Random.Range(0, 2) > 0 ? Escalator.EscalatorDirectionVertical.Up : Escalator.EscalatorDirectionVertical.Down, Random.Range(0, 2) > 0 ? Escalator.EscalatorDirectionHorizontal.Right : Escalator.EscalatorDirectionHorizontal.Left);
         }
 
         return spawnEscalator;
@@ -215,8 +233,13 @@ public class MapManager : MonoBehaviour {
         return TileSlideDirection.None;
     }
 
+    public void TriggerLiquidation(MapTile store)
+    {
+        _storesInLiquidation.Add(store);
+    }
     public void TriggerReplaceStore(MapTile mapTile)
     {
+        _storesInLiquidation.Remove(mapTile);
         StartCoroutine("ReplaceStore", mapTile);
     }
 

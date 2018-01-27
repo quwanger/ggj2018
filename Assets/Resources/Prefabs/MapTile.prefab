@@ -419,7 +419,12 @@ MonoBehaviour:
   _textSlideDirection: {fileID: 102995040904910054}
   _announcements:
   - {fileID: 21300000, guid: d675bc73a6f29b9469ea08cd6f7eda07, type: 3}
+  - {fileID: 21300000, guid: 0f7a0381b002be741b6eadfad735c312, type: 3}
+  - {fileID: 21300000, guid: 8c9233d04a3759940acc46765494fde1, type: 3}
+  - {fileID: 21300000, guid: d288db2367a18a04fa49080aafb910d6, type: 3}
+  - {fileID: 21300000, guid: b1c3096c3f3ba554bb29615ccce0cc91, type: 3}
   - {fileID: 21300000, guid: 02e749df53c460f4ca745833aba13e42, type: 3}
+  - {fileID: 21300000, guid: 59779b81047c3c045b3f8d9856e7004a, type: 3}
 --- !u!212 &212061361015608996
 SpriteRenderer:
   m_ObjectHideFlags: 1

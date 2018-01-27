@@ -84,7 +84,7 @@ public class MapTile : MonoBehaviour
 
         _announcementGameObject.SetActive(false);
 
-        _tileLifeCounter = Random.Range(mapManager.MinExpireTime, mapManager.MaxExpireTime);
+        ResetLifeSpan();
         _isDying = true;
 
         _liquidationDuration = Random.Range(mapManager.MinLiquidationTime, mapManager.MaxLiquidationTime);
@@ -116,12 +116,25 @@ public class MapTile : MonoBehaviour
         }
     }
 
+    private void ResetLifeSpan()
+    {
+        _tileLifeCounter = Random.Range(_mapManager.MinExpireTime, _mapManager.MaxExpireTime);
+    }
+
     private void TriggerLiquidation()
     {
-        _isDying = false;
-        _inLiquidation = true;
-        _announcementGameObject.SetActive(true);
-        _announcementSpriteRenderer.sprite = _announcements[Random.Range(0, _announcements.Count)];
+        if (_mapManager.StoresInLiquidation.Count < _mapManager.MaxStoresInLiquidation)
+        {
+            _mapManager.TriggerLiquidation(this);
+            _isDying = false;
+            _inLiquidation = true;
+            _announcementGameObject.SetActive(true);
+            _announcementSpriteRenderer.sprite = _announcements[Random.Range(0, _announcements.Count)];
+        }
+        else
+        {
+            ResetLifeSpan();
+        }
     }
 
     private void TriggerStoreClosing()
