@@ -9,6 +9,8 @@ TagManager:
   - 1
   - player3
   - player4
+  - cough_ps
+  - sneeze_ps
   layers:
   - Default
   - TransparentFX
