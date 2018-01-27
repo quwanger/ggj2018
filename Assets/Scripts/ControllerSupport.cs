@@ -8,7 +8,7 @@ public class ControllerSupport : MonoBehaviour {
 
     protected float x;
     protected float y;
-    protected float moveSpeed = 2;
+    protected float moveSpeed = 6;
 
     protected Rigidbody rb;
     int myPlayerID;
