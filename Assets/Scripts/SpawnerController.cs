@@ -7,17 +7,21 @@ public class SpawnerController : MonoBehaviour {
 
 	public NpcController npcToSpawn;
 	//spawn rate of npcs
-	public int rateLowerLimit = 3;
-	public int rateUpperLimit = 5;
-	public int rateOffset = 0;
+	[SerializeField]
+	public float rateLowerLimit = 3;
+	[SerializeField]
+	public float rateUpperLimit = 5;
+	public float rateOffset = 0; //for flash sales - add this to lower and upper rate to increase or decrease spawn rate 
 
-	public List<NpcController> spawnedNpcs;
+	[SerializeField]
+	public int burstLowerLimit = 1;
+	[SerializeField]
+	public int burstUpperLimit = 10;
 
 	public Transform tempGoal;
 
 	// Use this for initialization
 	void Start () {
-		spawnedNpcs = new List<NpcController>();
 		StartCoroutine("SpawnNpc");
 	}
 	
@@ -29,11 +33,13 @@ public class SpawnerController : MonoBehaviour {
 	IEnumerator SpawnNpc() {
 
 		while(true) {
-			yield return new WaitForSeconds(Random.Range(rateOffset + rateLowerLimit, rateOffset + rateUpperLimit));
-			NpcController n = Instantiate(npcToSpawn, transform.position, Quaternion.identity);
-			n.timeout = 10.0f;
-			n.targetGoal = tempGoal.position;
-			spawnedNpcs.Add(n);
+			float offset = Mathf.Max(rateOffset, 0);
+			yield return new WaitForSeconds(Random.Range(offset + rateLowerLimit, offset + rateUpperLimit));
+			for(int i = 0; i < Random.Range(burstLowerLimit, burstUpperLimit); i++) {
+				yield return new WaitForSeconds(Random.Range(0.05f, 0.2f));
+				NpcController n = Instantiate(npcToSpawn, transform.position, Quaternion.identity);
+				n.targetGoal = tempGoal.position;
+			}
 		}
 	}
 }

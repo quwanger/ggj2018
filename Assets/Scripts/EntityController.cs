@@ -6,7 +6,9 @@ public class EntityController : MonoBehaviour {
 
 	public float speed;
 
-	public List<Sneeze> sneezes;
+	//cough tracking
+	public int powerOfLastCough;
+	public string winningPlayerTag;
 
 	protected Rigidbody2D _rigidBody;
 	protected Animator _animator;
@@ -17,9 +19,9 @@ public class EntityController : MonoBehaviour {
 		_animator = GetComponent<Animator>();
 	}
 
-	virtual public void Move(Vector2 direction) {
+	virtual public void Move(Vector2 direction, float speedModifier = 1.0f) {
 
-		_rigidBody.AddForce(direction * speed * Time.deltaTime * 60);
+		_rigidBody.AddForce(direction * speed * speedModifier * Time.deltaTime * 60);
 	}
 
 	virtual protected void Sneeze() {

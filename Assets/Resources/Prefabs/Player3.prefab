@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4180656653039988}
   - component: {fileID: 212945458785455818}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: New Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 61367848919630744}
   - component: {fileID: 95036840017584414}
   - component: {fileID: 58901777186089012}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player3
   m_TagString: player3
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4770327426927832}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: root
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4373748828182778}
   - component: {fileID: 114257668333485598}
   m_Layer: 0
-  m_Name: NPM Spawner
+  m_Name: NPC Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34,7 +34,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1984627113003438}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.4717283, y: -3.3025444, z: 0}
+  m_LocalPosition: {x: -5.43, y: -4.03, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -51,9 +51,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 333960f09748c7846a7d5caac0063ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcToSpawn: {fileID: 0}
-  rateLowerLimit: 3
-  rateUpperLimit: 5
-  rateOffset: 0
-  spawnedNpcs: []
+  npcToSpawn: {fileID: 114981191826375096, guid: 3cee332f19b45384998be368f56f33f0,
+    type: 2}
+  rateLowerLimit: 0
+  rateUpperLimit: 1
+  rateOffset: 3
+  burstLowerLimit: 1
+  burstUpperLimit: 12
   tempGoal: {fileID: 0}
