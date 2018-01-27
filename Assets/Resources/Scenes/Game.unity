@@ -158,7 +158,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -1034,13 +1034,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 973ee0540f529bb4797dc0ce0d62bec9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enableTileReplace: 0
+  _enableTileReplace: 1
+  _minExpireTime: 1
+  _maxExpireTime: 10
+  _minLiquidationTime: 5
+  _maxLiquidationTime: 10
   _mapParent: {fileID: 1527142994}
   _escalatorParent: {fileID: 1942770228}
   _baseMapTile: {fileID: 114165963198242118, guid: 2a4508364a861874ca60fd89143a9fd8,
     type: 2}
   _escalator: {fileID: 114017524715603024, guid: d3e1d6548686a92428ff4c89f63e15a2,
     type: 2}
+  _storefronts:
+  - {fileID: 21300000, guid: cafeb4164db49ca4fa25eeecb3cb9214, type: 3}
+  - {fileID: 21300000, guid: e5e055bf23c050c4096234764a849eb7, type: 3}
+  - {fileID: 21300000, guid: 619a3322c2d612f4dac033ddc462eb3a, type: 3}
+  - {fileID: 21300000, guid: cafeb4164db49ca4fa25eeecb3cb9214, type: 3}
+  - {fileID: 21300000, guid: e5e055bf23c050c4096234764a849eb7, type: 3}
+  - {fileID: 21300000, guid: cf459eba0fa85bf4fb0b90f1394763a0, type: 3}
+  - {fileID: 21300000, guid: 619a3322c2d612f4dac033ddc462eb3a, type: 3}
+  - {fileID: 21300000, guid: e4e7c60fa1e13f842bc4d9839456e6c0, type: 3}
+  - {fileID: 21300000, guid: 2fff3479c7fbf8146a0c6db73a291489, type: 3}
 --- !u!4 &1527142994
 Transform:
   m_ObjectHideFlags: 0

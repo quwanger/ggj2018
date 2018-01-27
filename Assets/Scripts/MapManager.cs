@@ -21,6 +21,7 @@ public class MapManager : MonoBehaviour {
     private const float MAP_HEIGHT_TILE_COUNT = 4f;
     private const int WIDTH_STARTING_POSITION = 0;
     private const int HEIGHT_STARTING_POSITION = 0;
+    private const float ESCALATOR_VERTICAL_OFFSET = 0.2f;
 
     private const float SPRITE_HEIGHT_ORTHO_SIZE = 5f;  //this value is the orthographic size of the camera... don't ask
     private const float SPRITE_WIDTH_ORTHO_SIZE = SPRITE_HEIGHT_ORTHO_SIZE * (SCREEN_WIDTH / SCREEN_HEIGHT);
@@ -29,6 +30,20 @@ public class MapManager : MonoBehaviour {
     [SerializeField]
     private bool _enableTileReplace = true;
     public bool EnableTileReplace { get { return _enableTileReplace; } }
+
+    [SerializeField]
+    private float _minExpireTime;
+    public float MinExpireTime { get { return _minExpireTime; } }
+    [SerializeField]
+    private float _maxExpireTime;
+    public float MaxExpireTime { get { return _maxExpireTime; } }
+
+    [SerializeField]
+    private float _minLiquidationTime;
+    public float MinLiquidationTime { get { return _minLiquidationTime; } }
+    [SerializeField]
+    private float _maxLiquidationTime;
+    public float MaxLiquidationTime { get { return _maxLiquidationTime; } }
 
     [SerializeField]
     private Transform _mapParent;
@@ -41,6 +56,12 @@ public class MapManager : MonoBehaviour {
     [SerializeField]
     private Escalator _escalator;
 
+    [SerializeField]
+    private List<Sprite> _storefronts = new List<Sprite>();
+
+    private List<Sprite> _availableStorefronts = new List<Sprite>();
+    private List<Sprite> _storefrontsInUse = new List<Sprite>();
+
     private MapTile[] _currentMapTiles = new MapTile[12];
     private List<Escalator> _currentEscalators = new List<Escalator>();
 
@@ -48,8 +69,17 @@ public class MapManager : MonoBehaviour {
 
     private void Awake()
     {
+        InitStorefronts();
         InitializeMap();
         InitializeEscalators();
+    }
+
+    private void InitStorefronts()
+    {
+        foreach(Sprite store in _storefronts)
+        {
+            _availableStorefronts.Add(store);
+        }
     }
 
     private void InitializeMap()
@@ -64,14 +94,15 @@ public class MapManager : MonoBehaviour {
 
                 Vector3 tilePosition = new Vector3(posX, posY, 0);
                 MapTile tempMapTile = Instantiate(_baseMapTile, tilePosition, Quaternion.identity, _mapParent);
-                tempMapTile.Init(this, tilePosition, GetTileSlideDirection(i, j));
+                tempMapTile.Init(this, tilePosition, GetTileSlideDirection(i, j), HandleStorefrontInit());
                 _currentMapTiles[(i- WIDTH_STARTING_POSITION) * (j - HEIGHT_STARTING_POSITION)] = tempMapTile;
 
                 if(i < MAP_WIDTH_TILE_COUNT - 1 && j < MAP_HEIGHT_TILE_COUNT - 1)
                 {
                     float escPosX = Mathf.Lerp(-SPRITE_WIDTH_ORTHO_SIZE, SPRITE_WIDTH_ORTHO_SIZE, Mathf.InverseLerp(0, SCREEN_WIDTH, (i * TILE_WIDTH) + (TILE_WIDTH)));
 
-                    float escPosY = Mathf.Lerp(-SPRITE_HEIGHT_ORTHO_SIZE, SPRITE_HEIGHT_ORTHO_SIZE, Mathf.InverseLerp(0, SCREEN_HEIGHT, j * TILE_HEIGHT));
+                    float escPosY = Mathf.Lerp(-SPRITE_HEIGHT_ORTHO_SIZE, SPRITE_HEIGHT_ORTHO_SIZE, Mathf.InverseLerp(0, SCREEN_HEIGHT, (j * TILE_HEIGHT) + (TILE_HEIGHT / 2f)));
+                    escPosY += ESCALATOR_VERTICAL_OFFSET;
 
                     Vector3 tempEscalatorSpawn = new Vector3(escPosX, escPosY, 0f);
                     _escalatorSpawns.Add(new EscalatorSpawn(tempEscalatorSpawn, j));
@@ -79,6 +110,17 @@ public class MapManager : MonoBehaviour {
 
             }
         }
+    }
+
+    private Sprite HandleStorefrontInit()
+    {
+
+        return GetUnusedStorefront();
+    }
+
+    private Sprite GetUnusedStorefront()
+    {
+        return _availableStorefronts[Random.Range(0, _availableStorefronts.Count)];
     }
 
     private void InitializeEscalators()
@@ -102,6 +144,7 @@ public class MapManager : MonoBehaviour {
     {
         int escalatorsSpawnedOnFloor = 0;
 
+        //try to spawn each one
         foreach (EscalatorSpawn escalatorSpawn in escalatorSpawns)
         {
             if (TrySpawnEscalator(escalatorSpawn, escalatorSpawns.Count))
@@ -110,9 +153,13 @@ public class MapManager : MonoBehaviour {
             }
         }
 
+        //if none spawn, just keep trying until one does
         while(escalatorsSpawnedOnFloor < 1)
         {
-            TrySpawnEscalator(escalatorSpawns[Random.Range(0, escalatorSpawns.Count)], escalatorSpawns.Count);
+            if(TrySpawnEscalator(escalatorSpawns[Random.Range(0, escalatorSpawns.Count)], escalatorSpawns.Count))
+            {
+                escalatorsSpawnedOnFloor++;
+            }
         }
     }
 
@@ -125,7 +172,7 @@ public class MapManager : MonoBehaviour {
             Escalator tempEscalator = Instantiate(_escalator, escalatorSpawn.SpawnPosition, Quaternion.identity, _escalatorParent);
             escalatorSpawn.IsTaken = true;
             _currentEscalators.Add(tempEscalator);
-            tempEscalator.Init(Random.Range(0, 2) > 0 ? Escalator.EscalatorDirection.Up : Escalator.EscalatorDirection.Down);
+            tempEscalator.Init(Random.Range(0, 2) > 0 ? Escalator.EscalatorDirectionVertical.Up : Escalator.EscalatorDirectionVertical.Down, Random.Range(0, 2) > 0 ? Escalator.EscalatorDirectionHorizontal.Right : Escalator.EscalatorDirectionHorizontal.Left);
         }
 
         return spawnEscalator;
@@ -184,6 +231,6 @@ public class MapManager : MonoBehaviour {
     {
         yield return new WaitForSeconds(0.3f);
         mapTile.TriggerAnimation(mapTile.SlideDirection, true);
-        mapTile.Init(this, mapTile.TilePosition, mapTile.SlideDirection);
+        mapTile.Init(this, mapTile.TilePosition, mapTile.SlideDirection, HandleStorefrontInit());
     }
 }

@@ -31,17 +31,28 @@ public class Escalator : MonoBehaviour
     [SerializeField]
     private SpriteRenderer _escalatorSpriteRenderer;
 
-    public enum EscalatorDirection
+    public enum EscalatorDirectionVertical
     {
         Up = 0,
         Down = 1
     }
 
-    private EscalatorDirection _escalatorDirection;
-
-    public void Init(EscalatorDirection escalatorDirection)
+    public enum EscalatorDirectionHorizontal
     {
-        _escalatorDirection = escalatorDirection;
-        _escalatorSpriteRenderer.sprite = _escalatorSprites[(int)escalatorDirection];
+        Left = -1,
+        Right = 1
+    }
+
+
+    private EscalatorDirectionVertical _escalatorDirectionVertical;
+    private EscalatorDirectionHorizontal _escalatorDirectionHorizontal;
+
+    public void Init(EscalatorDirectionVertical escalatorDirectionV, EscalatorDirectionHorizontal escalatorDirectionH)
+    {
+        _escalatorDirectionVertical = escalatorDirectionV;
+        _escalatorDirectionHorizontal = escalatorDirectionH;
+
+        _escalatorSpriteRenderer.sprite = _escalatorSprites[(int)escalatorDirectionV];
+        transform.localScale = new Vector3((float)escalatorDirectionH, 1f, 1f);
     }
 }
