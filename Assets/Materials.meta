@@ -1,7 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Materials.meta
 guid: a89d30dbffcb2984e9905e3983ad5b9e
 folderAsset: yes
 timeCreated: 1517013209
+=======
+guid: f33ecbca42d92454f87ddaafd5ba11ac
+folderAsset: yes
+timeCreated: 1517014275
+>>>>>>> Andrew/EntityController:Assets/Resources.meta
 licenseType: Free
 DefaultImporter:
   userData: 
