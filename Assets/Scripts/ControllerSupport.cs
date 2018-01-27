@@ -28,13 +28,17 @@ public class ControllerSupport : MonoBehaviour
         currPlayerController = GetComponent<PlayerController>();
     }
 	
-	void Update () {
-        //move the player by getting the normalized vector created by the joystick
-        Vector3 mydir = new Vector2(x, y).normalized;
-        movePlayer();
+	void Update ()
+    {
+        if (!currPlayerController.RidingEscalator)
+        {
+            //move the player by getting the normalized vector created by the joystick
+            Vector3 mydir = new Vector2(x, y).normalized;
+            movePlayer();
 
-        //get keypresses.
-        keyPressedTimer();
+            //get keypresses.
+            keyPressedTimer();
+        }
     }
 
     void movePlayer()
@@ -110,6 +114,24 @@ public class ControllerSupport : MonoBehaviour
                 Debug.Log("LT Held for: " + timePressed);
 
                 currPlayerController.Sneeze(timePressed);
+            }
+        }
+
+        if (Input.GetAxis(string.Concat("L_YAxis_", myPlayerID)) != 0)
+        {           
+            if (Input.GetAxis(string.Concat("L_YAxis_", myPlayerID)) < 0)
+            {
+                if (currPlayerController.InEscalatorRange)
+                {
+                    currPlayerController.GoDownEscalator();
+                }
+            }
+            else
+            {
+                if (currPlayerController.InEscalatorRange)
+                {
+                    currPlayerController.GoUpEscalator();
+                }
             }
         }
     }
