@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:ad6ea5adec8dd26cc8000ef113c02fc3:cb43457a7d5f3f0ddc25df3b7ebcac2d:da2608eac4a7bde60ee5dbdfb39bef3f$ -->
+<TextureAtlas imagePath="player1.png" width="240" height="1116">
+    <SubTexture name="player1_coughstand" x="0" y="0" width="120" height="124"/>
+    <SubTexture name="player1_coughwalk_1" x="120" y="0" width="120" height="124"/>
+    <SubTexture name="player1_coughwalk_2" x="0" y="124" width="120" height="124"/>
+    <SubTexture name="player1_coughwalk_3" x="120" y="124" width="120" height="124"/>
+    <SubTexture name="player1_coughwalk_4" x="0" y="248" width="120" height="124"/>
+    <SubTexture name="player1_coughwalk_5" x="120" y="248" width="120" height="124"/>
+    <SubTexture name="player1_coughwalk_6" x="0" y="372" width="120" height="124"/>
+    <SubTexture name="player1_coughwalk_7" x="120" y="372" width="120" height="124"/>
+    <SubTexture name="player1_coughwalk_8" x="0" y="496" width="120" height="124"/>
+    <SubTexture name="player1_stand" x="120" y="496" width="120" height="124"/>
+    <SubTexture name="player1_walk_1" x="0" y="620" width="120" height="124"/>
+    <SubTexture name="player1_walk_2" x="120" y="620" width="120" height="124"/>
+    <SubTexture name="player1_walk_3" x="0" y="744" width="120" height="124"/>
+    <SubTexture name="player1_walk_4" x="120" y="744" width="120" height="124"/>
+    <SubTexture name="player1_walk_5" x="0" y="868" width="120" height="124"/>
+    <SubTexture name="player1_walk_6" x="120" y="868" width="120" height="124"/>
+    <SubTexture name="player1_walk_7" x="0" y="992" width="120" height="124"/>
+    <SubTexture name="player1_walk_8" x="120" y="992" width="120" height="124"/>
+</TextureAtlas>

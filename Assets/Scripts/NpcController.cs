@@ -61,8 +61,6 @@ public class NpcController : EntityController
 	private void GetWanderPosition() {
 		
 		wanderPosition = new Vector2(targetGoal.x + Random.Range(-2.222f, 2.222f), targetGoal.y);
-		Debug.Log("Wander to: ");
-		Debug.Log(wanderPosition);
 	}
 
 	//timeout wander behavior - then find exit and leave

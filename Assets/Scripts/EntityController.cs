@@ -50,13 +50,20 @@ public class EntityController : MonoBehaviour {
     {
         if (!_ridingEscalator)
         {
-            _animator.SetBool("walking", true);
+		    if(!_animator.GetBool("walking")) {
+			    _animator.SetBool("walking", true);
+		    }
 
-            if (direction.x > 0) transform.localScale = new Vector2(-1, 1);
-            else transform.localScale = new Vector2(1, 1);
+		    if(direction.x > 0) transform.localScale = new Vector2(-1, 1);
+		    else if(direction.x < 0) transform.localScale = new Vector2(1, 1);
 
             _rigidBody.AddForce(direction * speed * speedModifier * Time.deltaTime * 60);
         }
+	}
+
+	virtual public void StopMove() {
+
+		_animator.SetBool("walking", false);
 	}
 
 	virtual public void Sneeze(float timePressed = 1.0f) {

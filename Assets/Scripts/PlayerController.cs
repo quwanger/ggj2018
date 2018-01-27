@@ -1,17 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Experimental.UIElements;
+
 
 public class PlayerController : EntityController
 {
     public Sneeze sneezePrefab;
     public Cough coughPrefab;
     public GameObject escalatorNotification;
-
-    // Use this for initialization
-    void Start () {
-	}
 
     public override void Sneeze(float timePressed)
     {
@@ -29,6 +25,7 @@ public class PlayerController : EntityController
         Cough c = Instantiate(coughPrefab, transform.position, transform.rotation);
         c.owner = this;
         c.CalculatePower(timePressed);
+        _animator.SetTrigger("cough");
     }
 
     public override void EnableEscalatoring(Escalator escalator)
