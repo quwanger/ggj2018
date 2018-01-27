@@ -28,8 +28,13 @@ public class PlayerController : EntityController
 			// if(transform.position.y > -4f) Move(Vector2.down);
 		}
 		if(Input.GetKey(KeyCode.Space)) {
-			
+			Sneeze();
 		}
+		
+	}
+
+	void Sneeze () {
+		// Instansiate sneeze gameobject
 		
 	}
 }
