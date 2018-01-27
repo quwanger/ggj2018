@@ -22,13 +22,20 @@ public class EntityController : MonoBehaviour {
 		_rigidBody.AddForce(direction * speed * Time.deltaTime * 60);
 	}
 
-	virtual protected void Sneeze() {
-
-		_animator.SetTrigger("Sneeze");
+	virtual public void Sneeze(float timePressed = 1.0f) {
+ 
+        _animator.SetTrigger("Sneeze");
 		// return GameObject.Instantiate(projectile, shootPoint.position, transform.rotation);
 	}
 
-	virtual protected void Die() {
+    virtual public void Cough(float timePressed = 1.0f)
+    {
+
+        _animator.SetTrigger("Cough");
+        // return GameObject.Instantiate(projectile, shootPoint.position, transform.rotation);
+    }
+
+    virtual protected void Die() {
 		_animator.SetTrigger("Die");
 	}
 

@@ -10,7 +10,6 @@ public class ControllerSupport : MonoBehaviour
     //global vars
     protected float x;
     protected float y;
-    protected float moveSpeed = 6;
 
     private PlayerController currPlayerController; 
 
@@ -58,17 +57,56 @@ public class ControllerSupport : MonoBehaviour
         currPlayerController.Move(dir);
     }
 
-    void keyPressedTimer()
-    {
-        if (Input.GetButtonDown(string.Concat("A_", myPlayerID)))
+    private bool rightTriggerInUse = false;
+    private bool leftTriggerInUse = false;
+
+
+    void keyPressedTimer() {
+        if (Input.GetAxis(string.Concat("TriggersR_", myPlayerID)) != 0)
         {
-            timePressed = Time.time;
+            if (rightTriggerInUse == false)
+            {
+                timePressed = Time.time;
+
+                Debug.Log("RT Pressed");
+
+                rightTriggerInUse = true;
+            }
+        }
+        if (Input.GetAxis(string.Concat("TriggersR_", myPlayerID)) == 0)
+        {
+            if (rightTriggerInUse) {
+                rightTriggerInUse = false;
+                timePressed = Time.time - timePressed;
+                Debug.Log("RT Released");
+                Debug.Log("RT Held for: " + timePressed);
+
+                currPlayerController.Cough();
+            }
         }
 
-        if (Input.GetButtonUp(string.Concat("A_", myPlayerID)))
+        if (Input.GetAxis(string.Concat("TriggersL_", myPlayerID)) != 0)
         {
-            timePressed = Time.time - timePressed;
-            Debug.Log("Player " + myPlayerID + " Pressed A for : " + timePressed + " Seconds");
+            if (leftTriggerInUse == false)
+            {
+                timePressed = Time.time;
+
+                Debug.Log("LT Pressed");
+
+                leftTriggerInUse = true;
+            }
+        }
+        if (Input.GetAxis(string.Concat("TriggersL_", myPlayerID)) == 0)
+        {
+            if (leftTriggerInUse)
+            {
+                leftTriggerInUse = false;
+                timePressed = Time.time - timePressed;
+                Debug.Log("LT Released");
+                Debug.Log("LT Held for: " + timePressed);
+
+                currPlayerController.Sneeze();
+            }
         }
     }
 }

@@ -7,19 +7,34 @@ using UnityEngine;
 public class PlayerController : EntityController
 {
     public Sneeze sneezePrefab;
-    public int sneezePower = 1;
+    public Cough coughPrefab;
 
-	// Use this for initialization
-	void Start () {
+
+    // Use this for initialization
+    void Start () {
 	}
-	
-	// Update is called once per frame
-	void Update () {
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            Sneeze s = Instantiate(sneezePrefab, transform.position, transform.rotation);
-            s.owner = this;
-            Debug.Log("Pressed Space");
-            // s.timestamp = ms since epoch, not sure c# library
-        }
+
+    public override void Sneeze(float timePressed = 2.0f)
+    {
+        base.Sneeze(timePressed);
+
+        Sneeze s = Instantiate(sneezePrefab, transform.position, transform.rotation);
+        s.owner = this;
+
+        s.power = (int) timePressed;
+    }
+
+    public override void Cough(float timePressed = 2.0f)
+    {
+        base.Cough(timePressed);
+        Debug.Log(coughPrefab);
+        Cough c = Instantiate(coughPrefab, transform.position, transform.rotation);
+
+        c.power = (int)timePressed;
+    }
+
+    // Update is called once per frame
+    void Update () {
+       
     }
 }

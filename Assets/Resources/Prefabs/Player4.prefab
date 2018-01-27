@@ -194,9 +194,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 40
   sneezes: []
-  sneezePrefab: {fileID: 114483896591540074, guid: 12dcda8f9c257b345b6917172e71568a,
+  sneezePrefab: {fileID: 114449235467577754, guid: 12dcda8f9c257b345b6917172e71568a,
     type: 2}
-  sneezePower: 1
 --- !u!114 &114643419085093968
 MonoBehaviour:
   m_ObjectHideFlags: 1
