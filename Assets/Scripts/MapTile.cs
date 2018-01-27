@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class MapTile : MonoBehaviour {
 
-    private const float MIN_LIFESPAN = 10f;
-    private const float MAX_LIFESPAN = 50f;
+    private const float MIN_LIFESPAN = 1f;
+    private const float MAX_LIFESPAN = 5f;
 
     private Animator _animator;
 
@@ -23,6 +23,8 @@ public class MapTile : MonoBehaviour {
 
     [SerializeField]
     private string _storeName;
+    public string StoreName { get { return _storeName; } set { _storeName = value; } }
+
     [SerializeField]
     private TextMesh _textName;
     [SerializeField]
@@ -37,14 +39,15 @@ public class MapTile : MonoBehaviour {
 
     public void Update()
     {
-        if (_isDying)
+        if (_isDying && _slideDirection != MapManager.TileSlideDirection.None && _mapManager.EnableTileReplace)
         {
             _tileLifeCounter -= Time.deltaTime;
 
             if (_tileLifeCounter < 0)
             {
                 TriggerExtinction();
-            } }
+            }
+        }
     }
 
     public void Init(MapManager mapManager, Vector3 tilePosition, MapManager.TileSlideDirection slideDirection)
@@ -64,11 +67,6 @@ public class MapTile : MonoBehaviour {
 
     public void TriggerAnimation(MapManager.TileSlideDirection slideDirection, bool animateIn)
     {
-        if(animateIn)
-        {
-            Debug.Log("Animate In");
-        }
-
         switch(slideDirection)
         {
             case MapManager.TileSlideDirection.Down:
@@ -92,6 +90,6 @@ public class MapTile : MonoBehaviour {
     {
         _isDying = false;
         TriggerAnimation(_slideDirection, false);
-        _mapManager.ReplaceStore(this);
+        _mapManager.TriggerReplaceStore(this);
     }
 }

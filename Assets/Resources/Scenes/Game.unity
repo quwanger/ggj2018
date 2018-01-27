@@ -219,7 +219,7 @@ GameObject:
   - component: {fileID: 1527142994}
   - component: {fileID: 1527142993}
   m_Layer: 0
-  m_Name: MapController
+  m_Name: MapManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -236,6 +236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 973ee0540f529bb4797dc0ce0d62bec9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enableTileReplace: 0
   _mapParent: {fileID: 1527142994}
   _baseMapTile: {fileID: 114165963198242118, guid: 2a4508364a861874ca60fd89143a9fd8,
     type: 2}

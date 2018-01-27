@@ -41,6 +41,11 @@ public class MapManager : MonoBehaviour {
     private const float SPRITE_HEIGHT_ORTHO_SIZE = 5f;  //this value is the orthographic size of the camera... don't ask
     private const float SPRITE_WIDTH_ORTHO_SIZE = SPRITE_HEIGHT_ORTHO_SIZE * (SCREEN_WIDTH / SCREEN_HEIGHT);
 
+
+    [SerializeField]
+    private bool _enableTileReplace = true;
+    public bool EnableTileReplace { get { return _enableTileReplace; } }
+
     [SerializeField]
     private Transform _mapParent;
 
@@ -95,8 +100,15 @@ public class MapManager : MonoBehaviour {
         return TileSlideDirection.None;
     }
 
-    public void ReplaceStore(MapTile mapTile)
+    public void TriggerReplaceStore(MapTile mapTile)
     {
+        StartCoroutine("ReplaceStore", mapTile);
+    }
+
+    IEnumerator ReplaceStore(MapTile mapTile)
+    {
+        yield return new WaitForSeconds(0.15f);
+        mapTile.StoreName = "Store " + Random.Range(1, 100).ToString();
         StartCoroutine("AnimateStoreBackIn", mapTile);
     }
 
