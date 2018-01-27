@@ -55,6 +55,9 @@ public class ControllerSupport : MonoBehaviour
         rb.velocity = Vector3.ClampMagnitude(rb.velocity, 30.0f);*/
     
         currPlayerController.Move(dir);
+        if(x == 0) {
+            currPlayerController.StopMove();
+        }
     }
 
     private bool rightTriggerInUse = false;
@@ -70,8 +73,6 @@ public class ControllerSupport : MonoBehaviour
         
                 // Start player charge bar
 
-                Debug.Log("RT Pressed");
-
                 rightTriggerInUse = true;
             }
         }
@@ -80,8 +81,6 @@ public class ControllerSupport : MonoBehaviour
             if (rightTriggerInUse) {
                 rightTriggerInUse = false;
                 timePressed = Time.time - timePressed;
-                Debug.Log("RT Released");
-                Debug.Log("RT Held for: " + timePressed);
 
                 currPlayerController.Cough(timePressed);
             }
@@ -95,8 +94,6 @@ public class ControllerSupport : MonoBehaviour
 
                 // Stop player charge bar
 
-                Debug.Log("LT Pressed");
-
                 leftTriggerInUse = true;
             }
         }
@@ -106,9 +103,6 @@ public class ControllerSupport : MonoBehaviour
             {
                 leftTriggerInUse = false;
                 timePressed = Time.time - timePressed;
-                Debug.Log("LT Released");
-                Debug.Log("LT Held for: " + timePressed);
-
                 currPlayerController.Sneeze(timePressed);
             }
         }

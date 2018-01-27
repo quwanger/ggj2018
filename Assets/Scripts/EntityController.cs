@@ -21,12 +21,21 @@ public class EntityController : MonoBehaviour {
 
 	virtual public void Move(Vector2 direction, float speedModifier = 1.0f) {
 
-		_animator.SetBool("walking", true);
+		Debug.Log(_animator.GetBool("walking"));
+		if(!_animator.GetBool("walking")) {
+			Debug.Log("walking");
+			_animator.SetBool("walking", true);
+		}
 
 		if(direction.x > 0) transform.localScale = new Vector2(-1, 1);
-		else transform.localScale = new Vector2(1, 1);
+		else if(direction.x < 0) transform.localScale = new Vector2(1, 1);
 
 		_rigidBody.AddForce(direction * speed * speedModifier * Time.deltaTime * 60);
+	}
+
+	virtual public void StopMove() {
+
+		_animator.SetBool("walking", false);
 	}
 
 	virtual public void Sneeze(float timePressed = 1.0f) {

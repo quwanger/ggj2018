@@ -2,13 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
 public class PlayerController : EntityController
 {
     public Sneeze sneezePrefab;
     public Cough coughPrefab;
-
 
     // Use this for initialization
     void Start () {
@@ -30,10 +27,6 @@ public class PlayerController : EntityController
         Cough c = Instantiate(coughPrefab, transform.position, transform.rotation);
         c.owner = this;
         c.CalculatePower(timePressed);
-    }
-
-    // Update is called once per frame
-    void Update () {
-       
+        _animator.SetTrigger("cough");
     }
 }
