@@ -21,6 +21,11 @@ public class EntityController : MonoBehaviour {
 
 	virtual public void Move(Vector2 direction, float speedModifier = 1.0f) {
 
+		_animator.SetBool("walking", true);
+
+		if(direction.x > 0) transform.localScale = new Vector2(-1, 1);
+		else transform.localScale = new Vector2(1, 1);
+
 		_rigidBody.AddForce(direction * speed * speedModifier * Time.deltaTime * 60);
 	}
 

@@ -117,11 +117,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4373748828182778, guid: d8b742fbdfbe28542ac0a272f6518278, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -5.43
+      value: -4.9
       objectReference: {fileID: 0}
     - target: {fileID: 4373748828182778, guid: d8b742fbdfbe28542ac0a272f6518278, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -4.1
+      value: -3.39
       objectReference: {fileID: 0}
     - target: {fileID: 4373748828182778, guid: d8b742fbdfbe28542ac0a272f6518278, type: 2}
       propertyPath: m_LocalPosition.z
@@ -155,17 +155,17 @@ Prefab:
     - target: {fileID: 114257668333485598, guid: d8b742fbdfbe28542ac0a272f6518278,
         type: 2}
       propertyPath: rateUpperLimit
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 114257668333485598, guid: d8b742fbdfbe28542ac0a272f6518278,
         type: 2}
       propertyPath: rateOffset
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 114257668333485598, guid: d8b742fbdfbe28542ac0a272f6518278,
         type: 2}
       propertyPath: burstUpperLimit
-      value: 12
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d8b742fbdfbe28542ac0a272f6518278, type: 2}
@@ -388,7 +388,7 @@ MonoBehaviour:
   powerOfLastCough: 0
   winningPlayerTag: 
   sneezePrefab: {fileID: 0}
-  sneezePower: 1
+  coughPrefab: {fileID: 0}
 --- !u!4 &211152572
 Transform:
   m_ObjectHideFlags: 0
@@ -426,7 +426,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 240933660}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.48, y: -4.09, z: 0}
+  m_LocalPosition: {x: 1.48, y: -3.42, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1085,7 +1085,7 @@ MonoBehaviour:
   powerOfLastCough: 0
   winningPlayerTag: 
   sneezePrefab: {fileID: 0}
-  sneezePower: 1
+  coughPrefab: {fileID: 0}
 --- !u!1 &1504040058
 GameObject:
   m_ObjectHideFlags: 0
@@ -1327,7 +1327,7 @@ MonoBehaviour:
   powerOfLastCough: 0
   winningPlayerTag: 
   sneezePrefab: {fileID: 0}
-  sneezePower: 1
+  coughPrefab: {fileID: 0}
 --- !u!1 &1619349254
 GameObject:
   m_ObjectHideFlags: 0
@@ -1569,7 +1569,7 @@ MonoBehaviour:
   powerOfLastCough: 0
   winningPlayerTag: 
   sneezePrefab: {fileID: 0}
-  sneezePower: 1
+  coughPrefab: {fileID: 0}
 --- !u!1 &1850398974
 GameObject:
   m_ObjectHideFlags: 0
@@ -1644,3 +1644,49 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!1001 &2086277910
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4844780954775498, guid: 3cee332f19b45384998be368f56f33f0, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -1.96
+      objectReference: {fileID: 0}
+    - target: {fileID: 4844780954775498, guid: 3cee332f19b45384998be368f56f33f0, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -3.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 4844780954775498, guid: 3cee332f19b45384998be368f56f33f0, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4844780954775498, guid: 3cee332f19b45384998be368f56f33f0, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4844780954775498, guid: 3cee332f19b45384998be368f56f33f0, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4844780954775498, guid: 3cee332f19b45384998be368f56f33f0, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4844780954775498, guid: 3cee332f19b45384998be368f56f33f0, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4844780954775498, guid: 3cee332f19b45384998be368f56f33f0, type: 2}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1964313100526188, guid: 3cee332f19b45384998be368f56f33f0, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 3cee332f19b45384998be368f56f33f0, type: 2}
+  m_IsPrefabParent: 0
