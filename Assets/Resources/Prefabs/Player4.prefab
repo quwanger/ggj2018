@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 58051169125018032}
   m_Layer: 0
   m_Name: Player4
-  m_TagString: player4
+  m_TagString: player3
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -194,8 +194,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 40
   sneezes: []
-  sneezePrefab: {fileID: 114483896591540074, guid: 12dcda8f9c257b345b6917172e71568a,
-    type: 2}
+  sneezePrefab: {fileID: 0}
   sneezePower: 1
 --- !u!114 &114643419085093968
 MonoBehaviour:

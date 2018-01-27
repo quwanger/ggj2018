@@ -60,6 +60,7 @@ public class ControllerSupport : MonoBehaviour
 
     void keyPressedTimer()
     {
+        //if we want to switch it to the triggers, button name is TriggersR_ or TriggersL_
         if (Input.GetButtonDown(string.Concat("A_", myPlayerID)))
         {
             timePressed = Time.time;
