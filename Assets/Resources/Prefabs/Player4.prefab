@@ -445,6 +445,12 @@ MonoBehaviour:
   speed: 20
   powerOfLastCough: 0
   mostInfectedBy: {fileID: 0}
+  pointParticle: {fileID: 114268464230391504, guid: 3e6d30880c5ff0e44be7e7d4a077fb68,
+    type: 2}
+  pointSprites:
+  - {fileID: 21300000, guid: 1ed021e0263c7ec43958f581a6ac02fc, type: 3}
+  - {fileID: 21300000, guid: d42c3a6fadf2f284fb577a4446e671a3, type: 3}
+  - {fileID: 21300000, guid: 1dae00fa66e32f54994243e3eb67590c, type: 3}
   playerId: 4
   sneeze: {fileID: 114048310271158188}
   cough: {fileID: 114478960037370202}

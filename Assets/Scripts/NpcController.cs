@@ -207,6 +207,7 @@ public class NpcController : EntityController
         {
             int infectedBy = mostInfectedBy.GetComponent<PlayerController>().playerId;
             GameManager.Instance.PlayerScores[infectedBy] += powerOfLastCough;
+            mostInfectedBy.GetComponent<EntityController>().SpawnPoints(powerOfLastCough);
             Debug.Log("<color=blue>Player " + mostInfectedBy.name + " has just received " + powerOfLastCough + " points. They now have " + GameManager.Instance.PlayerScores[infectedBy].ToString() + " points.</color>");
         }
 

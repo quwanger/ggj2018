@@ -49,6 +49,28 @@ public class EntityController : MonoBehaviour {
         }
     }
 
+    public PointParticle pointParticle;
+    public Sprite[] pointSprites;
+
+    public void SpawnPoints(int points)
+    {
+        PointParticle pp = Instantiate(pointParticle, transform.position, Quaternion.identity, transform);
+        switch(points)
+        {
+            case 1:
+                pp.spriteRenderer.sprite = pointSprites[0];
+                break;
+            case 2:
+                pp.spriteRenderer.sprite = pointSprites[1];
+                break;
+            case 3:
+                pp.spriteRenderer.sprite = pointSprites[2];
+                break;
+            case 4:
+                break;
+        }
+    }
+
 	virtual public void Move(Vector2 direction, float speedModifier = 1.0f)
     {
         if (!_ridingEscalator)
