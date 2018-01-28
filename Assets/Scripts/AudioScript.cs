@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioScript : MonoBehaviour {
-    static AudioScript instance = null;
+    public static AudioScript instance = null;
 
     public AudioClip MusicClip;
     //public AudioClip MusicClip2;
