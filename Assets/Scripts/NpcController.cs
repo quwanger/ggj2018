@@ -15,6 +15,8 @@ public class NpcController : EntityController
         MovingToSale = 6
     }
 
+    public GameObject deathNotification;
+
     public NPCState _npcState = NPCState.None;
     public NPCState _previousNpcState = NPCState.None;
 
@@ -176,8 +178,12 @@ public class NpcController : EntityController
         }
     }
 
-    public void ExitNPC()
+    public void ExitNPC(bool isKilled = false)
     {
+        if(isKilled)
+        {
+            Instantiate(deathNotification, transform.position, Quaternion.identity);
+        }
         GameManager.Instance.NPCManager.AllNpcs.Remove(this);
         Destroy(this.gameObject);
     }

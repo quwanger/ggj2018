@@ -1429,8 +1429,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NPCManager: {fileID: 1073239171}
   MapManager: {fileID: 1527142993}
+  spawnPoints: []
   playerPrefabs:
   - {fileID: 114210382874987444, guid: 56b5e8bf2e3ff114bbb565fa96db3326, type: 2}
+  countdownText: {fileID: 0}
+  countdownFrom: 0
+  gameStarted: 0
 --- !u!4 &1073239170
 Transform:
   m_ObjectHideFlags: 0

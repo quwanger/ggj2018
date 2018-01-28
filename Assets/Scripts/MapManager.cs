@@ -101,9 +101,24 @@ public class MapManager : MonoBehaviour {
 
     public Vector2 GetRandomStorefrontPosition()
     {
-        int randomTile = Random.Range(0, _currentMapTiles.Length);
-        Vector2 randomStorePosition = new Vector2(_currentMapTiles[randomTile].position.x, _currentMapTiles[randomTile].position.y);
-        return randomStorePosition;
+        return FindGoodStore();
+    }
+
+    public Vector2 FindGoodStore()
+    {
+        int goToSaleWeight = Random.Range(1, 11);
+        if(goToSaleWeight >= 5 && _storesInLiquidation.Count > 0)
+        {
+            int randomTile = Random.Range(0, _storesInLiquidation.Count);
+            Vector2 randomStorePosition = new Vector2(_storesInLiquidation[randomTile].transform.position.x, _storesInLiquidation[randomTile].transform.position.y);
+            return randomStorePosition;
+        }
+        else
+        {
+            int randomTile = Random.Range(0, _currentMapTiles.Length);
+            Vector2 randomStorePosition = new Vector2(_currentMapTiles[randomTile].position.x, _currentMapTiles[randomTile].position.y);
+            return randomStorePosition;
+        }
     }
 
     private void InitStorefronts()
@@ -365,6 +380,8 @@ public class MapManager : MonoBehaviour {
     }
     public void TriggerReplaceStore(MapTile mapTile)
     {
+        Debug.Log("Replacing store at position: " + mapTile.transform.position);
+        GameManager.Instance.NPCManager.KillNPCsAtStore(mapTile.transform);
         _storesInLiquidation.Remove(mapTile);
         StartCoroutine("ReplaceStore", mapTile);
     }
