@@ -118,7 +118,7 @@ public class MapManager : MonoBehaviour {
 
                 float posY = Mathf.Lerp(-SPRITE_HEIGHT_ORTHO_SIZE, SPRITE_HEIGHT_ORTHO_SIZE, Mathf.InverseLerp(0, SCREEN_HEIGHT, (j * TILE_HEIGHT) + (TILE_HEIGHT / 2f)));
 
-                Vector3 tilePosition = new Vector3(posX, posY, 0);
+                Vector3 tilePosition = new Vector3(posX, posY, 2);
                 MapTile tempMapTile = Instantiate(_baseMapTile, tilePosition, Quaternion.identity, _mapParent);
                 tempMapTile.Init(this, tilePosition, GetTileSlideDirection(i, j), HandleStorefrontInit());
                 _currentMapTiles[(i * (int)MAP_HEIGHT_TILE_COUNT) +  j] = tempMapTile.transform;

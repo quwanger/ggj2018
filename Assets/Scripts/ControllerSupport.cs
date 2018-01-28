@@ -97,7 +97,7 @@ public class ControllerSupport : MonoBehaviour
                 currPlayerController.isCharging = false;
                 currPlayerController.isRegenerating = true;
 
-                currPlayerController.Cough();
+                currPlayerController.Sneeze();
             }
         }
 
