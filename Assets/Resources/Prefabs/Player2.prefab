@@ -294,7 +294,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.023529412, g: 0.76862746, b: 0, a: 0}
+  m_Color: {r: 0.023529412, g: 0.76862746, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -414,7 +414,7 @@ MonoBehaviour:
   escalatorNotification: {fileID: 1166014019036128}
   currPower: 0
   dividerParent: {fileID: 224089080331755852}
-  playerColor: {r: 0.023529412, g: 0.76862746, b: 0, a: 0}
+  playerColor: {r: 0.023529412, g: 0.76862746, b: 0, a: 1}
   chargeBarCanvas: {fileID: 224181924922137710}
 --- !u!114 &114990906339421828
 MonoBehaviour:

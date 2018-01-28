@@ -326,7 +326,7 @@ MonoBehaviour:
   escalatorNotification: {fileID: 1174325014025480}
   currPower: 0
   dividerParent: {fileID: 224584296456137314}
-  playerColor: {r: 0.22745098, g: 0.25882354, b: 0.9137255, a: 0.6666667}
+  playerColor: {r: 0.22745098, g: 0.25882354, b: 0.9137255, a: 1}
   chargeBarCanvas: {fileID: 224756167006198592}
 --- !u!114 &114600483267373908
 MonoBehaviour:
@@ -443,7 +443,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.22745098, g: 0.25882354, b: 0.9137255, a: 0.6666667}
+  m_Color: {r: 0.22745098, g: 0.25882354, b: 0.9137255, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
