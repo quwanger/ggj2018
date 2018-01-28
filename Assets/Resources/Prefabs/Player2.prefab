@@ -343,6 +343,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dischargePower: 0
   dischargeLevel: 0
+  sneezeForce: 1300
   owner: {fileID: 0}
 --- !u!114 &114825760852541758
 MonoBehaviour:
@@ -453,6 +454,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dischargePower: 0
   dischargeLevel: 0
+  sneezeForce: 1700
   owner: {fileID: 0}
 --- !u!198 &198154908245232778
 ParticleSystem:
@@ -3684,7 +3686,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: 1940079482
+  randomSeed: -1620321990
   InitialModule:
     serializedVersion: 3
     enabled: 1
