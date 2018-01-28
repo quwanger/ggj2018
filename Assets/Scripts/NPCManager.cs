@@ -35,7 +35,7 @@ public class NPCManager : MonoBehaviour {
 
         foreach (NpcController npc in AllNpcs)
         {
-            if(Vector2.Distance(new Vector2(store.position.x, store.position.y), new Vector2(npc.transform.position.x, npc.transform.position.y)) < 2.4f)
+            if(Vector2.Distance(new Vector2(store.position.x, store.position.y), new Vector2(npc.transform.position.x, npc.transform.position.y)) < 2.4f && npc._npcState != NpcController.NPCState.RidingEscalator)
             {
                 npcsToKill.Add(npc);
             }

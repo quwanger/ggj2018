@@ -182,19 +182,30 @@ public class MapManager : MonoBehaviour {
         //turn all off to start...
         foreach(SpawnerController entrance in _entrances)
         {
-            entrance.gameObject.SetActive(false);
+            entrance.enabled = false;
+            var spriteRenderers = entrance.transform.GetComponentsInChildren<SpriteRenderer>();
+            foreach (SpriteRenderer sr in spriteRenderers)
+            {
+                sr.enabled = false;
+            }
         }
 
         for(int i = 0; i < NUMBER_OF_ENTRANCES; i++)
         {
             int entranceToTurnOn = Random.Range(0, _entrances.Count);
-            if (_entrances[entranceToTurnOn].gameObject.activeSelf)
+            if (_entrances[entranceToTurnOn].enabled)
             {
                 i--;
             }
             else
             {
-                _entrances[entranceToTurnOn].gameObject.SetActive(true);
+                _entrances[entranceToTurnOn].enabled = true;
+                var spriteRenderers = _entrances[entranceToTurnOn].transform.GetComponentsInChildren<SpriteRenderer>();
+                foreach (SpriteRenderer sr in spriteRenderers)
+                {
+                    sr.enabled = true;
+                }
+                _entrances[entranceToTurnOn].GetComponentInChildren<EdgeCollider2D>().enabled = false;
             }
         }
     }
@@ -205,7 +216,7 @@ public class MapManager : MonoBehaviour {
 
         foreach (SpawnerController entrance in _entrances)
         {
-            if(entrance.gameObject.activeSelf)
+            if(entrance.enabled)
             {
                 exits.Add(entrance.GetComponentInChildren<NpcExit>());
             }
