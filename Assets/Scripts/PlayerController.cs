@@ -98,7 +98,7 @@ public class PlayerController : EntityController
             currPower = roundedTimePressed;
         }
     }
-    /*public override void EnableEscalatoring(Escalator escalator)
+    public override void EnableEscalatoring(Escalator escalator)
     {
         escalatorNotification.SetActive(true);
         base.EnableEscalatoring(escalator);
@@ -108,7 +108,7 @@ public class PlayerController : EntityController
     {
         escalatorNotification.SetActive(false);
         base.DisableEscalatoring();
-    }*/
+    }
 
     public void CompleteEscalatorRide()
     {
