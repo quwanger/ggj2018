@@ -20,6 +20,8 @@ public class PlayerController : EntityController
     public RectTransform dividerParent;
     public Color playerColor;
 
+    public Transform chargeBarCanvas;
+
     // Use this for initialization
     void Start () {
         // Initialize stamina bar
@@ -28,6 +30,13 @@ public class PlayerController : EntityController
                 transform.rotation, dividerParent);
         }
 
+	}
+
+    override public void Move(Vector2 direction, float speedModifier = 1.0f)
+    {
+        base.Move(direction, speedModifier);
+        if(direction.x > 0) chargeBarCanvas.localScale = new Vector2(-1, 1);
+        else if(direction.x < 0) chargeBarCanvas.localScale = new Vector2(1, 1);
 	}
 
     public override void Sneeze()
