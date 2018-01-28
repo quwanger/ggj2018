@@ -28,7 +28,7 @@ public class ControllerSupport : MonoBehaviour
 
     void Update()
     {
-        if (!currPlayerController.RidingEscalator)
+        if (!currPlayerController.RidingEscalator && GameManager.Instance.gameStarted)
         {
             //move the player by getting the normalized vector created by the joystick
             Vector3 mydir = new Vector2(x, y).normalized;
