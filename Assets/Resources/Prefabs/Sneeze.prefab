@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 199661156306968190}
   m_Layer: 0
   m_Name: Particle System
-  m_TagString: Untagged
+  m_TagString: sneeze_ps
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -82,9 +82,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 306813a693d2588428141998ee660a18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  owner: {fileID: 0}
-  timestamp: 0
   power: 0
+  owner: {fileID: 0}
 --- !u!198 &198355730583824714
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -94,7 +93,7 @@ ParticleSystem:
   serializedVersion: 5
   lengthInSec: 5
   simulationSpeed: 1
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -144,7 +143,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 486636759
+  randomSeed: 424012762
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -704,7 +703,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 10
+      scalar: 0
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -783,8 +782,13 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    m_BurstCount: 0
-    m_Bursts: []
+    m_BurstCount: 1
+    m_Bursts:
+    - time: 0
+      minCount: 30
+      maxCount: 30
+      cycleCount: 1
+      repeatInterval: 0.01
   SizeModule:
     enabled: 0
     curve:

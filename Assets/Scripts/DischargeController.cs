@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DischargeController : MonoBehaviour {
     public int power = 1;
+    public PlayerController owner;
 
 
     // Use this for initialization
@@ -16,7 +17,22 @@ public class DischargeController : MonoBehaviour {
 		
 	}
 
-    virtual protected void CalculatePower() {
+    public void CalculatePower(float timePressed) {
+        int tempPower = (int)Mathf.Floor(timePressed * 2);
+
+        if (tempPower > 3)
+        {
+            power = 3;
+        }
+        else if (tempPower < 1)
+        {
+            power = 1;
+        } else
+        {
+            power = tempPower;
+        }
+
+        Debug.Log("Cough power: " + power);
 
     }
 }
