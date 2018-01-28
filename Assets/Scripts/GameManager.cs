@@ -19,7 +19,13 @@ public class GameManager : MonoBehaviour {
     public static List<string> playerSprites = new List<string>();
 
     public Text countdownText;
+    public GameObject countDownSprite;
     public float countdownFrom;
+
+    public Sprite countDownSprite1;
+    public Sprite countDownSprite2;
+    public Sprite countDownSprite3;
+    public Sprite countDownSpriteSHOP;
 
     public bool gameStarted;
     bool isTimerStarted = false;
@@ -98,18 +104,22 @@ public class GameManager : MonoBehaviour {
         if (time <= 3.0f && time > 2.0f)
         {
             countdownText.text = "3";
+            countDownSprite.GetComponent<SpriteRenderer>().sprite = countDownSprite3;
         } else if (time <= 2.0f && time > 1.0f)
         {
             countdownText.text = "2";
+            countDownSprite.GetComponent<SpriteRenderer>().sprite = countDownSprite2;
         } else if (time <= 1.0f && time > 0.0f)
         {
+            countDownSprite.GetComponent<SpriteRenderer>().sprite = countDownSprite1;
             countdownText.text = "1";
         } else if (time <= 0.0f)
         {
-            // countdownText.text = "GO";
+         //    countdownText.text = "GO";
             gameStarted = true;
             if(!isTimerStarted)
             {
+                countDownSprite.GetComponent<SpriteRenderer>().sprite = countDownSpriteSHOP;
                 StartCoroutine(GetWorldTime());
                 isTimerStarted = true;
             }
@@ -125,6 +135,8 @@ public class GameManager : MonoBehaviour {
             GameManager.gameTime = currCountdownValue;
             yield return new WaitForSeconds(1.0f);
             currCountdownValue--;
+
+            countDownSprite.GetComponent<SpriteRenderer>().enabled = false;
         }
     }
 
