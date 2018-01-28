@@ -9,22 +9,20 @@ public class NpcController : EntityController
         None = 0,
         Wandering = 1,
         MovingToGoal = 2,
-        MovingToExit = 3
+        MovingToExit = 3,
+        MovingToEscalator = 4
     }
 
     public NPCState _npcState = NPCState.None;
 
 	public float wanderSpeedModifier = 0.05f;
-	[SerializeField]
 	public float flashSaleSpeedMultiplier = 2.0f;
-	[SerializeField]
 	public int points = 1;
 	private float timeout;
-    [SerializeField]
     public int timeoutMin = 3;
-    [SerializeField]
-    public int timeoutMax = 15;
+    public int timeoutMax = 8;
     public Vector2 targetGoal = Vector2.zero;
+    private Vector2 targetEscalator;
 
 	private bool goalReached = false;
 	public bool leaving = false;
@@ -56,14 +54,19 @@ public class NpcController : EntityController
             case NPCState.MovingToExit:
                 MoveToExit();
                 break;
+            case NPCState.MovingToEscalator:
+                MoveToEscalator();
+                break;
             default:
                 break;
         }
 	}
 
-    public void Init()
+    public void Init(int floor)
     {
+        currentFloor = floor;
         DecideNextTarget(true);
+        Physics2D.IgnoreLayerCollision(8, 10, true);
     }
 
 	private bool CheckProximity(Vector2 target) {
@@ -86,6 +89,12 @@ public class NpcController : EntityController
 		Vector2 direction = targetGoal.x > transform.position.x ? new Vector2(1f, 0f) : new Vector2(-1f, 0);
 		Move(direction, (isFlashSale ? flashSaleSpeedMultiplier : 1.0f));
 	}
+
+    private void MoveToEscalator()
+    {
+        Vector2 direction = targetEscalator.x > transform.position.x ? new Vector2(1f, 0f) : new Vector2(-1f, 0);
+        Move(direction, (isFlashSale ? flashSaleSpeedMultiplier : 1.0f));
+    }
 
     private void MoveToExit()
     {
@@ -141,17 +150,44 @@ public class NpcController : EntityController
     {
         _npcState = NPCState.MovingToGoal;
         targetGoal = GameManager.Instance.MapManager.GetRandomStorefrontPosition();
+
+        if ((transform.position.y - targetGoal.y) > 1)
+        {
+            //go down
+            _npcState = NPCState.MovingToEscalator;
+            targetEscalator = FindDownEscalator();
+        }
+        else if ((transform.position.y - targetGoal.y) < -1)
+        {
+            //go up
+            _npcState = NPCState.MovingToEscalator;
+            targetEscalator = FindUpEscalator();
+        }
+        else
+        {
+            //it's on this floor
+        }
+    }
+
+    private Vector2 FindDownEscalator()
+    {
+        return GameManager.Instance.MapManager.GetEscalatorFromFloorToFloor(currentFloor - 1, currentFloor, true);
+    }
+
+    private Vector2 FindUpEscalator()
+    {
+        return GameManager.Instance.MapManager.GetEscalatorFromFloorToFloor(currentFloor, currentFloor + 1, false);
     }
 
     private void DecideNextTarget(bool justSpawed = false)
     {
         int randomTarget = Random.Range(0, 100);
 
-        if(randomTarget < 10 && !justSpawed)
+        if(randomTarget < 20 && !justSpawed)
         {
             FindExit();
         }
-        else if(randomTarget < 35)
+        else if(randomTarget < 40)
         {
             // randomly wander around
             BeginToWander();
@@ -163,7 +199,7 @@ public class NpcController : EntityController
         }
     }
 
-	public void AwardPoints() {
+    public void AwardPoints() {
 		Debug.Log("Points awarded");
 	}
 }

@@ -18,8 +18,11 @@ public class SpawnerController : MonoBehaviour {
 	[SerializeField]
 	public int burstUpperLimit = 10;
 
-	// Use this for initialization
-	void Start () {
+    [SerializeField]
+    public int mallFloor;
+
+    // Use this for initialization
+    void Start () {
 		StartCoroutine("SpawnNpc");
 	}
 
@@ -30,7 +33,7 @@ public class SpawnerController : MonoBehaviour {
 			for(int i = 0; i < Random.Range(burstLowerLimit, burstUpperLimit); i++) {
 				yield return new WaitForSeconds(Random.Range(0.05f, 0.2f));
 				NpcController n = Instantiate(npcToSpawn, transform.position, Quaternion.identity);
-                n.Init();
+                n.Init(mallFloor);
 			}
 		}
 	}

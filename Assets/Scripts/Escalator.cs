@@ -83,6 +83,11 @@ public class Escalator : MonoBehaviour
     private float _escalatorLife;
     private float _shutdownTime;
 
+    private int _fromFloor;
+    public int FromFloor { get { return _fromFloor; } }
+    private int _toFloor;
+    public int ToFloor { get { return _toFloor; } }
+
     private MapManager _mapManager;
     private bool _isDying = false;
     private bool _isShutdown = false;
@@ -118,12 +123,15 @@ public class Escalator : MonoBehaviour
         }
     }
 
-    public void Init(MapManager mapManager, EscalatorDirectionVertical escalatorDirectionV, EscalatorDirectionHorizontal escalatorDirectionH)
+    public void Init(MapManager mapManager, EscalatorDirectionVertical escalatorDirectionV, EscalatorDirectionHorizontal escalatorDirectionH, int startingFloor)
     {
         _mapManager = mapManager;
         _escalatorDirectionVertical = escalatorDirectionV;
         _escalatorDirectionHorizontal = escalatorDirectionH;
         _isDying = true;
+
+        _fromFloor = startingFloor;
+        _toFloor = startingFloor + 1;
 
         _shutdownTime = mapManager.EscalatorShutdownTime;
         _escalatorLife = Random.Range(mapManager.MinEscalatorTime, mapManager.MaxEscalatorTime);
