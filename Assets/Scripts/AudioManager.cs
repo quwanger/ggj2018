@@ -5,9 +5,14 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour {
     static AudioManager instance = null;
 
-    public AudioClip[] coughs;
+    public AudioClip[] NPCCoughs;
+    public AudioClip[] playerCoughs;
+    public AudioClip[] playerSneezes;
+
 
     public AudioSource[] sources;
+
+    AudioSource sFX;
     AudioSource soundtrack;
 
     public GameObject audio;
@@ -29,7 +34,7 @@ public class AudioManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         sources = GetComponents<AudioSource>();
-        soundtrack = sources[0];
+        sFX = sources[0];
     }
 	
 	// Update is called once per frame
@@ -39,14 +44,20 @@ public class AudioManager : MonoBehaviour {
 
     public void PlaySound(string word)
     {
-        /*switch (word)
+
+        switch (word)
         {
-            case "FUCK":
-                soundEffects.PlayOneShot(fuck[Random.Range(0, fuck.Length)]);
+            case "player coughs":
+                Debug.Log(playerCoughs.Length);
+
+                sFX.PlayOneShot(playerCoughs[Random.Range(0, playerCoughs.Length)]);
                 break;
-            default:
-                soundEffects.PlayOneShot(grunts[Random.Range(0, grunts.Length)]);
+            case "npc coughs":
+                sFX.PlayOneShot(NPCCoughs[Random.Range(0, NPCCoughs.Length)]);
                 break;
-        }*/
+            case "sneezes":
+                sFX.PlayOneShot(playerSneezes[Random.Range(0, playerSneezes.Length)]);
+                break;
+        }
     }
 }

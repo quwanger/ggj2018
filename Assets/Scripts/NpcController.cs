@@ -41,6 +41,13 @@ public class NpcController : EntityController
 	public bool isFlashSale = false;
 
     private int currentFloor;
+
+    private AudioManager audioManager;
+
+    void Start()
+    {
+        audioManager = FindObjectOfType<AudioManager>();
+    }
 	
 	// Update is called once per frame
 	public override void Update () {
@@ -338,8 +345,7 @@ public class NpcController : EntityController
 
     public virtual void hitByCough(int power, GameObject coughOwner)
     {
-        //Debug.Log("Power: " + power);
-        //Debug.Log("ExistingPower: " + powerOfLastCough);
+        audioManager.PlaySound("npc coughs");
         if (power < powerOfLastCough)
         {
             return;

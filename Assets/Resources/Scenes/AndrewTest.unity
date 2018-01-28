@@ -147,10 +147,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 114844421731114544, guid: 56b5e8bf2e3ff114bbb565fa96db3326,
+    - target: {fileID: 114669041270885674, guid: 56b5e8bf2e3ff114bbb565fa96db3326,
         type: 2}
-      propertyPath: dischargePower
-      value: 400
+      propertyPath: m_FillAmount
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 56b5e8bf2e3ff114bbb565fa96db3326, type: 2}
@@ -907,11 +907,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
-    - target: {fileID: 114478960037370202, guid: e0c2fd8fb3f9cea498e169d4ed8a1589,
-        type: 2}
-      propertyPath: dischargePower
-      value: 400
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e0c2fd8fb3f9cea498e169d4ed8a1589, type: 2}
   m_IsPrefabParent: 0
@@ -1553,8 +1548,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b14fe2dd5b2ee8488b3a34d3bd4f5ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _npcControllers: []
-  _allNpcs: []
+  NpcSpawners: []
+  AllNpcs: []
 --- !u!1001 &1099302928
 Prefab:
   m_ObjectHideFlags: 0
@@ -1792,11 +1787,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 114356215044404190, guid: 001dc0c8fcbdd914f99b713d241fe47f,
-        type: 2}
-      propertyPath: dischargePower
-      value: 400
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 001dc0c8fcbdd914f99b713d241fe47f, type: 2}
   m_IsPrefabParent: 0
@@ -1961,11 +1951,6 @@ Prefab:
     - target: {fileID: 4981458510300010, guid: 06c427086ff05e9489360e83a6cf1132, type: 2}
       propertyPath: m_RootOrder
       value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 114605445348928354, guid: 06c427086ff05e9489360e83a6cf1132,
-        type: 2}
-      propertyPath: dischargePower
-      value: 400
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 06c427086ff05e9489360e83a6cf1132, type: 2}
