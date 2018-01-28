@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour {
 
     public PlayerController[] playerPrefabs;
 
+    public static int numPlayers = 0;
+
     void Awake()
     {
         if (Instance == null)
@@ -23,8 +25,7 @@ public class GameManager : MonoBehaviour {
         List<PlayerController> players = new List<PlayerController>();
 
         // to-do should be dynamic based on active players
-        int numOfPlayers = playerPrefabs.Length;
-        for(int i = 0; i < numOfPlayers; i++) {
+        for(int i = 0; i < numPlayers; i++) {
            players.Add(Instantiate(playerPrefabs[i], transform.position, transform.rotation));
         }
 
