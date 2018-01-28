@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
@@ -130,6 +131,11 @@ public class GameManager : MonoBehaviour {
                 isTimerStarted = true;
             }
         }
+
+        if (Input.GetButtonDown("Y_1"))
+        {
+            SceneManager.LoadScene(4);
+        }
     }
 
     float currCountdownValue = GameManager.gameTime;
@@ -143,6 +149,12 @@ public class GameManager : MonoBehaviour {
             currCountdownValue--;
 
             countDownSprite.GetComponent<SpriteRenderer>().enabled = false;
+        }
+
+        if (currCountdownValue < 0)
+        {
+            Debug.Log("GAME ENDED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+            SceneManager.LoadScene(4);
         }
     }
 

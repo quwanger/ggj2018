@@ -274,7 +274,7 @@ MonoBehaviour:
   escalatorNotification: {fileID: 1182353478192480}
   currPower: 0
   dividerParent: {fileID: 224223066748332788}
-  playerColor: {r: 1, g: 0, b: 0, a: 0}
+  playerColor: {r: 1, g: 0, b: 0, a: 1}
   chargeBarCanvas: {fileID: 224698412829039428}
 --- !u!114 &114374580597067920
 MonoBehaviour:

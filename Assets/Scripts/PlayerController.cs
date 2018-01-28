@@ -49,6 +49,14 @@ public class PlayerController : EntityController
         s.owner = this.gameObject;
         s.dischargePower = currPower;
         s.initiateSneeze();
+        //adds recoil
+        StopPlayer(currPower);
+    }
+
+    public void StopPlayer(float countdownFrom)
+    {
+        float time = countdownFrom - Time.timeSinceLevelLoad;
+        this.GetComponent<Rigidbody2D>().velocity = -this.GetComponent<Rigidbody2D>().velocity * currPower;
     }
 
 
@@ -60,6 +68,8 @@ public class PlayerController : EntityController
         c.owner = this.gameObject;
         c.dischargePower = currPower;
         c.initiateCough();
+        //adds recoil
+        StopPlayer(currPower/2);
     }
 
     // Update is called once per frame

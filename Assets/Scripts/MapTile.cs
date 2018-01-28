@@ -46,9 +46,11 @@ public class MapTile : MonoBehaviour
     [SerializeField]
     private List<Sprite> _announcements = new List<Sprite>();
 
+    public GameObject brickPS;
     public void Awake()
     {
         _animator = GetComponent<Animator>();
+        brickPS.SetActive(false);
     }
 
     public void Update()
@@ -67,7 +69,11 @@ public class MapTile : MonoBehaviour
             else if(_inLiquidation)
             {
                 _liquidationDuration -= Time.deltaTime;
-
+                _announcementGameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, Random.Range(-3.0f, 3.0f)));
+                if(_liquidationDuration <= 1.0f) {
+                    brickPS.SetActive(true);
+                    transform.rotation = Quaternion.Euler(new Vector3(0, 0, Random.Range(-3.0f, 3.0f)));
+                }
                 if (_liquidationDuration < 0)
                 {
                     TriggerStoreClosing();
@@ -118,6 +124,8 @@ public class MapTile : MonoBehaviour
     private void ResetLifeSpan()
     {
         _tileLifeCounter = Random.Range(_mapManager.MinExpireTime, _mapManager.MaxExpireTime);
+        brickPS.SetActive(false);
+        transform.rotation = Quaternion.identity;
     }
 
     private void TriggerLiquidation()
