@@ -18,14 +18,14 @@ public class Sneeze : DischargeController {
         {
             ParticleSystem.MainModule myModule = sneezePS.main;
             myModule.startSpeedMultiplier = 1f;
-            myModule.maxParticles = 10;
+            myModule.maxParticles = 20;
             rayDistance = 2f;
         }
         else if (dischargePower > 1 && dischargePower <= 2)
         {
             ParticleSystem.MainModule myModule = sneezePS.main;
             myModule.startSpeedMultiplier = 2f;
-            myModule.maxParticles = 25;
+            myModule.maxParticles = 40;
             rayDistance = 3f;
         }
         else
