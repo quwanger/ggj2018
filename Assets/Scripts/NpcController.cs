@@ -184,6 +184,14 @@ public class NpcController : EntityController
         {
             Instantiate(deathNotification, transform.position, Quaternion.identity);
         }
+
+        if(mostInfectedBy != null)
+        {
+            int infectedBy = mostInfectedBy.GetComponent<PlayerController>().playerId;
+            GameManager.Instance.PlayerScores[infectedBy] += powerOfLastCough;
+            Debug.Log("<color=blue>Player " + mostInfectedBy.name + " has just received " + powerOfLastCough + " points. They now have " + GameManager.Instance.PlayerScores[infectedBy].ToString() + " points.</color>");
+        }
+
         GameManager.Instance.NPCManager.AllNpcs.Remove(this);
         Destroy(this.gameObject);
     }
@@ -325,13 +333,13 @@ public class NpcController : EntityController
     }
 
     public void AwardPoints() {
-		Debug.Log("Points awarded");
+		//Debug.Log("Points awarded");
 	}
 
     public virtual void hitByCough(int power, GameObject coughOwner)
     {
-        Debug.Log("Power: " + power);
-        Debug.Log("ExistingPower: " + powerOfLastCough);
+        //Debug.Log("Power: " + power);
+        //Debug.Log("ExistingPower: " + powerOfLastCough);
         if (power < powerOfLastCough)
         {
             return;

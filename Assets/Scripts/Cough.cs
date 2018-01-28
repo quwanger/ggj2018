@@ -6,7 +6,7 @@ public class Cough : DischargeController {
 
 	// Use this for initialization
 	void Start () {
-        Debug.Log("Cough");
+        //Debug.Log("Cough");
     }
 
     // Update is called once per frame

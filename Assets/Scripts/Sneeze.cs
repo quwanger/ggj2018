@@ -5,7 +5,7 @@ using UnityEngine;
 public class Sneeze : DischargeController {
 
     void Start() {
-        Debug.Log("Sneezed");
+        //Debug.Log("Sneezed");
     }
 
     public void initiateSneeze()
