@@ -84,13 +84,15 @@ public class ControllerSupport : MonoBehaviour
 
         if (!currPlayerController.isRegenerating)
         {
-            if (Input.GetButtonDown(string.Concat("X_", myPlayerID)))
+            if (Input.GetButtonDown(string.Concat("X_", myPlayerID)) ||
+                Input.GetKeyDown("n"))
             {
                 currPlayerController.timePressed = Time.time;
                 currPlayerController.isCharging = true;
             }
 
-            if (Input.GetButtonUp(string.Concat("X_", myPlayerID)))
+            if (Input.GetButtonUp(string.Concat("X_", myPlayerID)) ||
+                Input.GetKeyDown("n"))
             {
                 currPlayerController.isCharging = false;
                 currPlayerController.isRegenerating = true;

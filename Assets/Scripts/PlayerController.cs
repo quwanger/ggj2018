@@ -34,6 +34,7 @@ public class PlayerController : EntityController
     {
         base.Sneeze();
         Sneeze s = sneeze;
+        Debug.Log(this.gameObject);
         s.owner = this.gameObject;
         s.dischargePower = currPower;
         s.initiateSneeze();
