@@ -34,7 +34,9 @@ public class NpcController : EntityController
     private int currentFloor;
 	
 	// Update is called once per frame
-	void Update () {
+	public override void Update () {
+
+        base.Update();
 
         switch(_npcState)
         {

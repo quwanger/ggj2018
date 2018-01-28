@@ -28,9 +28,9 @@ public class EntityController : MonoBehaviour {
 
     static float t = 0.0f;
 
-    private void Update()
+    public virtual void Update()
     {
-        if(_ridingEscalator)
+        if (_ridingEscalator)
         {
             float posX = Mathf.Lerp(_escalatorRide.StartinPosition.x, _escalatorRide.TargetPosition.x, t);
             float posY = Mathf.Lerp(_escalatorRide.StartinPosition.y, _escalatorRide.TargetPosition.y, t);

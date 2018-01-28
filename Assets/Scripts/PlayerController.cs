@@ -49,7 +49,10 @@ public class PlayerController : EntityController
     }
 
     // Update is called once per frame
-    void Update() {
+    public override void Update()
+    {
+        base.Update();
+
         if (isRegenerating)
         {
             // The 0.01 is just to make it feel smoother
@@ -65,13 +68,15 @@ public class PlayerController : EntityController
             chargeBarFG.GetComponent<Image>().fillAmount = Mathf.Lerp(fillAmount, 0, regenerationTime);
         }
 
-        if (isCharging) {
+        if (isCharging)
+        {
             // Current time - time when trigger was pressed
             int roundedTimePressed = (int)Mathf.Floor(Time.time - timePressed) * 2;
             Debug.Log(roundedTimePressed);
 
             // Holding a discharge button for longer than you can charge
-            if (roundedTimePressed > segments) {
+            if (roundedTimePressed > segments)
+            {
                 chargeBarFG.GetComponent<Image>().fillAmount = 1.0f;
             }
 
