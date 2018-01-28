@@ -3,20 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Cough : DischargeController {
+    private AudioManager audioManager;
 
 	// Use this for initialization
 	void Start () {
-        Debug.Log("Cough");
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     // Update is called once per frame
     void Update () {
-		
-	}
+        
+    }
 
     public void initiateCough()
     {
         ParticleSystem coughPS = this.GetComponent<ParticleSystem>();
+
+        audioManager.PlaySound("player coughs");
 
         float rayDistance = 0f;
 

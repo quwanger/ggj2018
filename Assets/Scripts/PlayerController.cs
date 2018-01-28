@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class PlayerController : EntityController
 {
+    public int playerId;
+
     public Sneeze sneeze;
     public Cough cough;
     public int segments;
@@ -20,6 +22,8 @@ public class PlayerController : EntityController
     public RectTransform dividerParent;
     public Color playerColor;
 
+    public Transform chargeBarCanvas;
+
     // Use this for initialization
     void Start () {
         // Initialize stamina bar
@@ -30,11 +34,18 @@ public class PlayerController : EntityController
 
 	}
 
+    override public void Move(Vector2 direction, float speedModifier = 1.0f)
+    {
+        base.Move(direction, speedModifier);
+        if(direction.x > 0) chargeBarCanvas.localScale = new Vector2(-1, 1);
+        else if(direction.x < 0) chargeBarCanvas.localScale = new Vector2(1, 1);
+	}
+
     public override void Sneeze()
     {
         base.Sneeze();
         Sneeze s = sneeze;
-        Debug.Log(this.gameObject);
+        //Debug.Log(this.gameObject);
         s.owner = this.gameObject;
         s.dischargePower = currPower;
         s.initiateSneeze();

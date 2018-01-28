@@ -88,8 +88,6 @@ public class MapTile : MonoBehaviour
         ResetLifeSpan();
         _isDying = true;
 
-        _liquidationDuration = Random.Range(mapManager.MinLiquidationTime, mapManager.MaxLiquidationTime);
-
         //TODO: set text (this will be removed)
         _textName.text = _storeName;
         _textPosition.text = "(" + _tilePosition.x.ToString() + ", " + _tilePosition.y + ")";
@@ -126,6 +124,9 @@ public class MapTile : MonoBehaviour
     {
         if (_mapManager.StoresInLiquidation.Count < _mapManager.MaxStoresInLiquidation)
         {
+            int saleStrength = Random.Range(1, 11);
+            GameManager.Instance.NPCManager.SendNPCsToSale(saleStrength, transform);
+            _liquidationDuration = Random.Range(_mapManager.MinLiquidationTime, _mapManager.MaxLiquidationTime);
             _mapManager.TriggerLiquidation(this);
             _isDying = false;
             _inLiquidation = true;

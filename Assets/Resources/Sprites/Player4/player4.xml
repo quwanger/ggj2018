@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
-<!-- $TexturePacker:SmartUpdate:f99166af9d7e44d5c51ed21b6b80bae1:737c5dc4f13f36bf9cc67ae6382a5097:9614b47c3bf606b98df9d56674538763$ -->
+<!-- $TexturePacker:SmartUpdate:0b2c5ef46181882ea4a0d3084f435013:8209237dd6c6114f24af54ba0a8e2ee7:9614b47c3bf606b98df9d56674538763$ -->
 <TextureAtlas imagePath="player4.png" width="240" height="1116">
     <SubTexture name="player4_coughstand" x="0" y="0" width="120" height="124"/>
     <SubTexture name="player4_coughwalk_1" x="120" y="0" width="120" height="124"/>

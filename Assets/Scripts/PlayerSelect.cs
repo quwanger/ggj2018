@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 public class PlayerSelect : MonoBehaviour {
     private int players;
     private bool[] alreadyEntered = new bool[4];
-
+        
+    public SpriteRenderer[] playerSprites;
 
     // Use this for initialization
     void Start () {
@@ -20,20 +21,40 @@ public class PlayerSelect : MonoBehaviour {
     void Update() {
         for (int i = 1; i <= 4; i++)
         {
-            if (Input.GetButtonDown("A_" + i) && alreadyEntered[i] == false)
+            
+
+            if (Input.GetButtonDown("A_" + i) && alreadyEntered[i-1] == false)
             {
                 players++;
 
-                Debug.Log("Number of players entered: " + players);
+                if (i == 1)
+                {
+                    GameManager.playerSprites.Add("red");
+                } else if (i == 2)
+                {
+                    GameManager.playerSprites.Add("green");
+                }
+                else if (i == 3)
+                {
+                    GameManager.playerSprites.Add("blue");
+                }
+                else if (i == 4)
+                {
+                    GameManager.playerSprites.Add("yellow");
+                }
 
-                alreadyEntered[i] = true;
+                GameManager.numPlayers = i;
+
+                playerSprites[i-1].enabled = true;
+
+                alreadyEntered[i-1] = true;
             }
         }
 
         if (Input.GetButtonDown("Start_1") || Input.GetButtonDown("Start_2") || Input.GetButtonDown("Start_3") || Input.GetButtonDown("Start_4"))
         {
             GameManager.numPlayers = players;
-            SceneManager.LoadScene(2);
+            SceneManager.LoadScene(3);
         }
 
     }
