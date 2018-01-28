@@ -20,8 +20,36 @@ public class EscalatorSpawn
     }
 }
 
+public class EscalatorRide
+{
+    private Vector3 _startingPosition;
+    public Vector3 StartinPosition { get { return _startingPosition; } }
+
+    private Vector3 _targetPosition;
+    public Vector3 TargetPosition { get { return _targetPosition; } }
+
+    private float _rideSpeed;
+    public float RideSpeed { get { return _rideSpeed; } }
+
+    public EscalatorRide(Vector3 start, Vector3 target, float speed)
+    {
+        _startingPosition = start;
+        _targetPosition = target;
+        _rideSpeed = speed;
+    }
+}
+
+
 public class Escalator : MonoBehaviour
 {
+    [SerializeField]
+    private float _properDirectionEscalatorSpeed;
+    public float ProperDirectionEscalatorSpeed { get { return _properDirectionEscalatorSpeed; } }
+
+    [SerializeField]
+    private float _wrongDirectionEscalatorSpeed;
+    public float WrongDirectionEscalatorSpeed { get { return _wrongDirectionEscalatorSpeed; } }
+
     // Because I'm lazy, let's just assume:
     //  0 = Up
     //  1 = Down
@@ -31,6 +59,14 @@ public class Escalator : MonoBehaviour
 
     [SerializeField]
     private SpriteRenderer _escalatorSpriteRenderer;
+
+    [SerializeField]
+    private Transform _targetTop;
+    public Transform TargetTop { get { return _targetTop; } }
+
+    [SerializeField]
+    private Transform _targetBottom;
+    public Transform TargetBottom { get { return _targetBottom; } }
 
     public enum EscalatorDirectionVertical
     {
@@ -50,9 +86,15 @@ public class Escalator : MonoBehaviour
     private MapManager _mapManager;
     private bool _isDying = false;
     private bool _isShutdown = false;
+    public bool IsShutdown { get { return _isShutdown; } }
+
+    private bool _escalatorInUse = false;
+    public bool EscalatorInUse { get { return _escalatorInUse; } set { _escalatorInUse = value; } }
 
     private EscalatorDirectionVertical _escalatorDirectionVertical;
+    public EscalatorDirectionVertical EscDirectionVertical { get { return _escalatorDirectionVertical; } }
     private EscalatorDirectionHorizontal _escalatorDirectionHorizontal;
+    public EscalatorDirectionHorizontal EscDirectionHorizontal { get { return _escalatorDirectionHorizontal; } }
 
     private void Update()
     {
@@ -92,9 +134,16 @@ public class Escalator : MonoBehaviour
 
     private void TriggerShutdown()
     {
-        _isDying = false;
-        _isShutdown = true;
-        _escalatorSpriteRenderer.sprite = _escalatorSprites[2];
+        if (!_escalatorInUse)
+        {
+            _isDying = false;
+            _isShutdown = true;
+            _escalatorSpriteRenderer.sprite = _escalatorSprites[2];
+        }
+        else
+        {
+            _escalatorLife = Random.Range(_mapManager.MinEscalatorTime, _mapManager.MaxEscalatorTime);
+        }
     }
 
     private void ReactivateEscalator()

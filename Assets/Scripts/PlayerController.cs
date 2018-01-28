@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-
 public class PlayerController : EntityController
 {
     public Sneeze sneezePrefab;
@@ -16,6 +15,7 @@ public class PlayerController : EntityController
     public bool isCharging;
     public bool isRegenerating;
     private float regenerationTime = 0f;
+    public GameObject escalatorNotification;
 
     public RectTransform dividerParent;
 
@@ -45,14 +45,12 @@ public class PlayerController : EntityController
         Cough c = Instantiate(coughPrefab, transform.position, transform.rotation);
         c.owner = this;
         c.CalculatePower(timePressed);
+        _animator.SetTrigger("cough");
     }
 
     // Update is called once per frame
-    void Update () {
-
-
-
-        if(isRegenerating)
+    void Update() {
+        if (isRegenerating)
         {
             // The 0.01 is just to make it feel smoother
             if (chargeBarFG.GetComponent<Image>().fillAmount <= 0.01)
@@ -67,9 +65,9 @@ public class PlayerController : EntityController
             chargeBarFG.GetComponent<Image>().fillAmount = Mathf.Lerp(fillAmount, 0, regenerationTime);
         }
 
-        if(isCharging) {
+        if (isCharging) {
             // Current time - time when trigger was pressed
-            int roundedTimePressed = (int) Mathf.Floor(Time.time - timePressed)*2;
+            int roundedTimePressed = (int)Mathf.Floor(Time.time - timePressed) * 2;
             Debug.Log(roundedTimePressed);
 
             // Holding a discharge button for longer than you can charge
@@ -87,7 +85,18 @@ public class PlayerController : EntityController
             else
             {
                 chargeBarFG.GetComponent<Image>().fillAmount = (1.0f / segments) * roundedTimePressed;
-            }      
+            }
         }
+    }
+    public override void EnableEscalatoring(Escalator escalator)
+    {
+        escalatorNotification.SetActive(true);
+        base.EnableEscalatoring(escalator);
+    }
+
+    public override void DisableEscalatoring()
+    {
+        escalatorNotification.SetActive(false);
+        base.DisableEscalatoring();
     }
 }
