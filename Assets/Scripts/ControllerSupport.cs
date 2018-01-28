@@ -28,7 +28,7 @@ public class ControllerSupport : MonoBehaviour
 
     void Update()
     {
-        if (!currPlayerController.RidingEscalator)
+        if (!currPlayerController.RidingEscalator && GameManager.Instance.gameStarted)
         {
             //move the player by getting the normalized vector created by the joystick
             Vector3 mydir = new Vector2(x, y).normalized;
@@ -42,7 +42,6 @@ public class ControllerSupport : MonoBehaviour
     {
         //based on the player ID, access the correct controller joystick data
         string myX = string.Concat("L_XAxis_", myPlayerID);
-        string myY = string.Concat("L_YAxis_", myPlayerID);
 
         //assign it to x and y; Ignore Y for now (no up movement)
         x = Input.GetAxis(myX);
@@ -62,20 +61,19 @@ public class ControllerSupport : MonoBehaviour
         }
     }
 
-    private bool leftTriggerInUse = false;
-
-
     void keyPressedTimer()
     {
         if (!currPlayerController.isRegenerating)
         {
-            if (Input.GetButtonDown(string.Concat("A_", myPlayerID)))
+            if (Input.GetButtonDown(string.Concat("A_", myPlayerID)) ||
+                Input.GetKeyDown("space"))
             {
                 currPlayerController.timePressed = Time.time;
                 currPlayerController.isCharging = true;
             }
 
-            if (Input.GetButtonUp(string.Concat("A_", myPlayerID)))
+            if (Input.GetButtonUp(string.Concat("A_", myPlayerID)) ||
+                Input.GetKeyUp("space"))
             {
                 currPlayerController.isCharging = false;
                 currPlayerController.isRegenerating = true;
