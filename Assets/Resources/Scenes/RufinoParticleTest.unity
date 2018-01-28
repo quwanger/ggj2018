@@ -500,22 +500,22 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 2
-      scalar: 12
+      scalar: 2
       minScalar: 5
       maxCurve:
         serializedVersion: 2
         m_Curve:
         - serializedVersion: 2
           time: 0.004211426
-          value: 1
+          value: 0.16216278
           inSlope: -2
           outSlope: -2
           tangentMode: 0
         - serializedVersion: 2
           time: 0.9937134
           value: -1
-          inSlope: 0
-          outSlope: 0
+          inSlope: -1.7907722
+          outSlope: -1.7907722
           tangentMode: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -524,8 +524,8 @@ ParticleSystem:
         serializedVersion: 2
         m_Curve:
         - serializedVersion: 2
-          time: 0
-          value: 0.45044965
+          time: 0.008422402
+          value: 0.96396434
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -818,7 +818,7 @@ ParticleSystem:
     serializedVersion: 5
     enabled: 1
     type: 4
-    angle: 20.02668
+    angle: 16.353292
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
@@ -885,7 +885,7 @@ ParticleSystem:
           m_RotationOrder: 4
     arc:
       value: 360
-      mode: 0
+      mode: 3
       spread: 0
       speed:
         serializedVersion: 2
@@ -1428,8 +1428,8 @@ ParticleSystem:
         - serializedVersion: 2
           time: 0
           value: 1
-          inSlope: 0
-          outSlope: 0
+          inSlope: -2.3108113
+          outSlope: -2.3108113
           tangentMode: 0
         - serializedVersion: 2
           time: 1
@@ -1849,7 +1849,7 @@ ParticleSystem:
     magnitude:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.8
+      scalar: 5
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -4417,7 +4417,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1261713617
 Transform:
   m_ObjectHideFlags: 0
@@ -4542,7 +4542,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -1706121862
+  randomSeed: -832212283
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -4848,7 +4848,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 50
+    maxNumParticles: 15
     size3D: 0
     rotation3D: 1
     gravityModifier:
@@ -4963,7 +4963,7 @@ ParticleSystem:
           m_RotationOrder: 4
     arc:
       value: 360
-      mode: 0
+      mode: 3
       spread: 0
       speed:
         serializedVersion: 2
@@ -5927,7 +5927,7 @@ ParticleSystem:
     magnitude:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.8
+      scalar: 0.5
       minScalar: 1
       maxCurve:
         serializedVersion: 2
