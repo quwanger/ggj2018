@@ -9,7 +9,7 @@ public class EntityController : MonoBehaviour {
 
 	//cough tracking
 	public int powerOfLastCough;
-	public string winningPlayerTag;
+	public GameObject mostInfectedBy;
 
 	protected Rigidbody2D _rigidBody;
 	protected Animator _animator;

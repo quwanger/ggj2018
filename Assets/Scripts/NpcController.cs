@@ -327,4 +327,25 @@ public class NpcController : EntityController
     public void AwardPoints() {
 		Debug.Log("Points awarded");
 	}
+
+    public virtual void hitByCough(int power, GameObject coughOwner)
+    {
+        Debug.Log("Power: " + power);
+        Debug.Log("ExistingPower: " + powerOfLastCough);
+        if (power < powerOfLastCough)
+        {
+            return;
+        }
+        else
+        {
+            powerOfLastCough = power;
+            mostInfectedBy = coughOwner;
+
+            SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+
+            PlayerController ownerScript = coughOwner.GetComponent<PlayerController>();
+
+            spriteRenderer.color = ownerScript.playerColor;
+        }
+    }
 }
