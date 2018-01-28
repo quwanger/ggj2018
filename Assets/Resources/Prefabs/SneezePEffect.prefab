@@ -9,35 +9,39 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1549627877128618}
+  m_RootGameObject: {fileID: 1290651977142534}
   m_IsPrefabParent: 1
---- !u!1 &1034105477273166
+--- !u!1 &1290651977142534
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4602734479088632}
+  - component: {fileID: 4739248445850134}
+  - component: {fileID: 33499068788370394}
+  - component: {fileID: 65391793431638792}
+  - component: {fileID: 23040091413819544}
+  - component: {fileID: 114881478672536220}
   m_Layer: 0
-  m_Name: Sneeze Transform
+  m_Name: SneezePEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1240721290692392
+--- !u!1 &1444610422915472
 GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4008122428630106}
-  - component: {fileID: 198896100609232072}
-  - component: {fileID: 199012725849084800}
-  - component: {fileID: 114344071919408376}
-  - component: {fileID: 114103166438016560}
+  - component: {fileID: 4597112974355460}
+  - component: {fileID: 198181132260786522}
+  - component: {fileID: 199375729536657284}
+  - component: {fileID: 114535375815014264}
+  - component: {fileID: 114505712445377728}
   m_Layer: 0
   m_Name: SteamMobile
   m_TagString: Untagged
@@ -45,71 +49,68 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1549627877128618
+--- !u!1 &1952471963140442
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4444375287493380}
-  - component: {fileID: 33433909224959234}
-  - component: {fileID: 65952372624820540}
-  - component: {fileID: 23617908839140582}
+  - component: {fileID: 4426751602878156}
   m_Layer: 0
-  m_Name: SneezeParticleEffect
+  m_Name: Sneeze Transform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4008122428630106
+--- !u!4 &4426751602878156
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1240721290692392}
+  m_GameObject: {fileID: 1952471963140442}
+  m_LocalRotation: {x: -0, y: -0, z: 0.7484291, w: 0.66321486}
+  m_LocalPosition: {x: 0, y: 0, z: -11.27}
+  m_LocalScale: {x: 1.215118, y: 1.2151179, z: 1.2151172}
+  m_Children:
+  - {fileID: 4597112974355460}
+  m_Father: {fileID: 4739248445850134}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 96.909004}
+--- !u!4 &4597112974355460
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1444610422915472}
   m_LocalRotation: {x: -0.5, y: 0.5, z: -0.5, w: 0.5}
   m_LocalPosition: {x: -0.10597468, y: -0.02214908, z: 9.416431}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4602734479088632}
+  m_Father: {fileID: 4426751602878156}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4444375287493380
+--- !u!4 &4739248445850134
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1549627877128618}
+  m_GameObject: {fileID: 1290651977142534}
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -0, y: -1.75, z: 0}
+  m_LocalPosition: {x: -14.226158, y: -5.0753183, z: 3.4967492}
   m_LocalScale: {x: 0.46408936, y: 0.46408933, z: 0.46408957}
   m_Children:
-  - {fileID: 4602734479088632}
+  - {fileID: 4426751602878156}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
---- !u!4 &4602734479088632
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1034105477273166}
-  m_LocalRotation: {x: -0, y: -0, z: 0.7484291, w: 0.66321486}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.215118, y: 1.2151179, z: 1.2151172}
-  m_Children:
-  - {fileID: 4008122428630106}
-  m_Father: {fileID: 4444375287493380}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 96.909004}
---- !u!23 &23617908839140582
+--- !u!23 &23040091413819544
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1549627877128618}
+  m_GameObject: {fileID: 1290651977142534}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -136,54 +137,67 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33433909224959234
+--- !u!33 &33499068788370394
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1549627877128618}
+  m_GameObject: {fileID: 1290651977142534}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &65952372624820540
+--- !u!65 &65391793431638792
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1549627877128618}
+  m_GameObject: {fileID: 1290651977142534}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114103166438016560
+--- !u!114 &114505712445377728
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1240721290692392}
+  m_GameObject: {fileID: 1444610422915472}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 039587c051912eb4ead9e58344c5f3ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   multiplier: 1
---- !u!114 &114344071919408376
+--- !u!114 &114535375815014264
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1240721290692392}
+  m_GameObject: {fileID: 1444610422915472}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 0}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!198 &198896100609232072
+--- !u!114 &114881478672536220
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1290651977142534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306813a693d2588428141998ee660a18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  power: 1
+  owner: {fileID: 0}
+--- !u!198 &198181132260786522
 ParticleSystem:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1240721290692392}
+  m_GameObject: {fileID: 1444610422915472}
   serializedVersion: 5
   lengthInSec: 2
   simulationSpeed: 1
@@ -237,7 +251,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: 215781960
+  randomSeed: 1798622041
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -917,8 +931,8 @@ ParticleSystem:
     enabled: 1
     x:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 0
+      minMaxState: 2
+      scalar: 1
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -958,8 +972,8 @@ ParticleSystem:
         m_RotationOrder: 4
     y:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 0
+      minMaxState: 2
+      scalar: 1
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -3343,13 +3357,13 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
---- !u!199 &199012725849084800
+--- !u!199 &199375729536657284
 ParticleSystemRenderer:
   serializedVersion: 4
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1240721290692392}
+  m_GameObject: {fileID: 1444610422915472}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1

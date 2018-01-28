@@ -22,7 +22,7 @@ public class PlayerController : EntityController
     {
         base.Cough(timePressed);
 
-        Cough c = Instantiate(coughPrefab, transform.position, transform.rotation);
+        Cough c = Instantiate(coughPrefab, new Vector3(transform.position.x, transform.position.y, -5), coughPrefab.transform.rotation);
         c.owner = this;
         c.CalculatePower(timePressed);
         _animator.SetTrigger("cough");
