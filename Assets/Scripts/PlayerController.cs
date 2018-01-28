@@ -108,4 +108,9 @@ public class PlayerController : EntityController
         escalatorNotification.SetActive(false);
         base.DisableEscalatoring();
     }
+
+    public void CompleteEscalatorRide()
+    {
+
+    }
 }
