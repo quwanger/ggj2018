@@ -357,6 +357,7 @@ MonoBehaviour:
   speed: 20
   powerOfLastCough: 0
   mostInfectedBy: {fileID: 0}
+  playerId: 4
   sneeze: {fileID: 114048310271158188}
   cough: {fileID: 114478960037370202}
   segments: 3

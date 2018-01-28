@@ -29,7 +29,7 @@ public class NPCManager : MonoBehaviour {
 
     public void KillNPCsAtStore(Transform store)
     {
-        Debug.Log("Killing NPCs");
+        //Debug.Log("Killing NPCs");
 
         List<NpcController> npcsToKill = new List<NpcController>();
 
@@ -43,7 +43,7 @@ public class NPCManager : MonoBehaviour {
 
         foreach (NpcController npc in npcsToKill)
         {
-            Debug.Log("Killing NPC");
+            //Debug.Log("Killing NPC");
             npc.ExitNPC(true);
         }
     }

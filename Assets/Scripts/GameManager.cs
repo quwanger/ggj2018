@@ -30,6 +30,8 @@ public class GameManager : MonoBehaviour {
     public bool gameStarted;
     bool isTimerStarted = false;
 
+    public Dictionary<int, int> PlayerScores = new Dictionary<int, int>();
+
     void Awake()
     {
         if (Instance == null)
@@ -46,29 +48,31 @@ public class GameManager : MonoBehaviour {
         for(int i = 0; i < numPlayers; i++) {
             //Debug.Log(playerPrefabs[i].name);
 
-            Debug.Log(playerSprites[i]);
+            //Debug.Log(playerSprites[i]);
 
             if (playerSprites[i] == "red")
             {
-                Debug.Log("red");
+                //Debug.Log("red");
 
                 PlayerController playerName = playerPrefabs[0];
 
                 if (playerName.name == "Player")
                 {
                     players.Add(Instantiate(playerName, spawnPoints[0].transform.position, spawnPoints[0].transform.rotation));
+                    PlayerScores.Add(playerName.playerId, 0);
                 }
             }
 
             if (playerSprites[i] == "green")
             {
-                Debug.Log("green");
+                //Debug.Log("green");
 
                 PlayerController playerName = playerPrefabs[1];
 
                 if (playerName.name == "Player2")
                 {
                     players.Add(Instantiate(playerName, spawnPoints[1].transform.position, spawnPoints[1].transform.rotation));
+                    PlayerScores.Add(playerName.playerId, 0);
                 }
             }
 
@@ -80,6 +84,7 @@ public class GameManager : MonoBehaviour {
                 if (playerName.name == "Player3")
                 {
                     players.Add(Instantiate(playerName, spawnPoints[2].transform.position, spawnPoints[2].transform.rotation));
+                    PlayerScores.Add(playerName.playerId, 0);
                 }
             }
 
@@ -91,6 +96,7 @@ public class GameManager : MonoBehaviour {
                 if (playerName.name == "Player4")
                 {
                     players.Add(Instantiate(playerName, spawnPoints[3].transform.position, spawnPoints[3].transform.rotation));
+                    PlayerScores.Add(playerName.playerId, 0);
                 }
             }
 

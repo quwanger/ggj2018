@@ -25,8 +25,6 @@ public class PlayerSelect : MonoBehaviour {
 
             if (Input.GetButtonDown("A_" + i) && alreadyEntered[i-1] == false)
             {
-                Debug.Log(i);
-
                 players++;
 
                 if (i == 1)
@@ -47,11 +45,7 @@ public class PlayerSelect : MonoBehaviour {
 
                 GameManager.numPlayers = i;
 
-                Debug.Log("Number of players entered: " + players);
-
                 playerSprites[i-1].enabled = true;
-
-                Debug.Log(playerSprites[i-1].name);
 
                 alreadyEntered[i-1] = true;
             }
@@ -60,6 +54,7 @@ public class PlayerSelect : MonoBehaviour {
         if (Input.GetButtonDown("Start_1") || Input.GetButtonDown("Start_2") || Input.GetButtonDown("Start_3") || Input.GetButtonDown("Start_4"))
         {
             GameManager.numPlayers = players;
+            AudioScript.FindObjectOfType<AudioSource>().Stop();
             SceneManager.LoadScene(3);
         }
 
