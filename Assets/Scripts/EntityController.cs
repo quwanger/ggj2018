@@ -29,13 +29,13 @@ public class EntityController : MonoBehaviour {
 		_rigidBody.AddForce(direction * speed * speedModifier * Time.deltaTime * 60);
 	}
 
-	virtual public void Sneeze(float timePressed = 1.0f) {
+	virtual public void Sneeze() {
  
         _animator.SetTrigger("Sneeze");
 		// return GameObject.Instantiate(projectile, shootPoint.position, transform.rotation);
 	}
 
-    virtual public void Cough(float timePressed = 1.0f)
+    virtual public void Cough()
     {
 
         _animator.SetTrigger("Cough");

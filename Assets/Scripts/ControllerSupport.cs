@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class ControllerSupport : MonoBehaviour
 {
 
@@ -15,8 +14,6 @@ public class ControllerSupport : MonoBehaviour
 
     protected Rigidbody2D rb;
     int myPlayerID;
-
-    float timePressed = 0f;
 
     void Start () {
         //get player tag
@@ -62,42 +59,50 @@ public class ControllerSupport : MonoBehaviour
 
 
     void keyPressedTimer() {
-        if (Input.GetAxis(string.Concat("TriggersR_", myPlayerID)) != 0)
+        if (!currPlayerController.isRegenerating)
         {
-            if (rightTriggerInUse == false)
+            if (Input.GetAxis(string.Concat("TriggersR_", myPlayerID)) != 0)
             {
-                timePressed = Time.time;
-        
-                // Start player charge bar
+                if (rightTriggerInUse == false)
+                {
+                    currPlayerController.timePressed = Time.time;
+                    currPlayerController.isCharging = true;
 
-                Debug.Log("RT Pressed");
+                    Debug.Log("RT Pressed");
 
-                rightTriggerInUse = true;
+                    rightTriggerInUse = true;
+                }
             }
         }
         if (Input.GetAxis(string.Concat("TriggersR_", myPlayerID)) == 0)
         {
-            if (rightTriggerInUse) {
+            if (rightTriggerInUse)
+            {
                 rightTriggerInUse = false;
-                timePressed = Time.time - timePressed;
-                Debug.Log("RT Released");
-                Debug.Log("RT Held for: " + timePressed);
+                currPlayerController.isCharging = false;
 
-                currPlayerController.Cough(timePressed);
+                Debug.Log("RT Released");
+
+                currPlayerController.isRegenerating = true;
+
+                currPlayerController.Cough();
             }
         }
+        
 
-        if (Input.GetAxis(string.Concat("TriggersL_", myPlayerID)) != 0)
+        if (!currPlayerController.isRegenerating)
         {
-            if (leftTriggerInUse == false)
+            if (Input.GetAxis(string.Concat("TriggersL_", myPlayerID)) != 0)
             {
-                timePressed = Time.time;
+                if (leftTriggerInUse == false)
+                {
+                    currPlayerController.timePressed = Time.time;
+                    currPlayerController.isCharging = true;
 
-                // Stop player charge bar
+                    Debug.Log("LT Pressed");
 
-                Debug.Log("LT Pressed");
-
-                leftTriggerInUse = true;
+                    leftTriggerInUse = true;
+                }
             }
         }
         if (Input.GetAxis(string.Concat("TriggersL_", myPlayerID)) == 0)
@@ -105,11 +110,13 @@ public class ControllerSupport : MonoBehaviour
             if (leftTriggerInUse)
             {
                 leftTriggerInUse = false;
-                timePressed = Time.time - timePressed;
-                Debug.Log("LT Released");
-                Debug.Log("LT Held for: " + timePressed);
+                currPlayerController.isCharging = false;
 
-                currPlayerController.Sneeze(timePressed);
+                Debug.Log("LT Released");
+
+                currPlayerController.isRegenerating = true;
+
+                currPlayerController.Sneeze();
             }
         }
     }
