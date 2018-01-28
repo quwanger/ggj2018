@@ -26,6 +26,7 @@ public class Cough : DischargeController {
             myModule.startSpeedMultiplier = 1f;
             myModule.maxParticles = 10;
             rayDistance = 2f;
+            dischargeLevel = 1;
         }
         else if (dischargePower > 1 && dischargePower <= 2)
         {
@@ -33,6 +34,7 @@ public class Cough : DischargeController {
             myModule.startSpeedMultiplier = 20f;
             myModule.maxParticles = 25;
             rayDistance = 3f;
+            dischargeLevel = 2;
         }
         else
         {
@@ -40,6 +42,7 @@ public class Cough : DischargeController {
             myModule.startSpeedMultiplier = 45f;
             myModule.maxParticles = 80;
             rayDistance = 4f;
+            dischargeLevel = 3;
         }
 
         coughPS.Play();
