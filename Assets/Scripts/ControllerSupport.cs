@@ -86,12 +86,14 @@ public class ControllerSupport : MonoBehaviour
             }
 
             if (Input.GetButtonUp(string.Concat("A_", myPlayerID)) ||
-                Input.GetKeyUp("space"))
-            {
-                currPlayerController.isCharging = false;
-                currPlayerController.isRegenerating = true;
+                Input.GetKeyUp("space")) {
+                if (currPlayerController.isCharging)
+                {
+                    currPlayerController.isCharging = false;
+                    currPlayerController.isRegenerating = true;
 
-                currPlayerController.Cough();
+                    currPlayerController.Cough();
+                }
             }
         }
 
@@ -105,12 +107,13 @@ public class ControllerSupport : MonoBehaviour
             }
 
             if (Input.GetButtonUp(string.Concat("X_", myPlayerID)) ||
-                Input.GetKeyDown("n"))
-            {
-                currPlayerController.isCharging = false;
-                currPlayerController.isRegenerating = true;
+                Input.GetKeyDown("n")) {
+                if(currPlayerController.isCharging) {
+                    currPlayerController.isCharging = false;
+                    currPlayerController.isRegenerating = true;
 
-                currPlayerController.Sneeze();
+                    currPlayerController.Sneeze();
+                }
             }
         }
 
