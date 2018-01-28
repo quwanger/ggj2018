@@ -39,7 +39,16 @@ public class PauseMenu : MonoBehaviour {
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
-        SceneManager.LoadScene("MainMenu");
+        GameManager.gameTime = 210;
+
+        for (int i = 0; i < GameManager.Instance.PlayerScores.Count; i++ )
+        {
+            GameManager.Instance.PlayerScores[i+1] = 0;
+        }
+        
+      
+        SceneManager.LoadScene(3);
+
     }
 
     public void QuitGame()

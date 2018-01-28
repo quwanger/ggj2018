@@ -19,7 +19,7 @@ public class AudioManager : MonoBehaviour {
 
     void Awake ()
     {
-        if (instance != null)
+       /* if (instance != null)
         {
             Destroy(gameObject);
             print("Duplicate music player self-destructing");
@@ -28,7 +28,7 @@ public class AudioManager : MonoBehaviour {
         {
             instance = this;
             GameObject.DontDestroyOnLoad(gameObject);
-        }
+        }*/
     }
 
 	// Use this for initialization
@@ -44,6 +44,7 @@ public class AudioManager : MonoBehaviour {
 
     public void PlaySound(string word)
     {
+        
 
         switch (word)
         {

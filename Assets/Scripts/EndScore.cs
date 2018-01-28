@@ -5,19 +5,20 @@ using UnityEngine.UI;
 
 public class EndScore : MonoBehaviour {
 
-    public Text player1;
-    public Text player2;
-    public Text player3;
-    public Text player4;
+    public Text[] player;
 
     GameManager gameManager;
 
-	// Use this for initialization
-	void Start () {
-        player1.text = "Score: " + GameManager.Instance.PlayerScores[0];
-        player2.text = "Score: " + GameManager.Instance.PlayerScores[1];
-        player3.text = "Score: " + GameManager.Instance.PlayerScores[2];
-        player4.text = "Score: " + GameManager.Instance.PlayerScores[3];
+    // Use this for initialization
+    void Start() {
+
+
+        for (int i = 0; i < GameManager.Instance.PlayerScores.Count; i++)
+        {
+            player[i].text = "Score: " + GameManager.Instance.PlayerScores[i+1].ToString(); ;
+        }
+
+        
 
 
     }

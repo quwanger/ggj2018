@@ -142,7 +142,7 @@ public class GameManager : MonoBehaviour {
     public IEnumerator GetWorldTime()
     {
         //currCountdownValue = countdownValue;
-        while (currCountdownValue > 0)
+        while (currCountdownValue >= 0)
         {
             GameManager.gameTime = currCountdownValue;
             yield return new WaitForSeconds(1.0f);
@@ -150,12 +150,11 @@ public class GameManager : MonoBehaviour {
 
             countDownSprite.GetComponent<SpriteRenderer>().enabled = false;
         }
-
         if (currCountdownValue < 0)
         {
             Debug.Log("GAME ENDED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
             SceneManager.LoadScene(4);
         }
-    }
 
+    }
 }
