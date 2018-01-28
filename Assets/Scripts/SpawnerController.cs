@@ -18,27 +18,19 @@ public class SpawnerController : MonoBehaviour {
 	[SerializeField]
 	public int burstUpperLimit = 10;
 
-	public Transform tempGoal;
-
 	// Use this for initialization
 	void Start () {
 		StartCoroutine("SpawnNpc");
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
 	IEnumerator SpawnNpc() {
-
 		while(true) {
 			float offset = Mathf.Max(rateOffset, 0);
 			yield return new WaitForSeconds(Random.Range(offset + rateLowerLimit, offset + rateUpperLimit));
 			for(int i = 0; i < Random.Range(burstLowerLimit, burstUpperLimit); i++) {
 				yield return new WaitForSeconds(Random.Range(0.05f, 0.2f));
 				NpcController n = Instantiate(npcToSpawn, transform.position, Quaternion.identity);
-				n.targetGoal = tempGoal.position;
+                n.Init();
 			}
 		}
 	}

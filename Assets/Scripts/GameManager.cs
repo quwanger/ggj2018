@@ -3,9 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour {
+
+    public static GameManager Instance = null;
+
+    public NPCManager NPCManager;
+    public MapManager MapManager;
+
     public PlayerController[] playerPrefabs;
 
-    // Use this for initialization
+    void Awake()
+    {
+        if (Instance == null)
+            Instance = this;
+        else if (Instance != this)
+            Destroy(gameObject);
+    }
+
     void Start () {
         List<PlayerController> players = new List<PlayerController>();
 
@@ -17,8 +30,4 @@ public class GameManager : MonoBehaviour {
 
     }
 
-    // Update is called once per frame
-    void Update () {
-		
-	}
 }

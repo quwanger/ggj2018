@@ -15,10 +15,12 @@ public class NpcExit : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
-		NpcController npc = other.GetComponent<NpcController>();
+        /*
+        NpcController npc = other.GetComponent<NpcController>();
 		if(npc && npc.leaving) {
 			npc.AwardPoints();
 			Destroy(npc.gameObject);
 		}
+        */
 	}
 }
