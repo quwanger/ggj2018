@@ -81,7 +81,12 @@ public class ControllerSupport : MonoBehaviour
             if (Input.GetButton(string.Concat("A_", myPlayerID)) ||
                 Input.GetKey("space"))
             {
-                if(currPlayerController.timePressed == 0) currPlayerController.timePressed = Time.time;
+                if(currPlayerController.timePressed == 0) {
+                    currPlayerController.timePressed = Time.time;
+                    currPlayerController.coughChargeBar.SetActive(true);
+                    currPlayerController.achooChargeBar.SetActive(false);
+
+                }
                 currPlayerController.isCharging = true;
             }
 
@@ -102,7 +107,12 @@ public class ControllerSupport : MonoBehaviour
             if (Input.GetButton(string.Concat("X_", myPlayerID)) ||
                 Input.GetKey("n"))
             {
-                if(currPlayerController.timePressed == 0) currPlayerController.timePressed = Time.time;
+                if(currPlayerController.timePressed == 0) {
+                    currPlayerController.timePressed = Time.time;
+                    currPlayerController.coughChargeBar.SetActive(false);
+                    currPlayerController.achooChargeBar.SetActive(true);
+
+                }
                 currPlayerController.isCharging = true;
             }
 

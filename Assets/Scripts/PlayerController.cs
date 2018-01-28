@@ -23,6 +23,8 @@ public class PlayerController : EntityController
     public Color playerColor;
 
     public Transform chargeBarCanvas;
+    public GameObject coughChargeBar;
+    public GameObject achooChargeBar;
 
     // Use this for initialization
     void Start () {
@@ -32,13 +34,16 @@ public class PlayerController : EntityController
                 transform.rotation, dividerParent);
         }
 
+        coughChargeBar.SetActive(true);
+        achooChargeBar.SetActive(false);
 	}
 
     override public void Move(Vector2 direction, float speedModifier = 1.0f)
     {
         base.Move(direction, speedModifier);
-        if(direction.x > 0) chargeBarCanvas.localScale = new Vector2(-1, 1);
-        else if(direction.x < 0) chargeBarCanvas.localScale = new Vector2(1, 1);
+        float chargeCanvasSize = Mathf.Abs(chargeBarCanvas.transform.localScale.x);
+        if(direction.x > 0) chargeBarCanvas.localScale = new Vector2(-chargeCanvasSize, chargeCanvasSize);
+        else if(direction.x < 0) chargeBarCanvas.localScale = new Vector2(chargeCanvasSize, chargeCanvasSize);
 	}
 
     public override void Sneeze()
