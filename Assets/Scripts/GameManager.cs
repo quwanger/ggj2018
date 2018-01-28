@@ -19,10 +19,18 @@ public class GameManager : MonoBehaviour {
     public static List<string> playerSprites = new List<string>();
 
     public Text countdownText;
+    public GameObject countDownSprite;
     public float countdownFrom;
+
+    public Sprite countDownSprite1;
+    public Sprite countDownSprite2;
+    public Sprite countDownSprite3;
+    public Sprite countDownSpriteSHOP;
 
     public bool gameStarted;
     bool isTimerStarted = false;
+
+    public Dictionary<int, int> PlayerScores = new Dictionary<int, int>();
 
     void Awake()
     {
@@ -40,29 +48,31 @@ public class GameManager : MonoBehaviour {
         for(int i = 0; i < numPlayers; i++) {
             //Debug.Log(playerPrefabs[i].name);
 
-            Debug.Log(playerSprites[i]);
+            //Debug.Log(playerSprites[i]);
 
             if (playerSprites[i] == "red")
             {
-                Debug.Log("red");
+                //Debug.Log("red");
 
                 PlayerController playerName = playerPrefabs[0];
 
                 if (playerName.name == "Player")
                 {
                     players.Add(Instantiate(playerName, spawnPoints[0].transform.position, spawnPoints[0].transform.rotation));
+                    PlayerScores.Add(playerName.playerId, 0);
                 }
             }
 
             if (playerSprites[i] == "green")
             {
-                Debug.Log("green");
+                //Debug.Log("green");
 
                 PlayerController playerName = playerPrefabs[1];
 
                 if (playerName.name == "Player2")
                 {
                     players.Add(Instantiate(playerName, spawnPoints[1].transform.position, spawnPoints[1].transform.rotation));
+                    PlayerScores.Add(playerName.playerId, 0);
                 }
             }
 
@@ -74,6 +84,7 @@ public class GameManager : MonoBehaviour {
                 if (playerName.name == "Player3")
                 {
                     players.Add(Instantiate(playerName, spawnPoints[2].transform.position, spawnPoints[2].transform.rotation));
+                    PlayerScores.Add(playerName.playerId, 0);
                 }
             }
 
@@ -85,6 +96,7 @@ public class GameManager : MonoBehaviour {
                 if (playerName.name == "Player4")
                 {
                     players.Add(Instantiate(playerName, spawnPoints[3].transform.position, spawnPoints[3].transform.rotation));
+                    PlayerScores.Add(playerName.playerId, 0);
                 }
             }
 
@@ -98,18 +110,22 @@ public class GameManager : MonoBehaviour {
         if (time <= 3.0f && time > 2.0f)
         {
             countdownText.text = "3";
+            countDownSprite.GetComponent<SpriteRenderer>().sprite = countDownSprite3;
         } else if (time <= 2.0f && time > 1.0f)
         {
             countdownText.text = "2";
+            countDownSprite.GetComponent<SpriteRenderer>().sprite = countDownSprite2;
         } else if (time <= 1.0f && time > 0.0f)
         {
+            countDownSprite.GetComponent<SpriteRenderer>().sprite = countDownSprite1;
             countdownText.text = "1";
         } else if (time <= 0.0f)
         {
-            // countdownText.text = "GO";
+         //    countdownText.text = "GO";
             gameStarted = true;
             if(!isTimerStarted)
             {
+                countDownSprite.GetComponent<SpriteRenderer>().sprite = countDownSpriteSHOP;
                 StartCoroutine(GetWorldTime());
                 isTimerStarted = true;
             }
@@ -125,6 +141,8 @@ public class GameManager : MonoBehaviour {
             GameManager.gameTime = currCountdownValue;
             yield return new WaitForSeconds(1.0f);
             currCountdownValue--;
+
+            countDownSprite.GetComponent<SpriteRenderer>().enabled = false;
         }
     }
 

@@ -380,7 +380,7 @@ public class MapManager : MonoBehaviour {
     }
     public void TriggerReplaceStore(MapTile mapTile)
     {
-        Debug.Log("Replacing store at position: " + mapTile.transform.position);
+        //Debug.Log("Replacing store at position: " + mapTile.transform.position);
         GameManager.Instance.NPCManager.KillNPCsAtStore(mapTile.transform);
         _storesInLiquidation.Remove(mapTile);
         StartCoroutine("ReplaceStore", mapTile);

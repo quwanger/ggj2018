@@ -23,7 +23,7 @@ public class DischargeController : MonoBehaviour {
     public void shootRay(float rayDistance, string type)
     {
         float direction = transform.parent.localScale.x * -1;
-        Debug.Log("Direction: " + direction);
+        //Debug.Log("Direction: " + direction);
 
         RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, new Vector2(direction, 0), rayDistance);
 

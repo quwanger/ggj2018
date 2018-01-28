@@ -180,6 +180,7 @@ MonoBehaviour:
   _escalatorSpriteRenderer: {fileID: 212681941260872376}
   _targetTop: {fileID: 4979215531159918}
   _targetBottom: {fileID: 4087717375072540}
+  CharactersOnEscalator: []
 --- !u!212 &212681941260872376
 SpriteRenderer:
   m_ObjectHideFlags: 1
