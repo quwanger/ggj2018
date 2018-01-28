@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
@@ -129,6 +130,11 @@ public class GameManager : MonoBehaviour {
                 StartCoroutine(GetWorldTime());
                 isTimerStarted = true;
             }
+        }
+
+        if (Input.GetButtonDown("Y_1"))
+        {
+            SceneManager.LoadScene(4);
         }
     }
 
