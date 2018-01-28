@@ -289,18 +289,37 @@ public class MapManager : MonoBehaviour {
         return spawnEscalator;
     }
 
-    public Vector2 GetEscalatorFromFloorToFloor(int from, int to, bool down)
+    private void ShuffleArray<T>(T[] array)
     {
-        foreach (Escalator escalator in _currentEscalators)
+        int n = array.Length;
+        for (int i = 0; i < n; i++)
         {
-            if(escalator.FromFloor == from && escalator.ToFloor == to)
+            // Pick a new index higher than current for each item in the array
+            int r = i + Random.Range(0, n - i);
+
+            // Swap item into new spot
+            T t = array[r];
+            array[r] = array[i];
+            array[i] = t;
+        }
+    }
+
+    public Escalator GetEscalatorFromFloorToFloor(int from, int to, bool down)
+    {
+        Escalator[] shuffledEscalators = _currentEscalators.ToArray();
+        ShuffleArray(shuffledEscalators);
+
+        for (int i = 0; i < shuffledEscalators.Length; i++)
+        {
+            if (shuffledEscalators[i].FromFloor == from && shuffledEscalators[i].ToFloor == to && !shuffledEscalators[i].IsShutdown)
             {
-                Vector2 target = new Vector2(down ? escalator.TargetTop.position.x : escalator.TargetBottom.position.x, down ? escalator.TargetTop.position.y : escalator.TargetBottom.position.y);
-                return target;
+                return shuffledEscalators[i];
+                //Vector2 target = new Vector2(down ? shuffledEscalators[i].TargetTop.position.x : shuffledEscalators[i].TargetBottom.position.x, down ? shuffledEscalators[i].TargetTop.position.y : shuffledEscalators[i].TargetBottom.position.y);
+                //return target;
             }
         }
 
-        return Vector2.zero;
+        return null;
     }
 
     private List<EscalatorSpawn> GetEscalatorsForFloor(int floor)
