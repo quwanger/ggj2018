@@ -15,7 +15,8 @@ public class ControllerSupport : MonoBehaviour
     protected Rigidbody2D rb;
     public int myPlayerID;
 
-    void Start () {
+    void Start()
+    {
         //get player tag
         string myTag = this.tag;
         myPlayerID = Convert.ToInt32(myTag.Substring(myTag.Length - 1, 1));
@@ -24,8 +25,8 @@ public class ControllerSupport : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         currPlayerController = GetComponent<PlayerController>();
     }
-    	
-	void Update ()
+
+    void Update()
     {
         if (!currPlayerController.RidingEscalator)
         {
@@ -64,7 +65,8 @@ public class ControllerSupport : MonoBehaviour
     private bool leftTriggerInUse = false;
 
 
-    void keyPressedTimer() {
+    void keyPressedTimer()
+    {
         if (!currPlayerController.isRegenerating)
         {
             if (Input.GetButtonDown(string.Concat("A_", myPlayerID)))
@@ -100,7 +102,7 @@ public class ControllerSupport : MonoBehaviour
         }
 
         if (Input.GetAxis(string.Concat("L_YAxis_", myPlayerID)) != 0)
-        {           
+        {
             if (Input.GetAxis(string.Concat("L_YAxis_", myPlayerID)) < 0)
             {
                 if (currPlayerController.InEscalatorRange)
@@ -115,6 +117,30 @@ public class ControllerSupport : MonoBehaviour
                     currPlayerController.GoUpEscalator();
                 }
             }
+        }
+
+        if (Input.GetKeyDown("space"))
+        {;
+            Debug.Log("Pressed Space");
+            RaycastHit2D[] hits = Physics2D.RaycastAll(currPlayerController.transform.position, new Vector2(-1,0), 200f, 8);
+
+            Debug.DrawRay(currPlayerController.transform.position, new Vector2(-1, 0), Color.green, 2.0f);
+
+            List<RaycastHit2D> filteredHits = new List<RaycastHit2D>();
+
+            for(int i = 0; i < hits.Length; i++)
+            {
+                Debug.Log(hits[i].collider.name);
+            }
+
+          /*for(int i = 0; i < hits.Length; i++)
+          {
+              if(hits[i].collider.name == "Player(NPC)")
+              {
+                  filteredHits.Add(hits[i]);
+                  Debug.Log(hits[i].collider.name);
+              }
+          }*/
         }
     }
 }
