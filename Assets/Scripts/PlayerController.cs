@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class PlayerController : EntityController
 {
-    public Sneeze sneezePrefab;
-    public Cough coughPrefab;
+    public Sneeze sneeze;
+    public Cough cough;
     public int segments;
     public GameObject divider;
     public float timePressed;
@@ -16,7 +16,7 @@ public class PlayerController : EntityController
     public bool isRegenerating;
     private float regenerationTime = 0f;
     public GameObject escalatorNotification;
-
+    public float currPower;
     public RectTransform dividerParent;
 
     // Use this for initialization
@@ -32,20 +32,21 @@ public class PlayerController : EntityController
     public override void Sneeze()
     {
         base.Sneeze();
-
-        Sneeze s = Instantiate(sneezePrefab, transform.position, transform.rotation);
+        Sneeze s = sneeze;
         s.owner = this;
-        s.CalculatePower(timePressed);
+        s.dischargePower = currPower;
+        s.initiateSneeze();
     }
+
+
 
     public override void Cough()
     {
         base.Cough();
-
-        Cough c = Instantiate(coughPrefab, new Vector3(transform.position.x, transform.position.y, -5), coughPrefab.transform.rotation);
+        Cough c = cough;
         c.owner = this;
-        c.CalculatePower(timePressed);
-        _animator.SetTrigger("cough");
+        c.dischargePower = currPower;
+        c.initiateCough();
     }
 
     // Update is called once per frame
@@ -72,7 +73,7 @@ public class PlayerController : EntityController
         {
             // Current time - time when trigger was pressed
             int roundedTimePressed = (int)Mathf.Floor(Time.time - timePressed) * 2;
-            Debug.Log(roundedTimePressed);
+            //Debug.Log(roundedTimePressed);
 
             // Holding a discharge button for longer than you can charge
             if (roundedTimePressed > segments)
@@ -91,6 +92,8 @@ public class PlayerController : EntityController
             {
                 chargeBarFG.GetComponent<Image>().fillAmount = (1.0f / segments) * roundedTimePressed;
             }
+
+            currPower = roundedTimePressed;
         }
     }
     public override void EnableEscalatoring(Escalator escalator)

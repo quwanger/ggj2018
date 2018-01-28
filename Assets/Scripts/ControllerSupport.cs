@@ -15,7 +15,8 @@ public class ControllerSupport : MonoBehaviour
     protected Rigidbody2D rb;
     public int myPlayerID;
 
-    void Start () {
+    void Start()
+    {
         //get player tag
         string myTag = this.tag;
         myPlayerID = Convert.ToInt32(myTag.Substring(myTag.Length - 1, 1));
@@ -24,8 +25,8 @@ public class ControllerSupport : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         currPlayerController = GetComponent<PlayerController>();
     }
-    	
-	void Update ()
+
+    void Update()
     {
         if (!currPlayerController.RidingEscalator)
         {
@@ -64,7 +65,8 @@ public class ControllerSupport : MonoBehaviour
     private bool leftTriggerInUse = false;
 
 
-    void keyPressedTimer() {
+    void keyPressedTimer()
+    {
         if (!currPlayerController.isRegenerating)
         {
             if (Input.GetButtonDown(string.Concat("A_", myPlayerID)))
@@ -95,12 +97,12 @@ public class ControllerSupport : MonoBehaviour
                 currPlayerController.isCharging = false;
                 currPlayerController.isRegenerating = true;
 
-                currPlayerController.Cough();
+                currPlayerController.Sneeze();
             }
         }
 
         if (Input.GetAxis(string.Concat("L_YAxis_", myPlayerID)) != 0)
-        {           
+        {
             if (Input.GetAxis(string.Concat("L_YAxis_", myPlayerID)) < 0)
             {
                 if (currPlayerController.InEscalatorRange)
