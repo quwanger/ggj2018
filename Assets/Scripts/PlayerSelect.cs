@@ -54,7 +54,11 @@ public class PlayerSelect : MonoBehaviour {
         if (Input.GetButtonDown("Start_1") || Input.GetButtonDown("Start_2") || Input.GetButtonDown("Start_3") || Input.GetButtonDown("Start_4"))
         {
             GameManager.numPlayers = players;
-            AudioScript.FindObjectOfType<AudioSource>().Stop();
+            for (int i = 0; i < FindObjectsOfType<AudioSource>().Length; i++)
+            {
+                FindObjectsOfType<AudioSource>()[i].Stop();
+            }
+
             SceneManager.LoadScene(3);
         }
 
