@@ -36,4 +36,17 @@ public class AudioManager : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    public void PlaySound(string word)
+    {
+        /*switch (word)
+        {
+            case "FUCK":
+                soundEffects.PlayOneShot(fuck[Random.Range(0, fuck.Length)]);
+                break;
+            default:
+                soundEffects.PlayOneShot(grunts[Random.Range(0, grunts.Length)]);
+                break;
+        }*/
+    }
 }
