@@ -317,7 +317,8 @@ public class MapManager : MonoBehaviour {
 
         return escalatorsOnFloor;
     }
- 
+
+
     private TileSlideDirection GetTileSlideDirection(int x, int y)
     {
         if(x == WIDTH_STARTING_POSITION)
@@ -362,4 +363,6 @@ public class MapManager : MonoBehaviour {
         mapTile.TriggerAnimation(mapTile.SlideDirection, true);
         mapTile.Init(this, mapTile.TilePosition, mapTile.SlideDirection, HandleStorefrontInit(mapTile.CurrentSprite));
     }
+
+    
 }

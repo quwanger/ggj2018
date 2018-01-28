@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour {
     public PlayerController[] playerPrefabs;
 
     public static int numPlayers = 0;
+    public static float gameTime = 120;
 
     public Text countdownText;
     public float countdownFrom;
@@ -38,6 +39,8 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+
+    bool isTimerStarted = false;
     void Update()
     {
         float time = countdownFrom - Time.timeSinceLevelLoad;
@@ -56,6 +59,30 @@ public class GameManager : MonoBehaviour {
             countdownText.text = "GO";
 
             gameStarted = true;
+            if(!isTimerStarted)
+            {
+                StartCoroutine(GetWorldTime());
+                isTimerStarted = true;
+
+            }
+        
+
+        }
+
+    
+    }
+
+    float currCountdownValue = GameManager.gameTime;
+    public IEnumerator GetWorldTime()
+    {
+        //currCountdownValue = countdownValue;
+        while (currCountdownValue > 0)
+        {
+            Debug.Log("Countdown: " + currCountdownValue);
+            GameManager.gameTime = currCountdownValue;
+            yield return new WaitForSeconds(1.0f);
+            currCountdownValue--;
+
         }
     }
 
