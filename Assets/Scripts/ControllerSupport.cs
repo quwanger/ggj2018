@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class ControllerSupport : MonoBehaviour
 {
 
@@ -16,10 +15,7 @@ public class ControllerSupport : MonoBehaviour
     protected Rigidbody2D rb;
     public int myPlayerID;
 
-    float timePressed = 0f;
-
-    void Start()
-    {
+    void Start () {
         //get player tag
         string myTag = this.tag;
         myPlayerID = Convert.ToInt32(myTag.Substring(myTag.Length - 1, 1));
@@ -65,34 +61,42 @@ public class ControllerSupport : MonoBehaviour
         }
     }
 
-    private bool rightTriggerInUse = false;
     private bool leftTriggerInUse = false;
 
 
-    void keyPressedTimer()
-    {
-        if (Input.GetButtonDown(string.Concat("A_", myPlayerID)))
+    void keyPressedTimer() {
+        if (!currPlayerController.isRegenerating)
         {
-            timePressed = Time.time;
+            if (Input.GetButtonDown(string.Concat("A_", myPlayerID)))
+            {
+                currPlayerController.timePressed = Time.time;
+                currPlayerController.isCharging = true;
+            }
+
+            if (Input.GetButtonUp(string.Concat("A_", myPlayerID)))
+            {
+                currPlayerController.isCharging = false;
+                currPlayerController.isRegenerating = true;
+
+                currPlayerController.Cough();
+            }
         }
 
-        if (Input.GetButtonUp(string.Concat("A_", myPlayerID)))
+        if (!currPlayerController.isRegenerating)
         {
-            timePressed = Time.time - timePressed;
-            Debug.Log("Player " + myPlayerID + " Pressed A for : " + timePressed + " Seconds");
-            currPlayerController.Cough(timePressed);
-        }
+            if (Input.GetButtonDown(string.Concat("X_", myPlayerID)))
+            {
+                currPlayerController.timePressed = Time.time;
+                currPlayerController.isCharging = true;
+            }
 
-        if(Input.GetButtonDown(string.Concat("X_", myPlayerID)))
-        {
-            timePressed = Time.time;
-        }
+            if (Input.GetButtonUp(string.Concat("X_", myPlayerID)))
+            {
+                currPlayerController.isCharging = false;
+                currPlayerController.isRegenerating = true;
 
-        if (Input.GetButtonUp(string.Concat("X_", myPlayerID)))
-        {
-            timePressed = Time.time - timePressed;
-            Debug.Log("Player " + myPlayerID + " Pressed X for : " + timePressed + " Seconds");
-            currPlayerController.Sneeze(timePressed);
+                currPlayerController.Cough();
+            }
         }
 
         if (Input.GetAxis(string.Concat("L_YAxis_", myPlayerID)) != 0)
