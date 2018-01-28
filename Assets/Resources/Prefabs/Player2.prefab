@@ -22,10 +22,9 @@ GameObject:
   - component: {fileID: 114966335671794918}
   - component: {fileID: 114349172407741762}
   - component: {fileID: 50109277203477284}
-  - component: {fileID: 70563678357853230}
-  - component: {fileID: 212056067143185866}
   - component: {fileID: 95998012538450456}
-  - component: {fileID: 114437833517890516}
+  - component: {fileID: 212056067143185866}
+  - component: {fileID: 70563678357853230}
   m_Layer: 9
   m_Name: Player2
   m_TagString: player2
@@ -67,6 +66,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!1 &1621520032803250
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4460449801826966}
+  - component: {fileID: 198288774815636410}
+  - component: {fileID: 199398040576763508}
+  - component: {fileID: 114528976260584062}
+  m_Layer: 9
+  m_Name: Sneeze
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1684705522529250
 GameObject:
   m_ObjectHideFlags: 1
@@ -101,19 +118,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1891170529348502
+--- !u!1 &1871531286693032
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4898841138045572}
-  - component: {fileID: 198843979950166874}
-  - component: {fileID: 199897671326128136}
-  - component: {fileID: 114517542383987398}
+  - component: {fileID: 4756000376142958}
+  - component: {fileID: 198049254425273862}
+  - component: {fileID: 199164114144550546}
+  - component: {fileID: 114356840378627276}
   m_Layer: 9
-  m_Name: Sneeze (1)
+  m_Name: Cough
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -137,45 +154,27 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1947762168041858
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4964523424789082}
-  - component: {fileID: 198227604646293664}
-  - component: {fileID: 199468183472346282}
-  - component: {fileID: 114087517053840026}
-  m_Layer: 9
-  m_Name: Cough (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4898841138045572
+--- !u!4 &4460449801826966
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1891170529348502}
+  m_GameObject: {fileID: 1621520032803250}
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.09800005, y: 0.13699996, z: 0.03000021}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.09799999, y: 0.13699996, z: 0.03000021}
+  m_LocalScale: {x: 1.0000005, y: 1, z: 1.0000005}
   m_Children: []
   m_Father: {fileID: 4981458510300010}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
---- !u!4 &4964523424789082
+--- !u!4 &4756000376142958
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1947762168041858}
+  m_GameObject: {fileID: 1871531286693032}
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.09499979, y: 0.16299999, z: -0.069}
+  m_LocalPosition: {x: -0.095000006, y: 0.163, z: -0.069}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4981458510300010}
@@ -192,8 +191,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224181924922137710}
-  - {fileID: 4964523424789082}
-  - {fileID: 4898841138045572}
+  - {fileID: 4756000376142958}
+  - {fileID: 4460449801826966}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -209,7 +208,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 5
+  m_LinearDrag: 6
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 6200000, guid: 52acb833603952e4fba644f790c0f5b3, type: 2}
@@ -249,19 +248,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114087517053840026
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1947762168041858}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dba18ee793816cf4cbd1b4d9803e12fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  power: 1
-  owner: {fileID: 0}
 --- !u!114 &114349172407741762
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -274,6 +260,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myPlayerID: 0
+--- !u!114 &114356840378627276
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1871531286693032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dba18ee793816cf4cbd1b4d9803e12fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dischargePower: 0
+  dischargeLevel: 0
+  owner: {fileID: 0}
 --- !u!114 &114416461379106160
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -296,42 +296,19 @@ MonoBehaviour:
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
---- !u!114 &114437833517890516
+--- !u!114 &114528976260584062
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1046268740809332}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85c982dedaf4ee84390e3b273864af70, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 20
-  powerOfLastCough: 0
-  winningPlayerTag: 
-  sneezeEffect: {fileID: 0}
-  coughEffect: {fileID: 0}
-  segments: 3
-  divider: {fileID: 1217223270872316, guid: ef1ed7bfcb23c7844b78adb0a0c7b171, type: 2}
-  timePressed: 0
-  chargeBarFG: {fileID: 0}
-  isCharging: 0
-  isRegenerating: 0
-  escalatorNotification: {fileID: 0}
-  dividerParent: {fileID: 0}
---- !u!114 &114517542383987398
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1891170529348502}
+  m_GameObject: {fileID: 1621520032803250}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 306813a693d2588428141998ee660a18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  power: 1
+  dischargePower: 0
+  dischargeLevel: 0
   owner: {fileID: 0}
 --- !u!114 &114570308298077068
 MonoBehaviour:
@@ -345,7 +322,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.023529412, g: 0.6627451, b: 0, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -437,9 +414,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 20
   powerOfLastCough: 0
-  winningPlayerTag: 
-  sneezeEffect: {fileID: 114517542383987398}
-  coughEffect: {fileID: 114087517053840026}
+  mostInfectedBy: {fileID: 0}
+  sneeze: {fileID: 114528976260584062}
+  cough: {fileID: 114356840378627276}
   segments: 3
   divider: {fileID: 1217223270872316, guid: ef1ed7bfcb23c7844b78adb0a0c7b171, type: 2}
   timePressed: 0
@@ -447,7 +424,9 @@ MonoBehaviour:
   isCharging: 0
   isRegenerating: 0
   escalatorNotification: {fileID: 1166014019036128}
+  currPower: 0
   dividerParent: {fileID: 224089080331755852}
+  playerColor: {r: 0.023529412, g: 0.6627451, b: 0, a: 1}
 --- !u!114 &114990906339421828
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -475,12 +454,12 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!198 &198227604646293664
+--- !u!198 &198049254425273862
 ParticleSystem:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1947762168041858}
+  m_GameObject: {fileID: 1871531286693032}
   serializedVersion: 5
   lengthInSec: 1.5
   simulationSpeed: 1
@@ -534,7 +513,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: 1879539737
+  randomSeed: -689913328
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -3640,12 +3619,12 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
---- !u!198 &198843979950166874
+--- !u!198 &198288774815636410
 ParticleSystem:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1891170529348502}
+  m_GameObject: {fileID: 1621520032803250}
   serializedVersion: 5
   lengthInSec: 1.5
   simulationSpeed: 1
@@ -3699,7 +3678,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -938963175
+  randomSeed: 513911464
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -6805,13 +6784,13 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
---- !u!199 &199468183472346282
+--- !u!199 &199164114144550546
 ParticleSystemRenderer:
   serializedVersion: 4
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1947762168041858}
+  m_GameObject: {fileID: 1871531286693032}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -6820,7 +6799,7 @@ ParticleSystemRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 2100000, guid: df1e43a8dda027649bdbfb46f81f60f1, type: 2}
-  - {fileID: 2100000, guid: b5e1ffd8a994c514e878dc4a0d3d4252, type: 2}
+  - {fileID: 2100000, guid: df1e43a8dda027649bdbfb46f81f60f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6857,13 +6836,13 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!199 &199897671326128136
+--- !u!199 &199398040576763508
 ParticleSystemRenderer:
   serializedVersion: 4
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1891170529348502}
+  m_GameObject: {fileID: 1621520032803250}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1

@@ -46,6 +46,7 @@ public class Cough : DischargeController {
         }
 
         coughPS.Play();
-        shootRay(rayDistance);
+
+        shootRay(rayDistance, "cough");
     }
 }
