@@ -1177,22 +1177,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1929397279285860, guid: 2a4508364a861874ca60fd89143a9fd8, type: 2}
       propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 212113819995645528, guid: 2a4508364a861874ca60fd89143a9fd8,
-        type: 2}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 81a96c6959ec8a74f9f9b9d791ed7173,
-        type: 3}
-    - target: {fileID: 1986376440146842, guid: 2a4508364a861874ca60fd89143a9fd8, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 212113819995645528, guid: 2a4508364a861874ca60fd89143a9fd8,
-        type: 2}
-      propertyPath: m_Color.a
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2a4508364a861874ca60fd89143a9fd8, type: 2}
@@ -1578,7 +1563,12 @@ MonoBehaviour:
   playerPrefabs:
   - {fileID: 114210382874987444, guid: 56b5e8bf2e3ff114bbb565fa96db3326, type: 2}
   countdownText: {fileID: 0}
+  countDownSprite: {fileID: 0}
   countdownFrom: 0
+  countDownSprite1: {fileID: 0}
+  countDownSprite2: {fileID: 0}
+  countDownSprite3: {fileID: 0}
+  countDownSpriteSHOP: {fileID: 0}
   gameStarted: 0
 --- !u!4 &1073239170
 Transform:

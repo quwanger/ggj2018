@@ -78,41 +78,41 @@ public class ControllerSupport : MonoBehaviour
     {
         if (!currPlayerController.isRegenerating)
         {
-            if (Input.GetButtonDown(string.Concat("A_", myPlayerID)) ||
-                Input.GetKeyDown("space"))
+            if (Input.GetButton(string.Concat("A_", myPlayerID)) ||
+                Input.GetKey("space"))
             {
-                currPlayerController.timePressed = Time.time;
+                if(currPlayerController.timePressed == 0) currPlayerController.timePressed = Time.time;
                 currPlayerController.isCharging = true;
             }
 
             if (Input.GetButtonUp(string.Concat("A_", myPlayerID)) ||
                 Input.GetKeyUp("space")) {
-                if (currPlayerController.isCharging)
-                {
+                if (currPlayerController.isCharging) {
                     currPlayerController.isCharging = false;
                     currPlayerController.isRegenerating = true;
-
                     currPlayerController.Cough();
+                    currPlayerController.timePressed = 0;
                 }
             }
         }
 
+        
         if (!currPlayerController.isRegenerating)
         {
-            if (Input.GetButtonDown(string.Concat("X_", myPlayerID)) ||
-                Input.GetKeyDown("n"))
+            if (Input.GetButton(string.Concat("X_", myPlayerID)) ||
+                Input.GetKey("n"))
             {
-                currPlayerController.timePressed = Time.time;
+                if(currPlayerController.timePressed == 0) currPlayerController.timePressed = Time.time;
                 currPlayerController.isCharging = true;
             }
 
             if (Input.GetButtonUp(string.Concat("X_", myPlayerID)) ||
-                Input.GetKeyDown("n")) {
+                Input.GetKeyUp("n")) {
                 if(currPlayerController.isCharging) {
                     currPlayerController.isCharging = false;
                     currPlayerController.isRegenerating = true;
-
                     currPlayerController.Sneeze();
+                    currPlayerController.timePressed = 0;
                 }
             }
         }
