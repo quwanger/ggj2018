@@ -49,6 +49,7 @@ public class PlayerController : EntityController
         s.owner = this.gameObject;
         s.dischargePower = currPower;
         s.initiateSneeze();
+        //adds recoil
         StopPlayer(currPower);
     }
 
@@ -67,6 +68,7 @@ public class PlayerController : EntityController
         c.owner = this.gameObject;
         c.dischargePower = currPower;
         c.initiateCough();
+        //adds recoil
         StopPlayer(currPower/2);
     }
 
