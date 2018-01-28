@@ -500,27 +500,27 @@ Prefab:
     - target: {fileID: 114257668333485598, guid: d8b742fbdfbe28542ac0a272f6518278,
         type: 2}
       propertyPath: rateOffset
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114257668333485598, guid: d8b742fbdfbe28542ac0a272f6518278,
         type: 2}
       propertyPath: burstUpperLimit
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 114257668333485598, guid: d8b742fbdfbe28542ac0a272f6518278,
         type: 2}
       propertyPath: rateLowerLimit
-      value: 10
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114257668333485598, guid: d8b742fbdfbe28542ac0a272f6518278,
         type: 2}
       propertyPath: rateUpperLimit
-      value: 20
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 114257668333485598, guid: d8b742fbdfbe28542ac0a272f6518278,
         type: 2}
       propertyPath: burstLowerLimit
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114257668333485598, guid: d8b742fbdfbe28542ac0a272f6518278,
         type: 2}
@@ -643,27 +643,27 @@ Prefab:
     - target: {fileID: 114257668333485598, guid: d8b742fbdfbe28542ac0a272f6518278,
         type: 2}
       propertyPath: rateOffset
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114257668333485598, guid: d8b742fbdfbe28542ac0a272f6518278,
         type: 2}
       propertyPath: burstUpperLimit
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 114257668333485598, guid: d8b742fbdfbe28542ac0a272f6518278,
         type: 2}
       propertyPath: rateLowerLimit
-      value: 10
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114257668333485598, guid: d8b742fbdfbe28542ac0a272f6518278,
         type: 2}
       propertyPath: rateUpperLimit
-      value: 20
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 114257668333485598, guid: d8b742fbdfbe28542ac0a272f6518278,
         type: 2}
       propertyPath: burstLowerLimit
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114257668333485598, guid: d8b742fbdfbe28542ac0a272f6518278,
         type: 2}
@@ -729,27 +729,27 @@ Prefab:
     - target: {fileID: 114257668333485598, guid: d8b742fbdfbe28542ac0a272f6518278,
         type: 2}
       propertyPath: rateOffset
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114257668333485598, guid: d8b742fbdfbe28542ac0a272f6518278,
         type: 2}
       propertyPath: burstUpperLimit
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 114257668333485598, guid: d8b742fbdfbe28542ac0a272f6518278,
         type: 2}
       propertyPath: rateLowerLimit
-      value: 10
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114257668333485598, guid: d8b742fbdfbe28542ac0a272f6518278,
         type: 2}
       propertyPath: rateUpperLimit
-      value: 20
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 114257668333485598, guid: d8b742fbdfbe28542ac0a272f6518278,
         type: 2}
       propertyPath: burstLowerLimit
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114257668333485598, guid: d8b742fbdfbe28542ac0a272f6518278,
         type: 2}
@@ -1103,27 +1103,27 @@ Prefab:
     - target: {fileID: 114257668333485598, guid: d8b742fbdfbe28542ac0a272f6518278,
         type: 2}
       propertyPath: rateOffset
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114257668333485598, guid: d8b742fbdfbe28542ac0a272f6518278,
         type: 2}
       propertyPath: burstUpperLimit
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 114257668333485598, guid: d8b742fbdfbe28542ac0a272f6518278,
         type: 2}
       propertyPath: rateLowerLimit
-      value: 10
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114257668333485598, guid: d8b742fbdfbe28542ac0a272f6518278,
         type: 2}
       propertyPath: rateUpperLimit
-      value: 20
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 114257668333485598, guid: d8b742fbdfbe28542ac0a272f6518278,
         type: 2}
       propertyPath: burstLowerLimit
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114257668333485598, guid: d8b742fbdfbe28542ac0a272f6518278,
         type: 2}
@@ -1429,8 +1429,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NPCManager: {fileID: 1073239171}
   MapManager: {fileID: 1527142993}
+  spawnPoints: []
   playerPrefabs:
   - {fileID: 114210382874987444, guid: 56b5e8bf2e3ff114bbb565fa96db3326, type: 2}
+  countdownText: {fileID: 0}
+  countdownFrom: 0
+  gameStarted: 0
 --- !u!4 &1073239170
 Transform:
   m_ObjectHideFlags: 0
@@ -1455,8 +1459,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b14fe2dd5b2ee8488b3a34d3bd4f5ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _npcControllers: []
-  _allNpcs: []
+  NpcSpawners: []
+  AllNpcs: []
 --- !u!1001 &1099302928
 Prefab:
   m_ObjectHideFlags: 0
@@ -1503,27 +1507,27 @@ Prefab:
     - target: {fileID: 114257668333485598, guid: d8b742fbdfbe28542ac0a272f6518278,
         type: 2}
       propertyPath: rateOffset
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114257668333485598, guid: d8b742fbdfbe28542ac0a272f6518278,
         type: 2}
       propertyPath: burstUpperLimit
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 114257668333485598, guid: d8b742fbdfbe28542ac0a272f6518278,
         type: 2}
       propertyPath: rateLowerLimit
-      value: 10
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114257668333485598, guid: d8b742fbdfbe28542ac0a272f6518278,
         type: 2}
       propertyPath: rateUpperLimit
-      value: 20
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 114257668333485598, guid: d8b742fbdfbe28542ac0a272f6518278,
         type: 2}
       propertyPath: burstLowerLimit
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114257668333485598, guid: d8b742fbdfbe28542ac0a272f6518278,
         type: 2}
@@ -1808,11 +1812,11 @@ MonoBehaviour:
   _enableTileReplace: 1
   _maxStoresInLiquidation: 2
   _minExpireTime: 10
-  _maxExpireTime: 120
-  _minLiquidationTime: 2
-  _maxLiquidationTime: 5
-  _minEscalatorTime: 15
-  _maxEscalatorTime: 120
+  _maxExpireTime: 30
+  _minLiquidationTime: 10
+  _maxLiquidationTime: 30
+  _minEscalatorTime: 10
+  _maxEscalatorTime: 20
   _escalatorShutdownTime: 5
   _mapParent: {fileID: 1527142994}
   _escalatorParent: {fileID: 1942770228}
@@ -2029,27 +2033,27 @@ Prefab:
     - target: {fileID: 114257668333485598, guid: d8b742fbdfbe28542ac0a272f6518278,
         type: 2}
       propertyPath: rateOffset
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114257668333485598, guid: d8b742fbdfbe28542ac0a272f6518278,
         type: 2}
       propertyPath: burstUpperLimit
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 114257668333485598, guid: d8b742fbdfbe28542ac0a272f6518278,
         type: 2}
       propertyPath: rateLowerLimit
-      value: 10
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114257668333485598, guid: d8b742fbdfbe28542ac0a272f6518278,
         type: 2}
       propertyPath: rateUpperLimit
-      value: 20
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 114257668333485598, guid: d8b742fbdfbe28542ac0a272f6518278,
         type: 2}
       propertyPath: burstLowerLimit
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114257668333485598, guid: d8b742fbdfbe28542ac0a272f6518278,
         type: 2}
@@ -2106,27 +2110,27 @@ Prefab:
     - target: {fileID: 114257668333485598, guid: d8b742fbdfbe28542ac0a272f6518278,
         type: 2}
       propertyPath: rateOffset
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114257668333485598, guid: d8b742fbdfbe28542ac0a272f6518278,
         type: 2}
       propertyPath: burstUpperLimit
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 114257668333485598, guid: d8b742fbdfbe28542ac0a272f6518278,
         type: 2}
       propertyPath: rateLowerLimit
-      value: 10
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114257668333485598, guid: d8b742fbdfbe28542ac0a272f6518278,
         type: 2}
       propertyPath: rateUpperLimit
-      value: 20
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 114257668333485598, guid: d8b742fbdfbe28542ac0a272f6518278,
         type: 2}
       propertyPath: burstLowerLimit
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114257668333485598, guid: d8b742fbdfbe28542ac0a272f6518278,
         type: 2}
@@ -2192,27 +2196,27 @@ Prefab:
     - target: {fileID: 114257668333485598, guid: d8b742fbdfbe28542ac0a272f6518278,
         type: 2}
       propertyPath: rateOffset
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114257668333485598, guid: d8b742fbdfbe28542ac0a272f6518278,
         type: 2}
       propertyPath: burstUpperLimit
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 114257668333485598, guid: d8b742fbdfbe28542ac0a272f6518278,
         type: 2}
       propertyPath: rateLowerLimit
-      value: 10
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114257668333485598, guid: d8b742fbdfbe28542ac0a272f6518278,
         type: 2}
       propertyPath: rateUpperLimit
-      value: 20
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 114257668333485598, guid: d8b742fbdfbe28542ac0a272f6518278,
         type: 2}
       propertyPath: burstLowerLimit
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114257668333485598, guid: d8b742fbdfbe28542ac0a272f6518278,
         type: 2}

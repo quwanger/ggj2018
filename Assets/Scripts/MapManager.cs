@@ -101,9 +101,24 @@ public class MapManager : MonoBehaviour {
 
     public Vector2 GetRandomStorefrontPosition()
     {
-        int randomTile = Random.Range(0, _currentMapTiles.Length);
-        Vector2 randomStorePosition = new Vector2(_currentMapTiles[randomTile].position.x, _currentMapTiles[randomTile].position.y);
-        return randomStorePosition;
+        return FindGoodStore();
+    }
+
+    public Vector2 FindGoodStore()
+    {
+        int goToSaleWeight = Random.Range(1, 11);
+        if(goToSaleWeight >= 5 && _storesInLiquidation.Count > 0)
+        {
+            int randomTile = Random.Range(0, _storesInLiquidation.Count);
+            Vector2 randomStorePosition = new Vector2(_storesInLiquidation[randomTile].transform.position.x, _storesInLiquidation[randomTile].transform.position.y);
+            return randomStorePosition;
+        }
+        else
+        {
+            int randomTile = Random.Range(0, _currentMapTiles.Length);
+            Vector2 randomStorePosition = new Vector2(_currentMapTiles[randomTile].position.x, _currentMapTiles[randomTile].position.y);
+            return randomStorePosition;
+        }
     }
 
     private void InitStorefronts()
@@ -289,18 +304,37 @@ public class MapManager : MonoBehaviour {
         return spawnEscalator;
     }
 
-    public Vector2 GetEscalatorFromFloorToFloor(int from, int to, bool down)
+    private void ShuffleArray<T>(T[] array)
     {
-        foreach (Escalator escalator in _currentEscalators)
+        int n = array.Length;
+        for (int i = 0; i < n; i++)
         {
-            if(escalator.FromFloor == from && escalator.ToFloor == to)
+            // Pick a new index higher than current for each item in the array
+            int r = i + Random.Range(0, n - i);
+
+            // Swap item into new spot
+            T t = array[r];
+            array[r] = array[i];
+            array[i] = t;
+        }
+    }
+
+    public Escalator GetEscalatorFromFloorToFloor(int from, int to, bool down)
+    {
+        Escalator[] shuffledEscalators = _currentEscalators.ToArray();
+        ShuffleArray(shuffledEscalators);
+
+        for (int i = 0; i < shuffledEscalators.Length; i++)
+        {
+            if (shuffledEscalators[i].FromFloor == from && shuffledEscalators[i].ToFloor == to && !shuffledEscalators[i].IsShutdown)
             {
-                Vector2 target = new Vector2(down ? escalator.TargetTop.position.x : escalator.TargetBottom.position.x, down ? escalator.TargetTop.position.y : escalator.TargetBottom.position.y);
-                return target;
+                return shuffledEscalators[i];
+                //Vector2 target = new Vector2(down ? shuffledEscalators[i].TargetTop.position.x : shuffledEscalators[i].TargetBottom.position.x, down ? shuffledEscalators[i].TargetTop.position.y : shuffledEscalators[i].TargetBottom.position.y);
+                //return target;
             }
         }
 
-        return Vector2.zero;
+        return null;
     }
 
     private List<EscalatorSpawn> GetEscalatorsForFloor(int floor)
@@ -346,6 +380,8 @@ public class MapManager : MonoBehaviour {
     }
     public void TriggerReplaceStore(MapTile mapTile)
     {
+        Debug.Log("Replacing store at position: " + mapTile.transform.position);
+        GameManager.Instance.NPCManager.KillNPCsAtStore(mapTile.transform);
         _storesInLiquidation.Remove(mapTile);
         StartCoroutine("ReplaceStore", mapTile);
     }
