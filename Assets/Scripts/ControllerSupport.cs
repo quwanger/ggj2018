@@ -105,14 +105,14 @@ public class ControllerSupport : MonoBehaviour
             {
                 if (currPlayerController.InEscalatorRange)
                 {
-                    currPlayerController.GoDownEscalator();
+                    currPlayerController.GoDownEscalator(currPlayerController.CompleteEscalatorRide);
                 }
             }
             else
             {
                 if (currPlayerController.InEscalatorRange)
                 {
-                    currPlayerController.GoUpEscalator();
+                    currPlayerController.GoUpEscalator(currPlayerController.CompleteEscalatorRide);
                 }
             }
         }

@@ -93,8 +93,10 @@ public class Escalator : MonoBehaviour
     private bool _isShutdown = false;
     public bool IsShutdown { get { return _isShutdown; } }
 
-    private bool _escalatorInUse = false;
-    public bool EscalatorInUse { get { return _escalatorInUse; } set { _escalatorInUse = value; } }
+    //private bool _escalatorInUse = false;
+    //public bool EscalatorInUse { get { return _escalatorInUse; } set { _escalatorInUse = value; } }
+
+    public List<EntityController> CharactersOnEscalator = new List<EntityController>();
 
     private EscalatorDirectionVertical _escalatorDirectionVertical;
     public EscalatorDirectionVertical EscDirectionVertical { get { return _escalatorDirectionVertical; } }
@@ -142,7 +144,7 @@ public class Escalator : MonoBehaviour
 
     private void TriggerShutdown()
     {
-        if (!_escalatorInUse)
+        if (CharactersOnEscalator.Count < 1)
         {
             _isDying = false;
             _isShutdown = true;

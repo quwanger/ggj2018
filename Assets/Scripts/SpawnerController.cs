@@ -13,7 +13,9 @@ public class SpawnerController : MonoBehaviour {
 	public float rateUpperLimit = 5;
 	public float rateOffset = 0; //for flash sales - add this to lower and upper rate to increase or decrease spawn rate 
 
-	[SerializeField]
+    public float startingRateOffset = 0;
+
+    [SerializeField]
 	public int burstLowerLimit = 1;
 	[SerializeField]
 	public int burstUpperLimit = 10;
@@ -27,14 +29,17 @@ public class SpawnerController : MonoBehaviour {
 	}
 
 	IEnumerator SpawnNpc() {
-		while(true) {
+
+        yield return new WaitForSeconds(startingRateOffset);
+
+        while (true) {
 			float offset = Mathf.Max(rateOffset, 0);
-			yield return new WaitForSeconds(Random.Range(offset + rateLowerLimit, offset + rateUpperLimit));
 			for(int i = 0; i < Random.Range(burstLowerLimit, burstUpperLimit); i++) {
 				yield return new WaitForSeconds(Random.Range(0.05f, 0.2f));
 				NpcController n = Instantiate(npcToSpawn, transform.position, Quaternion.identity);
                 n.Init(mallFloor);
 			}
-		}
+            yield return new WaitForSeconds(Random.Range(offset + rateLowerLimit, offset + rateUpperLimit));
+        }
 	}
 }

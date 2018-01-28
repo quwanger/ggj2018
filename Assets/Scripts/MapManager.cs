@@ -184,6 +184,21 @@ public class MapManager : MonoBehaviour {
         }
     }
 
+    public List<NpcExit> GetActiveExits()
+    {
+        List<NpcExit> exits = new List<NpcExit>();
+
+        foreach (SpawnerController entrance in _entrances)
+        {
+            if(entrance.gameObject.activeSelf)
+            {
+                exits.Add(entrance.GetComponentInChildren<NpcExit>());
+            }
+        }
+
+        return exits;
+    }
+
     private void InitializeEscalators()
     {
         _escalatorSlots = new Escalator[(int)MAP_WIDTH_TILE_COUNT - 1, (int)MAP_HEIGHT_TILE_COUNT - 1];
