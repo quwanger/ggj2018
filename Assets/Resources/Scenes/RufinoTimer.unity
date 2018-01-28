@@ -1670,6 +1670,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NPCManager: {fileID: 1073239171}
   MapManager: {fileID: 1527142993}
+  spawnPoints: []
   playerPrefabs:
   - {fileID: 114210382874987444, guid: 56b5e8bf2e3ff114bbb565fa96db3326, type: 2}
   - {fileID: 114966335671794918, guid: 06c427086ff05e9489360e83a6cf1132, type: 2}
@@ -1732,7 +1733,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1093313625}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.04, y: 0.41, z: -0.415}
+  m_LocalPosition: {x: -0.04, y: 0.41, z: -1.19}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 434268082}

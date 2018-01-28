@@ -69,8 +69,6 @@ public class GameManager : MonoBehaviour {
         
 
         }
-
-    
     }
 
     float currCountdownValue = GameManager.gameTime;
