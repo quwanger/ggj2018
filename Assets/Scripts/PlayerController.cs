@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class PlayerController : EntityController
 {
-    public Sneeze sneezeEffect;
-    public Cough coughEffect;
+    public Sneeze sneeze;
+    public Cough cough;
     public int segments;
     public GameObject divider;
     public float timePressed;
@@ -16,7 +16,7 @@ public class PlayerController : EntityController
     public bool isRegenerating;
     private float regenerationTime = 0f;
     public GameObject escalatorNotification;
-    float currPower;
+    public float currPower;
     public RectTransform dividerParent;
 
     // Use this for initialization
@@ -32,104 +32,21 @@ public class PlayerController : EntityController
     public override void Sneeze()
     {
         base.Sneeze();
-        Sneeze s = sneezeEffect;
-        ParticleSystem sneezePS = s.GetComponent<ParticleSystem>();
-        
-        
+        Sneeze s = sneeze;
         s.owner = this;
-     
-
-        if(currPower <= 1)
-        {
-            ParticleSystem.MainModule myModule = sneezePS.main;
-            myModule.startSpeedMultiplier = 1f;
-            myModule.maxParticles = 10;
-       
-
-        }
-        else if ( currPower > 1 && currPower <= 2)
-        {
-            ParticleSystem.MainModule myModule = sneezePS.main;
-            myModule.startSpeedMultiplier = 2f;
-            myModule.maxParticles = 25;
-
-        }
-        else 
-        {
-            ParticleSystem.MainModule myModule = sneezePS.main;
-            myModule.startSpeedMultiplier = 4.5f;
-            myModule.maxParticles = 80;
-
-        }
-
-        ParticleSystem.Particle[] m_Particles = new ParticleSystem.Particle[sneezePS.main.maxParticles];
-        int numParticlesAlive = sneezePS.GetParticles(m_Particles);
-        // Change only the particles that are alive
-        for (int i = 0; i < numParticlesAlive; i++)
-        {
-            m_Particles[i].velocity = Vector3.Scale(m_Particles[i].velocity, new Vector3(1,1,0));
-
-            //myvelocity.z = 0;
-
-            //m_Particles[i].velocity = myvelocity;
-
-
-        }
-
-        // Apply the particle changes to the particle system
-        //sneezePS.SetParticles(m_Particles, numParticlesAlive);
-
-        sneezePS.Play();
+        s.dischargePower = currPower;
+        s.initiateSneeze();
     }
+
+
 
     public override void Cough()
     {
         base.Cough();
-        Cough c = coughEffect;
-        ParticleSystem coughPS = c.GetComponent<ParticleSystem>();
-  
-
+        Cough c = cough;
         c.owner = this;
-        ParticleSystem.MainModule myModule = coughPS.main;
-
-        if (currPower <= 1)
-        {
-            
-            myModule.startSpeedMultiplier = 1f;
-            myModule.maxParticles = 10;
-
-
-        }
-        else if (currPower > 1 && currPower <= 2)
-        {
-           
-            myModule.startSpeedMultiplier = 20f;
-            myModule.maxParticles = 25;
-
-        }
-        else
-        {
-            
-            myModule.startSpeedMultiplier = 45f;
-            myModule.maxParticles = 80;
-
-        }
-
-        ParticleSystem.Particle[] m_Particles = new ParticleSystem.Particle[coughPS.main.maxParticles];
-        int numParticlesAlive = coughPS.GetParticles(m_Particles);
-        // Change only the particles that are alive
-        for (int i = 0; i < numParticlesAlive; i++)
-        {
-           var myvelocity = m_Particles[i].velocity;
-                
-           myvelocity.z = 0;
-        }
-
-        // Apply the particle changes to the particle system
-        coughPS.SetParticles(m_Particles, numParticlesAlive);
-
-        coughPS.Play();
-        _animator.SetTrigger("cough");
+        c.dischargePower = currPower;
+        c.initiateCough();
     }
 
     // Update is called once per frame

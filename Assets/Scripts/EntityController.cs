@@ -119,11 +119,6 @@ public class EntityController : MonoBehaviour {
 		Destroy(this.gameObject);
 	}
 
-    void OnParticleCollision(GameObject coll)
-    {
-        Debug.Log("Entity hit by: " + coll.gameObject.tag);
-    }
-
     public virtual void EnableEscalatoring(Escalator escalator)
     {
         _escalatorInRange = escalator;

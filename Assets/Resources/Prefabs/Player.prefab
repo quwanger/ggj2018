@@ -259,7 +259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 306813a693d2588428141998ee660a18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  power: 1
+  dischargePower: 0
   owner: {fileID: 0}
 --- !u!114 &114210382874987444
 MonoBehaviour:
@@ -275,8 +275,8 @@ MonoBehaviour:
   speed: 20
   powerOfLastCough: 0
   winningPlayerTag: 
-  sneezeEffect: {fileID: 114034622704384096}
-  coughEffect: {fileID: 114644587711951412}
+  sneeze: {fileID: 114034622704384096}
+  cough: {fileID: 114644587711951412}
   segments: 3
   divider: {fileID: 1217223270872316, guid: ef1ed7bfcb23c7844b78adb0a0c7b171, type: 2}
   timePressed: 0
@@ -284,6 +284,7 @@ MonoBehaviour:
   isCharging: 0
   isRegenerating: 0
   escalatorNotification: {fileID: 1182353478192480}
+  currPower: 0
   dividerParent: {fileID: 224223066748332788}
 --- !u!114 &114482459412971050
 MonoBehaviour:
@@ -345,7 +346,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dba18ee793816cf4cbd1b4d9803e12fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  power: 1
+  dischargePower: 0
   owner: {fileID: 0}
 --- !u!114 &114669041270885674
 MonoBehaviour:
@@ -509,7 +510,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -624603172
+  randomSeed: -2139005609
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -3674,7 +3675,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -1386725606
+  randomSeed: -2096858077
   InitialModule:
     serializedVersion: 3
     enabled: 1

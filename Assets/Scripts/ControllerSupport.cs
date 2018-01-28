@@ -118,26 +118,5 @@ public class ControllerSupport : MonoBehaviour
                 }
             }
         }
-
-        if (Input.GetKeyDown("space"))
-        {
-            Debug.Log("Pressed Space");
-
-            float direction = currPlayerController.transform.localScale.x * -1;
-            RaycastHit2D[] hits = Physics2D.RaycastAll(currPlayerController.transform.position, new Vector2(direction, 0), 2.0f);
-
-            Debug.DrawRay(currPlayerController.transform.position, new Vector2(direction, 0), Color.green, 2.0f);
-
-            List<RaycastHit2D> filteredHits = new List<RaycastHit2D>();
-
-            for(int i = 0; i < hits.Length; i++)
-            {
-                if (hits[i].collider.gameObject.layer == LayerMask.NameToLayer("NPC"))
-                {
-                    filteredHits.Add(hits[i]);
-                    Debug.Log(hits[i].collider.name);
-                }
-            }
-        }
     }
 }
