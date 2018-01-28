@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4711671120945778}
   - component: {fileID: 198781444783752572}
   - component: {fileID: 199346877473059992}
+  - component: {fileID: 114644587711951412}
   m_Layer: 9
   m_Name: Cough
   m_TagString: Untagged
@@ -93,6 +94,7 @@ GameObject:
   - component: {fileID: 4109878390154408}
   - component: {fileID: 198727013528955428}
   - component: {fileID: 199260562983387690}
+  - component: {fileID: 114034622704384096}
   m_Layer: 9
   m_Name: Sneeze
   m_TagString: Untagged
@@ -172,7 +174,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1035352191649310}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -4.52, y: -0.6167377, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224698412829039428}
@@ -246,6 +248,19 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114034622704384096
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1316560733799638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306813a693d2588428141998ee660a18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  power: 1
+  owner: {fileID: 0}
 --- !u!114 &114210382874987444
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -260,9 +275,8 @@ MonoBehaviour:
   speed: 20
   powerOfLastCough: 0
   winningPlayerTag: 
-  sneezePrefab: {fileID: 114449235467577754, guid: 12dcda8f9c257b345b6917172e71568a,
-    type: 2}
-  coughPrefab: {fileID: 0}
+  sneezeEffect: {fileID: 114034622704384096}
+  coughEffect: {fileID: 114644587711951412}
   segments: 3
   divider: {fileID: 1217223270872316, guid: ef1ed7bfcb23c7844b78adb0a0c7b171, type: 2}
   timePressed: 0
@@ -320,6 +334,19 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &114644587711951412
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1022815781030010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dba18ee793816cf4cbd1b4d9803e12fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  power: 1
+  owner: {fileID: 0}
 --- !u!114 &114669041270885674
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -432,9 +459,9 @@ ParticleSystem:
   serializedVersion: 5
   lengthInSec: 1.5
   simulationSpeed: 1
-  looping: 1
+  looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -482,7 +509,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -3060778
+  randomSeed: -624603172
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -3597,9 +3624,9 @@ ParticleSystem:
   serializedVersion: 5
   lengthInSec: 1.5
   simulationSpeed: 1
-  looping: 1
+  looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -3647,7 +3674,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -1389716318
+  randomSeed: -1386725606
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -6787,7 +6814,7 @@ ParticleSystemRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_RenderMode: 0
+  m_RenderMode: 4
   m_SortMode: 0
   m_MinParticleSize: 0
   m_MaxParticleSize: 0.5
@@ -6800,7 +6827,7 @@ ParticleSystemRenderer:
   m_Pivot: {x: 0, y: 0, z: 0}
   m_UseCustomVertexStreams: 0
   m_VertexStreams: 0001030405
-  m_Mesh: {fileID: 0}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
@@ -6839,7 +6866,7 @@ ParticleSystemRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_RenderMode: 0
+  m_RenderMode: 4
   m_SortMode: 0
   m_MinParticleSize: 0
   m_MaxParticleSize: 0.5
@@ -6852,7 +6879,7 @@ ParticleSystemRenderer:
   m_Pivot: {x: 0, y: 0, z: 0}
   m_UseCustomVertexStreams: 0
   m_VertexStreams: 0001030405
-  m_Mesh: {fileID: 0}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}

@@ -62,6 +62,23 @@ public class PlayerController : EntityController
 
         }
 
+        ParticleSystem.Particle[] m_Particles = new ParticleSystem.Particle[sneezePS.main.maxParticles];
+        int numParticlesAlive = sneezePS.GetParticles(m_Particles);
+        // Change only the particles that are alive
+        for (int i = 0; i < numParticlesAlive; i++)
+        {
+            m_Particles[i].velocity = Vector3.Scale(m_Particles[i].velocity, new Vector3(1,1,0));
+
+            //myvelocity.z = 0;
+
+            //m_Particles[i].velocity = myvelocity;
+
+
+        }
+
+        // Apply the particle changes to the particle system
+        //sneezePS.SetParticles(m_Particles, numParticlesAlive);
+
         sneezePS.Play();
     }
 
@@ -73,11 +90,11 @@ public class PlayerController : EntityController
   
 
         c.owner = this;
-
+        ParticleSystem.MainModule myModule = coughPS.main;
 
         if (currPower <= 1)
         {
-            ParticleSystem.MainModule myModule = coughPS.main;
+            
             myModule.startSpeedMultiplier = 1f;
             myModule.maxParticles = 10;
 
@@ -85,18 +102,32 @@ public class PlayerController : EntityController
         }
         else if (currPower > 1 && currPower <= 2)
         {
-            ParticleSystem.MainModule myModule = coughPS.main;
+           
             myModule.startSpeedMultiplier = 20f;
             myModule.maxParticles = 25;
 
         }
         else
         {
-            ParticleSystem.MainModule myModule = coughPS.main;
+            
             myModule.startSpeedMultiplier = 45f;
             myModule.maxParticles = 80;
 
         }
+
+        ParticleSystem.Particle[] m_Particles = new ParticleSystem.Particle[coughPS.main.maxParticles];
+        int numParticlesAlive = coughPS.GetParticles(m_Particles);
+        // Change only the particles that are alive
+        for (int i = 0; i < numParticlesAlive; i++)
+        {
+           var myvelocity = m_Particles[i].velocity;
+                
+           myvelocity.z = 0;
+        }
+
+        // Apply the particle changes to the particle system
+        coughPS.SetParticles(m_Particles, numParticlesAlive);
+
         coughPS.Play();
         _animator.SetTrigger("cough");
     }
