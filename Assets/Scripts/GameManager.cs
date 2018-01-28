@@ -108,7 +108,7 @@ public class GameManager : MonoBehaviour {
             countdownText.text = "1";
         } else if (time <= 0.0f)
         {
-            //countdownText.text = "GO";
+            // countdownText.text = "GO";
 
             gameStarted = true;
         }

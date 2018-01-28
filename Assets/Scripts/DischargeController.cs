@@ -25,25 +25,31 @@ public class DischargeController : MonoBehaviour {
 
         RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, new Vector2(direction, 0), rayDistance);
 
-        Debug.DrawRay(transform.position, new Vector2(direction, 0), Color.green, rayDistance);
+        Debug.DrawRay(transform.position, new Vector2(direction*rayDistance, 0), Color.green, 1.0f);
 
         // List<RaycastHit2D> filteredHits = new List<RaycastHit2D>();
 
         for (int i = 0; i < hits.Length; i++)
         {
-            GameObject npc = hits[i].collider.gameObject;
+            GameObject obj = hits[i].collider.gameObject;
 
             if(type == "cough")
             {
-                if (npc.layer == LayerMask.NameToLayer("NPC"))
+                if (obj.layer == LayerMask.NameToLayer("NPC"))
                 {
-                    NpcController npcScript = npc.GetComponent<NpcController>();
+                    NpcController npcScript = obj.GetComponent<NpcController>();
                     npcScript.hitByCough(dischargeLevel, owner);
                     // filteredHits.Add(hits[i]);
                 }
             } else
             {
-
+                if (obj.layer == LayerMask.NameToLayer("NPC") || 
+                    obj.layer == LayerMask.NameToLayer("Player"))
+                {
+                    EntityController entity = obj.GetComponent<EntityController>();
+                    entity.GetComponent<Rigidbody2D>().AddForce(transform.parent.localScale * -1000.0f);
+                    // filteredHits.Add(hits[i]);
+                }
             }
            
         }

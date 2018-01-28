@@ -23,7 +23,7 @@ public class Cough : DischargeController {
         if (dischargePower <= 1)
         {
             ParticleSystem.MainModule myModule = coughPS.main;
-            myModule.startSpeedMultiplier = 1f;
+            myModule.startSpeedMultiplier = 13.0f;
             myModule.maxParticles = 10;
             rayDistance = 2f;
             dischargeLevel = 1;
@@ -31,15 +31,15 @@ public class Cough : DischargeController {
         else if (dischargePower > 1 && dischargePower <= 2)
         {
             ParticleSystem.MainModule myModule = coughPS.main;
-            myModule.startSpeedMultiplier = 20f;
-            myModule.maxParticles = 25;
+            myModule.startSpeedMultiplier = 20.0f;
+            myModule.maxParticles = 30;
             rayDistance = 3f;
             dischargeLevel = 2;
         }
         else
         {
             ParticleSystem.MainModule myModule = coughPS.main;
-            myModule.startSpeedMultiplier = 45f;
+            myModule.startSpeedMultiplier = 35.0f;
             myModule.maxParticles = 80;
             rayDistance = 4f;
             dischargeLevel = 3;
