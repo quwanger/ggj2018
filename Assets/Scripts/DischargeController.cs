@@ -17,7 +17,7 @@ public class DischargeController : MonoBehaviour {
 		
 	}
 
-    public void CalculatePower(float timePressed) {
+    public int CalculatePower(float timePressed) {
         int tempPower = (int)Mathf.Floor(timePressed * 2);
 
         if (tempPower > 3)
@@ -33,6 +33,8 @@ public class DischargeController : MonoBehaviour {
         }
 
         Debug.Log("Cough power: " + power);
+
+        return power;
 
     }
 }

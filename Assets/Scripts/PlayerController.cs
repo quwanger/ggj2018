@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class PlayerController : EntityController
 {
-    public Sneeze sneezePrefab;
-    public Cough coughPrefab;
+    public Sneeze sneezeEffect;
+    public Cough coughEffect;
     public int segments;
     public GameObject divider;
     public float timePressed;
@@ -16,7 +16,7 @@ public class PlayerController : EntityController
     public bool isRegenerating;
     private float regenerationTime = 0f;
     public GameObject escalatorNotification;
-
+    float currPower;
     public RectTransform dividerParent;
 
     // Use this for initialization
@@ -32,19 +32,72 @@ public class PlayerController : EntityController
     public override void Sneeze()
     {
         base.Sneeze();
-
-        Sneeze s = Instantiate(sneezePrefab, transform.position, transform.rotation);
+        Sneeze s = sneezeEffect;
+        ParticleSystem sneezePS = s.GetComponent<ParticleSystem>();
+        
+        
         s.owner = this;
-        s.CalculatePower(timePressed);
+     
+
+        if(currPower <= 1)
+        {
+            ParticleSystem.MainModule myModule = sneezePS.main;
+            myModule.startSpeedMultiplier = 1f;
+            myModule.maxParticles = 10;
+       
+
+        }
+        else if ( currPower > 1 && currPower <= 2)
+        {
+            ParticleSystem.MainModule myModule = sneezePS.main;
+            myModule.startSpeedMultiplier = 2f;
+            myModule.maxParticles = 25;
+
+        }
+        else 
+        {
+            ParticleSystem.MainModule myModule = sneezePS.main;
+            myModule.startSpeedMultiplier = 4.5f;
+            myModule.maxParticles = 80;
+
+        }
+
+        sneezePS.Play();
     }
 
     public override void Cough()
     {
         base.Cough();
+        Cough c = coughEffect;
+        ParticleSystem coughPS = c.GetComponent<ParticleSystem>();
+  
 
-        Cough c = Instantiate(coughPrefab, new Vector3(transform.position.x, transform.position.y, -5), coughPrefab.transform.rotation);
         c.owner = this;
-        c.CalculatePower(timePressed);
+
+
+        if (currPower <= 1)
+        {
+            ParticleSystem.MainModule myModule = coughPS.main;
+            myModule.startSpeedMultiplier = 1f;
+            myModule.maxParticles = 10;
+
+
+        }
+        else if (currPower > 1 && currPower <= 2)
+        {
+            ParticleSystem.MainModule myModule = coughPS.main;
+            myModule.startSpeedMultiplier = 20f;
+            myModule.maxParticles = 25;
+
+        }
+        else
+        {
+            ParticleSystem.MainModule myModule = coughPS.main;
+            myModule.startSpeedMultiplier = 45f;
+            myModule.maxParticles = 80;
+
+        }
+        coughPS.Play();
         _animator.SetTrigger("cough");
     }
 
@@ -72,7 +125,7 @@ public class PlayerController : EntityController
         {
             // Current time - time when trigger was pressed
             int roundedTimePressed = (int)Mathf.Floor(Time.time - timePressed) * 2;
-            Debug.Log(roundedTimePressed);
+            //Debug.Log(roundedTimePressed);
 
             // Holding a discharge button for longer than you can charge
             if (roundedTimePressed > segments)
@@ -91,6 +144,8 @@ public class PlayerController : EntityController
             {
                 chargeBarFG.GetComponent<Image>().fillAmount = (1.0f / segments) * roundedTimePressed;
             }
+
+            currPower = roundedTimePressed;
         }
     }
     public override void EnableEscalatoring(Escalator escalator)
