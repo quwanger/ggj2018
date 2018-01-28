@@ -31,19 +31,25 @@ public class DischargeController : MonoBehaviour {
 
         for (int i = 0; i < hits.Length; i++)
         {
-            GameObject npc = hits[i].collider.gameObject;
+            GameObject obj = hits[i].collider.gameObject;
 
             if(type == "cough")
             {
-                if (npc.layer == LayerMask.NameToLayer("NPC"))
+                if (obj.layer == LayerMask.NameToLayer("NPC"))
                 {
-                    NpcController npcScript = npc.GetComponent<NpcController>();
+                    NpcController npcScript = obj.GetComponent<NpcController>();
                     npcScript.hitByCough(dischargeLevel, owner);
                     // filteredHits.Add(hits[i]);
                 }
             } else
             {
-
+                if (obj.layer == LayerMask.NameToLayer("NPC") || 
+                    obj.layer == LayerMask.NameToLayer("Player"))
+                {
+                    EntityController entity = obj.GetComponent<EntityController>();
+                    entity.GetComponent<Rigidbody2D>().AddForce(transform.parent.localScale * 100.0f);
+                    // filteredHits.Add(hits[i]);
+                }
             }
            
         }
