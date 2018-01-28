@@ -34,6 +34,7 @@ public class PlayerController : EntityController
     {
         base.Sneeze();
         Sneeze s = sneeze;
+        Debug.Log(this.gameObject);
         s.owner = this.gameObject;
         s.dischargePower = currPower;
         s.initiateSneeze();
@@ -97,7 +98,7 @@ public class PlayerController : EntityController
             currPower = roundedTimePressed;
         }
     }
-    public override void EnableEscalatoring(Escalator escalator)
+    /*public override void EnableEscalatoring(Escalator escalator)
     {
         escalatorNotification.SetActive(true);
         base.EnableEscalatoring(escalator);
@@ -107,7 +108,7 @@ public class PlayerController : EntityController
     {
         escalatorNotification.SetActive(false);
         base.DisableEscalatoring();
-    }
+    }*/
 
     public void CompleteEscalatorRide()
     {

@@ -37,7 +37,7 @@ public class Sneeze : DischargeController {
         }
 
         sneezePS.Play();
-        shootRay(rayDistance);
+        shootRay(rayDistance, "sneeze");
     }
 
     void Update() {

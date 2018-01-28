@@ -18,9 +18,10 @@ public class DischargeController : MonoBehaviour {
 		
 	}
 
-    public void shootRay(float rayDistance)
+    public void shootRay(float rayDistance, string type)
     {
-        float direction = transform.localScale.x * -1;
+        float direction = transform.parent.localScale.x * -1;
+        Debug.Log("Direction: " + direction);
 
         RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, new Vector2(direction, 0), rayDistance);
 
@@ -31,12 +32,20 @@ public class DischargeController : MonoBehaviour {
         for (int i = 0; i < hits.Length; i++)
         {
             GameObject npc = hits[i].collider.gameObject;
-            if (npc.layer == LayerMask.NameToLayer("NPC"))
+
+            if(type == "cough")
             {
-                NpcController npcScript = npc.GetComponent<NpcController>();
-                npcScript.hitBySneeze(dischargeLevel, owner);
-                // filteredHits.Add(hits[i]);
+                if (npc.layer == LayerMask.NameToLayer("NPC"))
+                {
+                    NpcController npcScript = npc.GetComponent<NpcController>();
+                    npcScript.hitByCough(dischargeLevel, owner);
+                    // filteredHits.Add(hits[i]);
+                }
+            } else
+            {
+
             }
+           
         }
     }
 }
