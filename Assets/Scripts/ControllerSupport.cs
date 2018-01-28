@@ -96,6 +96,7 @@ public class ControllerSupport : MonoBehaviour
                 currPlayerController.isRegenerating = true;
 
                 currPlayerController.Sneeze();
+                Handheld.Vibrate();
             }
         }
 
