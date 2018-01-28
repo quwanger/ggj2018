@@ -84,6 +84,8 @@ public class MapManager : MonoBehaviour {
 
     private List<EscalatorSpawn> _escalatorSpawns = new List<EscalatorSpawn>();
 
+    private Escalator[,] _escalatorSlots;
+
     private void Awake()
     {
         InitStorefronts();
@@ -142,13 +144,23 @@ public class MapManager : MonoBehaviour {
 
     private void InitializeEscalators()
     {
+        _escalatorSlots = new Escalator[(int)MAP_WIDTH_TILE_COUNT - 1, (int)MAP_HEIGHT_TILE_COUNT - 1];
+
+        for (int m = 0; m < MAP_WIDTH_TILE_COUNT-1; m++)
+        {
+            for (int n = 0; n < MAP_HEIGHT_TILE_COUNT-1; n++)
+            {
+                _escalatorSlots[m, n] = null;
+            }
+        }
+
         for (int i = 0; i < MAP_HEIGHT_TILE_COUNT - 1; i++)
         {
             List<EscalatorSpawn> escalatorsOnFloor = GetEscalatorsForFloor(i);
 
             if(escalatorsOnFloor.Count > 0)
             {
-                SpawnEscalatorsForFloor(escalatorsOnFloor);
+                SpawnEscalatorsForFloor(escalatorsOnFloor, i);
             }
             else
             {
@@ -157,14 +169,13 @@ public class MapManager : MonoBehaviour {
         }
     }
 
-    private void SpawnEscalatorsForFloor(List<EscalatorSpawn> escalatorSpawns)
+    private void SpawnEscalatorsForFloor(List<EscalatorSpawn> escalatorSpawns, int floor)
     {
         int escalatorsSpawnedOnFloor = 0;
 
-        //try to spawn each one
-        foreach (EscalatorSpawn escalatorSpawn in escalatorSpawns)
+        for(int i = 0; i < escalatorSpawns.Count; i++)
         {
-            if (TrySpawnEscalator(escalatorSpawn, escalatorSpawns.Count))
+            if (TrySpawnEscalator(escalatorSpawns[i], escalatorSpawns.Count, i, floor))
             {
                 escalatorsSpawnedOnFloor++;
             }
@@ -173,24 +184,49 @@ public class MapManager : MonoBehaviour {
         //if none spawn, just keep trying until one does
         while(escalatorsSpawnedOnFloor < 1)
         {
-            if(TrySpawnEscalator(escalatorSpawns[Random.Range(0, escalatorSpawns.Count)], escalatorSpawns.Count))
+            int escNum = Random.Range(0, escalatorSpawns.Count);
+            if (TrySpawnEscalator(escalatorSpawns[escNum], escalatorSpawns.Count, escNum, floor))
             {
                 escalatorsSpawnedOnFloor++;
             }
         }
     }
 
-    private bool TrySpawnEscalator(EscalatorSpawn escalatorSpawn, int escalatorSpawnsOnFloor)
+    private bool CheckBelow(int slot, int floor, Escalator.EscalatorDirectionHorizontal dirH)
+    {
+        if(floor > 0)
+        {
+            if(_escalatorSlots[slot, floor - 1] != null)
+            {
+                if(_escalatorSlots[slot, floor - 1].EscDirectionHorizontal == dirH)
+                {
+                    return true;
+                }
+
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private bool TrySpawnEscalator(EscalatorSpawn escalatorSpawn, int escalatorSpawnsOnFloor, int slot, int floor)
     {
         bool spawnEscalator = Random.Range(0, escalatorSpawnsOnFloor) > (escalatorSpawnsOnFloor - 2) && !escalatorSpawn.IsTaken;
 
         if (spawnEscalator)
         {
-            Escalator tempEscalator = Instantiate(_escalator, escalatorSpawn.SpawnPosition, Quaternion.identity, _escalatorParent);
-            tempEscalator.transform.parent.SetAsFirstSibling();
-            escalatorSpawn.IsTaken = true;
-            _currentEscalators.Add(tempEscalator);
-            tempEscalator.Init(this, Random.Range(0, 2) > 0 ? Escalator.EscalatorDirectionVertical.Up : Escalator.EscalatorDirectionVertical.Down, Random.Range(0, 2) > 0 ? Escalator.EscalatorDirectionHorizontal.Right : Escalator.EscalatorDirectionHorizontal.Left);
+            Escalator.EscalatorDirectionHorizontal dirH = Random.Range(0, 2) > 0 ? Escalator.EscalatorDirectionHorizontal.Right : Escalator.EscalatorDirectionHorizontal.Left;
+            spawnEscalator = CheckBelow(slot, floor, dirH);
+            if (spawnEscalator)
+            {
+                Escalator tempEscalator = Instantiate(_escalator, escalatorSpawn.SpawnPosition, Quaternion.identity, _escalatorParent);
+                tempEscalator.transform.parent.SetAsFirstSibling();
+                escalatorSpawn.IsTaken = true;
+                _currentEscalators.Add(tempEscalator);
+                tempEscalator.Init(this, Random.Range(0, 2) > 0 ? Escalator.EscalatorDirectionVertical.Up : Escalator.EscalatorDirectionVertical.Down, dirH);
+                _escalatorSlots[slot, floor] = tempEscalator;
+            }
         }
 
         return spawnEscalator;

@@ -11,14 +11,15 @@ public class ControllerSupport : MonoBehaviour
     protected float x;
     protected float y;
 
-    private PlayerController currPlayerController; 
+    private PlayerController currPlayerController;
 
     protected Rigidbody2D rb;
-    int myPlayerID;
+    public int myPlayerID;
 
     float timePressed = 0f;
 
-    void Start () {
+    void Start()
+    {
         //get player tag
         string myTag = this.tag;
         myPlayerID = Convert.ToInt32(myTag.Substring(myTag.Length - 1, 1));
@@ -27,14 +28,17 @@ public class ControllerSupport : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         currPlayerController = GetComponent<PlayerController>();
     }
-	
-	void Update () {
-        //move the player by getting the normalized vector created by the joystick
-        Vector3 mydir = new Vector2(x, y).normalized;
-        movePlayer();
-
-        //get keypresses.
-        keyPressedTimer();
+    	
+	void Update ()
+    {
+        if (!currPlayerController.RidingEscalator)
+        {
+            //move the player by getting the normalized vector created by the joystick
+            Vector3 mydir = new Vector2(x, y).normalized;
+            movePlayer();
+            //get keypresses.
+            keyPressedTimer();
+        }
     }
 
     void movePlayer()
@@ -53,63 +57,59 @@ public class ControllerSupport : MonoBehaviour
         //this moves the player directly; do not use unless player controller is not available. 
         /*rb.AddForce(dir * moveSpeed);
         rb.velocity = Vector3.ClampMagnitude(rb.velocity, 30.0f);*/
-    
+
         currPlayerController.Move(dir);
+        if (x == 0)
+        {
+            currPlayerController.StopMove();
+        }
     }
 
     private bool rightTriggerInUse = false;
     private bool leftTriggerInUse = false;
 
 
-    void keyPressedTimer() {
-        if (Input.GetAxis(string.Concat("TriggersR_", myPlayerID)) != 0)
+    void keyPressedTimer()
+    {
+        if (Input.GetButtonDown(string.Concat("A_", myPlayerID)))
         {
-            if (rightTriggerInUse == false)
-            {
-                timePressed = Time.time;
-        
-                // Start player charge bar
-
-                Debug.Log("RT Pressed");
-
-                rightTriggerInUse = true;
-            }
-        }
-        if (Input.GetAxis(string.Concat("TriggersR_", myPlayerID)) == 0)
-        {
-            if (rightTriggerInUse) {
-                rightTriggerInUse = false;
-                timePressed = Time.time - timePressed;
-                Debug.Log("RT Released");
-                Debug.Log("RT Held for: " + timePressed);
-
-                currPlayerController.Cough(timePressed);
-            }
+            timePressed = Time.time;
         }
 
-        if (Input.GetAxis(string.Concat("TriggersL_", myPlayerID)) != 0)
+        if (Input.GetButtonUp(string.Concat("A_", myPlayerID)))
         {
-            if (leftTriggerInUse == false)
-            {
-                timePressed = Time.time;
-
-                // Stop player charge bar
-
-                Debug.Log("LT Pressed");
-
-                leftTriggerInUse = true;
-            }
+            timePressed = Time.time - timePressed;
+            Debug.Log("Player " + myPlayerID + " Pressed A for : " + timePressed + " Seconds");
+            currPlayerController.Cough(timePressed);
         }
-        if (Input.GetAxis(string.Concat("TriggersL_", myPlayerID)) == 0)
-        {
-            if (leftTriggerInUse)
-            {
-                leftTriggerInUse = false;
-                timePressed = Time.time - timePressed;
-                Debug.Log("LT Released");
-                Debug.Log("LT Held for: " + timePressed);
 
-                currPlayerController.Sneeze(timePressed);
+        if(Input.GetButtonDown(string.Concat("X_", myPlayerID)))
+        {
+            timePressed = Time.time;
+        }
+
+        if (Input.GetButtonUp(string.Concat("X_", myPlayerID)))
+        {
+            timePressed = Time.time - timePressed;
+            Debug.Log("Player " + myPlayerID + " Pressed X for : " + timePressed + " Seconds");
+            currPlayerController.Sneeze(timePressed);
+        }
+
+        if (Input.GetAxis(string.Concat("L_YAxis_", myPlayerID)) != 0)
+        {           
+            if (Input.GetAxis(string.Concat("L_YAxis_", myPlayerID)) < 0)
+            {
+                if (currPlayerController.InEscalatorRange)
+                {
+                    currPlayerController.GoDownEscalator();
+                }
+            }
+            else
+            {
+                if (currPlayerController.InEscalatorRange)
+                {
+                    currPlayerController.GoUpEscalator();
+                }
             }
         }
     }
