@@ -150,6 +150,12 @@ public class GameManager : MonoBehaviour {
 
             countDownSprite.GetComponent<SpriteRenderer>().enabled = false;
         }
+
+        if (currCountdownValue < 0)
+        {
+            Debug.Log("GAME ENDED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+            SceneManager.LoadScene(4);
+        }
     }
 
 }
