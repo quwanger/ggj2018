@@ -8,7 +8,7 @@ public class EntityController : MonoBehaviour {
 
 	//cough tracking
 	public int powerOfLastCough;
-	public string winningPlayerTag;
+	public GameObject mostInfectedBy;
 
 	protected Rigidbody2D _rigidBody;
 	protected Animator _animator;
@@ -146,5 +146,17 @@ public class EntityController : MonoBehaviour {
         {
             DisableEscalatoring();
         }
+    }
+
+    public virtual void hitBySneeze(int power, GameObject coughOwner)
+    {
+        powerOfLastCough = power;
+        mostInfectedBy = coughOwner;
+
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+
+        PlayerController ownerScript = coughOwner.GetComponent<PlayerController>();
+
+        spriteRenderer.color = ownerScript.playerColor;
     }
 }

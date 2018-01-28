@@ -18,6 +18,7 @@ public class PlayerController : EntityController
     public GameObject escalatorNotification;
     public float currPower;
     public RectTransform dividerParent;
+    public Color playerColor;
 
     // Use this for initialization
     void Start () {
@@ -33,7 +34,7 @@ public class PlayerController : EntityController
     {
         base.Sneeze();
         Sneeze s = sneeze;
-        s.owner = this;
+        s.owner = this.gameObject;
         s.dischargePower = currPower;
         s.initiateSneeze();
     }
@@ -44,7 +45,7 @@ public class PlayerController : EntityController
     {
         base.Cough();
         Cough c = cough;
-        c.owner = this;
+        c.owner = this.gameObject;
         c.dischargePower = currPower;
         c.initiateCough();
     }

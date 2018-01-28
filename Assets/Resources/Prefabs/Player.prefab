@@ -260,6 +260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dischargePower: 0
+  dischargeLevel: 0
   owner: {fileID: 0}
 --- !u!114 &114210382874987444
 MonoBehaviour:
@@ -274,7 +275,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 20
   powerOfLastCough: 0
-  winningPlayerTag: 
+  mostInfectedBy: {fileID: 0}
   sneeze: {fileID: 114034622704384096}
   cough: {fileID: 114644587711951412}
   segments: 3
@@ -286,6 +287,7 @@ MonoBehaviour:
   escalatorNotification: {fileID: 1182353478192480}
   currPower: 0
   dividerParent: {fileID: 224223066748332788}
+  playerColor: {r: 1, g: 0, b: 0, a: 0}
 --- !u!114 &114482459412971050
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -347,6 +349,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dischargePower: 0
+  dischargeLevel: 0
   owner: {fileID: 0}
 --- !u!114 &114669041270885674
 MonoBehaviour:

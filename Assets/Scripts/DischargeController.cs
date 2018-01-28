@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class DischargeController : MonoBehaviour {
     public float dischargePower;
-    public PlayerController owner;
+    public int dischargeLevel;
+    public GameObject owner;
 
 
     // Use this for initialization
@@ -23,7 +24,7 @@ public class DischargeController : MonoBehaviour {
 
         RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, new Vector2(direction, 0), rayDistance);
 
-        Debug.DrawRay(transform.position, new Vector2(direction, 0), Color.green, 2.0f);
+        Debug.DrawRay(transform.position, new Vector2(direction, 0), Color.green, rayDistance);
 
         // List<RaycastHit2D> filteredHits = new List<RaycastHit2D>();
 
@@ -32,8 +33,9 @@ public class DischargeController : MonoBehaviour {
             GameObject npc = hits[i].collider.gameObject;
             if (npc.layer == LayerMask.NameToLayer("NPC"))
             {
+                NpcController npcScript = npc.GetComponent<NpcController>();
+                npcScript.hitBySneeze(dischargeLevel, owner);
                 // filteredHits.Add(hits[i]);
-                Debug.Log(hits[i].collider.name);
             }
         }
     }
