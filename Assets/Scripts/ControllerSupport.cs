@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ControllerSupport : MonoBehaviour
 {
@@ -35,6 +36,18 @@ public class ControllerSupport : MonoBehaviour
             movePlayer();
             //get keypresses.
             keyPressedTimer();
+        }
+
+        if (Input.GetButtonDown("Back_1") || Input.GetButtonDown("Back_2") || Input.GetButtonDown("Back_3") || Input.GetButtonDown("Back_4"))
+        {
+            for (int i = 0; i < FindObjectsOfType<AudioSource>().Length; i++)
+            {
+                FindObjectsOfType<AudioSource>()[i].Stop();
+            }
+
+            FindObjectsOfType<AudioSource>()[1].Play();
+
+            SceneManager.LoadScene(0);
         }
     }
 
