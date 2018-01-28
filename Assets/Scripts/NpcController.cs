@@ -79,6 +79,12 @@ public class NpcController : EntityController
             default:
                 break;
         }
+
+        //failsafe
+        if(transform.position.y < -10)
+        {
+            ExitNPC();
+        }
 	}
 
     private void ChangeNPCState(NPCState state)
@@ -96,7 +102,12 @@ public class NpcController : EntityController
         Physics2D.IgnoreLayerCollision(8, 10, true);
     }
 
-	private bool CheckProximity(Vector2 target) {
+    IEnumerator IgnoreWallsTimer()
+    {
+        yield return new WaitForSeconds(1f);
+    }
+
+    private bool CheckProximity(Vector2 target) {
         return Mathf.Abs(transform.position.x - target.x) <= 0.2f;
     }
 

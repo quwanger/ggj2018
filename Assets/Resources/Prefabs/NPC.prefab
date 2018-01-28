@@ -62,7 +62,7 @@ Rigidbody2D:
   m_Material: {fileID: 6200000, guid: 52acb833603952e4fba644f790c0f5b3, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!70 &70611476749209988
 CapsuleCollider2D:
@@ -109,7 +109,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 15
   powerOfLastCough: 0
-  winningPlayerTag: 
+  mostInfectedBy: {fileID: 0}
   deathNotification: {fileID: 1249531666923528, guid: feb6675a8bd96bb40aa3ac26fce396da,
     type: 2}
   _npcState: 0
