@@ -110,10 +110,12 @@ MonoBehaviour:
   speed: 15
   powerOfLastCough: 0
   winningPlayerTag: 
-  wanderSpeedModifier: 0.5
+  _npcState: 0
+  wanderSpeedModifier: 0.05
   flashSaleSpeedMultiplier: 5
   points: 1
-  timeout: 15
+  timeoutMin: 3
+  timeoutMax: 15
   targetGoal: {x: 0, y: 0}
   leaving: 0
   isFlashSale: 0

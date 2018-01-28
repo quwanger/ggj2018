@@ -28,14 +28,14 @@ public class EntityController : MonoBehaviour {
 
     static float t = 0.0f;
 
-    private void Update()
+    public virtual void Update()
     {
-        if(_ridingEscalator)
+        if (_ridingEscalator)
         {
             float posX = Mathf.Lerp(_escalatorRide.StartinPosition.x, _escalatorRide.TargetPosition.x, t);
             float posY = Mathf.Lerp(_escalatorRide.StartinPosition.y, _escalatorRide.TargetPosition.y, t);
 
-            transform.position = new Vector3(posX, posY, transform.position.z);
+            transform.position = new Vector3(posX, posY + 0.7f, transform.position.z);
 
             t += (_escalatorRide.RideSpeed / 10f) * Time.deltaTime;
 
@@ -57,7 +57,9 @@ public class EntityController : MonoBehaviour {
 		    if(direction.x > 0) transform.localScale = new Vector2(-1, 1);
 		    else if(direction.x < 0) transform.localScale = new Vector2(1, 1);
 
-            _rigidBody.AddForce(direction * speed * speedModifier * Time.deltaTime * 60);
+            Vector2 flatDirection = new Vector2(direction.x, 0f);
+
+            _rigidBody.AddForce(flatDirection * speed * speedModifier * Time.deltaTime * 60);
         }
 	}
 
@@ -91,6 +93,7 @@ public class EntityController : MonoBehaviour {
     {
         if(transform.position.y < _escalatorInRange.transform.position.y && !_escalatorInRange.IsShutdown)
         {
+            StopMove();
             _escalatorInRange.EscalatorInUse = true;
             _escalatorRide = new EscalatorRide(_escalatorInRange.TargetBottom.position, _escalatorInRange.TargetTop.position, _escalatorInRange.EscDirectionVertical == Escalator.EscalatorDirectionVertical.Up ? _escalatorInRange.ProperDirectionEscalatorSpeed : _escalatorInRange.WrongDirectionEscalatorSpeed);
             _ridingEscalator = true;
@@ -101,6 +104,7 @@ public class EntityController : MonoBehaviour {
     {
         if (transform.position.y > _escalatorInRange.transform.position.y && !_escalatorInRange.IsShutdown)
         {
+            StopMove();
             _escalatorInRange.EscalatorInUse = true;
             _escalatorRide = new EscalatorRide(_escalatorInRange.TargetTop.position, _escalatorInRange.TargetBottom.position, _escalatorInRange.EscDirectionVertical == Escalator.EscalatorDirectionVertical.Down ? _escalatorInRange.ProperDirectionEscalatorSpeed : _escalatorInRange.WrongDirectionEscalatorSpeed);
             _ridingEscalator = true;

@@ -79,7 +79,7 @@ public class MapManager : MonoBehaviour {
     private List<MapTile> _storesInLiquidation = new List<MapTile>();
     public List<MapTile> StoresInLiquidation { get { return _storesInLiquidation; } }
 
-    private MapTile[] _currentMapTiles = new MapTile[12];
+    public Transform[] _currentMapTiles = new Transform[16];
     private List<Escalator> _currentEscalators = new List<Escalator>();
 
     private List<EscalatorSpawn> _escalatorSpawns = new List<EscalatorSpawn>();
@@ -91,6 +91,13 @@ public class MapManager : MonoBehaviour {
         InitStorefronts();
         InitializeMap();
         InitializeEscalators();
+    }
+
+    public Vector2 GetRandomStorefrontPosition()
+    {
+        int randomTile = Random.Range(0, _currentMapTiles.Length);
+        Vector2 randomStorePosition = new Vector2(_currentMapTiles[randomTile].position.x, _currentMapTiles[randomTile].position.y);
+        return randomStorePosition;
     }
 
     private void InitStorefronts()
@@ -114,7 +121,7 @@ public class MapManager : MonoBehaviour {
                 Vector3 tilePosition = new Vector3(posX, posY, 0);
                 MapTile tempMapTile = Instantiate(_baseMapTile, tilePosition, Quaternion.identity, _mapParent);
                 tempMapTile.Init(this, tilePosition, GetTileSlideDirection(i, j), HandleStorefrontInit());
-                _currentMapTiles[(i- WIDTH_STARTING_POSITION) * (j - HEIGHT_STARTING_POSITION)] = tempMapTile;
+                _currentMapTiles[(i * (int)MAP_HEIGHT_TILE_COUNT) +  j] = tempMapTile.transform;
 
                 if(i < MAP_WIDTH_TILE_COUNT - 1 && j < MAP_HEIGHT_TILE_COUNT - 1)
                 {
@@ -131,10 +138,17 @@ public class MapManager : MonoBehaviour {
         }
     }
 
-    private Sprite HandleStorefrontInit()
+    private Sprite HandleStorefrontInit(Sprite currentStorefront = null)
     {
+        Sprite storefront = GetUnusedStorefront();
+        _storefrontsInUse.Add(storefront);
+        _availableStorefronts.Remove(storefront);
+        if (currentStorefront)
+        {
+            _availableStorefronts.Add(currentStorefront);
+        }
 
-        return GetUnusedStorefront();
+        return storefront;
     }
 
     private Sprite GetUnusedStorefront()
@@ -282,7 +296,6 @@ public class MapManager : MonoBehaviour {
     IEnumerator ReplaceStore(MapTile mapTile)
     {
         yield return new WaitForSeconds(0.15f);
-        mapTile.StoreName = "Store " + Random.Range(1, 100).ToString();
         StartCoroutine("AnimateStoreBackIn", mapTile);
     }
 
@@ -290,6 +303,6 @@ public class MapManager : MonoBehaviour {
     {
         yield return new WaitForSeconds(0.3f);
         mapTile.TriggerAnimation(mapTile.SlideDirection, true);
-        mapTile.Init(this, mapTile.TilePosition, mapTile.SlideDirection, HandleStorefrontInit());
+        mapTile.Init(this, mapTile.TilePosition, mapTile.SlideDirection, HandleStorefrontInit(mapTile.CurrentSprite));
     }
 }

@@ -29,6 +29,7 @@ public class MapTile : MonoBehaviour
 
     [SerializeField]
     private SpriteRenderer _storefrontSpriteRenderer;
+    public Sprite CurrentSprite { get { return _storefrontSpriteRenderer.sprite; } }
 
     [SerializeField]
     private GameObject _announcementGameObject;
