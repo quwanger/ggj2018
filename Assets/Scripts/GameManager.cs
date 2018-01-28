@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour {
     public NPCManager NPCManager;
     public MapManager MapManager;
 
+    public List<GameObject> spawnPoints = new List<GameObject>();
+
     public PlayerController[] playerPrefabs;
 
     public static int numPlayers = 0;
@@ -32,9 +34,8 @@ public class GameManager : MonoBehaviour {
 
         List<PlayerController> players = new List<PlayerController>();
 
-        // to-do should be dynamic based on active players
         for(int i = 0; i < numPlayers; i++) {
-           players.Add(Instantiate(playerPrefabs[i], transform.position, transform.rotation));
+            players.Add(Instantiate(playerPrefabs[i], spawnPoints[i].transform.position, spawnPoints[i].transform.rotation));
         }
     }
 
@@ -53,7 +54,7 @@ public class GameManager : MonoBehaviour {
             countdownText.text = "1";
         } else if (time <= 0.0f)
         {
-            countdownText.text = "GO";
+            //countdownText.text = "GO";
 
             gameStarted = true;
         }
