@@ -15,7 +15,8 @@ public class ControllerSupport : MonoBehaviour
     protected Rigidbody2D rb;
     public int myPlayerID;
 
-    void Start () {
+    void Start()
+    {
         //get player tag
         string myTag = this.tag;
         myPlayerID = Convert.ToInt32(myTag.Substring(myTag.Length - 1, 1));
@@ -24,10 +25,10 @@ public class ControllerSupport : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         currPlayerController = GetComponent<PlayerController>();
     }
-    	
-	void Update ()
+
+    void Update()
     {
-        if (!currPlayerController.RidingEscalator)
+        if (!currPlayerController.RidingEscalator && GameManager.Instance.gameStarted)
         {
             //move the player by getting the normalized vector created by the joystick
             Vector3 mydir = new Vector2(x, y).normalized;
@@ -41,7 +42,6 @@ public class ControllerSupport : MonoBehaviour
     {
         //based on the player ID, access the correct controller joystick data
         string myX = string.Concat("L_XAxis_", myPlayerID);
-        string myY = string.Concat("L_YAxis_", myPlayerID);
 
         //assign it to x and y; Ignore Y for now (no up movement)
         x = Input.GetAxis(myX);
@@ -61,19 +61,19 @@ public class ControllerSupport : MonoBehaviour
         }
     }
 
-    private bool leftTriggerInUse = false;
-
-
-    void keyPressedTimer() {
+    void keyPressedTimer()
+    {
         if (!currPlayerController.isRegenerating)
         {
-            if (Input.GetButtonDown(string.Concat("A_", myPlayerID)))
+            if (Input.GetButtonDown(string.Concat("A_", myPlayerID)) ||
+                Input.GetKeyDown("space"))
             {
                 currPlayerController.timePressed = Time.time;
                 currPlayerController.isCharging = true;
             }
 
-            if (Input.GetButtonUp(string.Concat("A_", myPlayerID)))
+            if (Input.GetButtonUp(string.Concat("A_", myPlayerID)) ||
+                Input.GetKeyUp("space"))
             {
                 currPlayerController.isCharging = false;
                 currPlayerController.isRegenerating = true;
@@ -95,24 +95,24 @@ public class ControllerSupport : MonoBehaviour
                 currPlayerController.isCharging = false;
                 currPlayerController.isRegenerating = true;
 
-                currPlayerController.Cough();
+                currPlayerController.Sneeze();
             }
         }
 
         if (Input.GetAxis(string.Concat("L_YAxis_", myPlayerID)) != 0)
-        {           
+        {
             if (Input.GetAxis(string.Concat("L_YAxis_", myPlayerID)) < 0)
             {
                 if (currPlayerController.InEscalatorRange)
                 {
-                    currPlayerController.GoDownEscalator();
+                    currPlayerController.GoDownEscalator(currPlayerController.CompleteEscalatorRide);
                 }
             }
             else
             {
                 if (currPlayerController.InEscalatorRange)
                 {
-                    currPlayerController.GoUpEscalator();
+                    currPlayerController.GoUpEscalator(currPlayerController.CompleteEscalatorRide);
                 }
             }
         }

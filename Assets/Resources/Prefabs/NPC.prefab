@@ -114,8 +114,8 @@ MonoBehaviour:
   wanderSpeedModifier: 0.05
   flashSaleSpeedMultiplier: 5
   points: 1
-  timeoutMin: 3
-  timeoutMax: 15
+  timeoutMin: 1
+  timeoutMax: 2
   targetGoal: {x: 0, y: 0}
   leaving: 0
   isFlashSale: 0

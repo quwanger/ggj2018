@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DischargeController : MonoBehaviour {
-    public int power = 1;
-    public PlayerController owner;
+    public float dischargePower;
+    public int dischargeLevel;
+    public GameObject owner;
 
 
     // Use this for initialization
@@ -17,22 +18,34 @@ public class DischargeController : MonoBehaviour {
 		
 	}
 
-    public void CalculatePower(float timePressed) {
-        int tempPower = (int)Mathf.Floor(timePressed * 2);
+    public void shootRay(float rayDistance, string type)
+    {
+        float direction = transform.parent.localScale.x * -1;
+        Debug.Log("Direction: " + direction);
 
-        if (tempPower > 3)
+        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, new Vector2(direction, 0), rayDistance);
+
+        Debug.DrawRay(transform.position, new Vector2(direction, 0), Color.green, rayDistance);
+
+        // List<RaycastHit2D> filteredHits = new List<RaycastHit2D>();
+
+        for (int i = 0; i < hits.Length; i++)
         {
-            power = 3;
+            GameObject npc = hits[i].collider.gameObject;
+
+            if(type == "cough")
+            {
+                if (npc.layer == LayerMask.NameToLayer("NPC"))
+                {
+                    NpcController npcScript = npc.GetComponent<NpcController>();
+                    npcScript.hitByCough(dischargeLevel, owner);
+                    // filteredHits.Add(hits[i]);
+                }
+            } else
+            {
+
+            }
+           
         }
-        else if (tempPower < 1)
-        {
-            power = 1;
-        } else
-        {
-            power = tempPower;
-        }
-
-        Debug.Log("Cough power: " + power);
-
     }
 }

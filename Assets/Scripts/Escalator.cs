@@ -83,13 +83,20 @@ public class Escalator : MonoBehaviour
     private float _escalatorLife;
     private float _shutdownTime;
 
+    private int _fromFloor;
+    public int FromFloor { get { return _fromFloor; } }
+    private int _toFloor;
+    public int ToFloor { get { return _toFloor; } }
+
     private MapManager _mapManager;
     private bool _isDying = false;
     private bool _isShutdown = false;
     public bool IsShutdown { get { return _isShutdown; } }
 
-    private bool _escalatorInUse = false;
-    public bool EscalatorInUse { get { return _escalatorInUse; } set { _escalatorInUse = value; } }
+    //private bool _escalatorInUse = false;
+    //public bool EscalatorInUse { get { return _escalatorInUse; } set { _escalatorInUse = value; } }
+
+    public List<EntityController> CharactersOnEscalator = new List<EntityController>();
 
     private EscalatorDirectionVertical _escalatorDirectionVertical;
     public EscalatorDirectionVertical EscDirectionVertical { get { return _escalatorDirectionVertical; } }
@@ -118,12 +125,15 @@ public class Escalator : MonoBehaviour
         }
     }
 
-    public void Init(MapManager mapManager, EscalatorDirectionVertical escalatorDirectionV, EscalatorDirectionHorizontal escalatorDirectionH)
+    public void Init(MapManager mapManager, EscalatorDirectionVertical escalatorDirectionV, EscalatorDirectionHorizontal escalatorDirectionH, int startingFloor)
     {
         _mapManager = mapManager;
         _escalatorDirectionVertical = escalatorDirectionV;
         _escalatorDirectionHorizontal = escalatorDirectionH;
         _isDying = true;
+
+        _fromFloor = startingFloor;
+        _toFloor = startingFloor + 1;
 
         _shutdownTime = mapManager.EscalatorShutdownTime;
         _escalatorLife = Random.Range(mapManager.MinEscalatorTime, mapManager.MaxEscalatorTime);
@@ -134,7 +144,7 @@ public class Escalator : MonoBehaviour
 
     private void TriggerShutdown()
     {
-        if (!_escalatorInUse)
+        if (CharactersOnEscalator.Count < 1)
         {
             _isDying = false;
             _isShutdown = true;

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +9,7 @@ public class EntityController : MonoBehaviour {
 
 	//cough tracking
 	public int powerOfLastCough;
-	public string winningPlayerTag;
+	public GameObject mostInfectedBy;
 
 	protected Rigidbody2D _rigidBody;
 	protected Animator _animator;
@@ -20,13 +21,15 @@ public class EntityController : MonoBehaviour {
     private bool _inEscalatorRange = false;
     public bool InEscalatorRange { get { return _inEscalatorRange; } }
 
+    public Action ElevatorRideComplete;
+
     virtual protected void Awake() {
 
 		_rigidBody = GetComponent<Rigidbody2D>();
 		_animator = GetComponent<Animator>();
 	}
 
-    static float t = 0.0f;
+    private float t = 0.0f;
 
     public virtual void Update()
     {
@@ -83,29 +86,37 @@ public class EntityController : MonoBehaviour {
 
     virtual public void GetOffEscalator()
     {
-        _escalatorInRange.EscalatorInUse = false;
+        _ridingEscalator = false;
         t = 0.0f;
         _escalatorRide = null;
-        _ridingEscalator = false;
+        //_escalatorInRange.EscalatorInUse = false;
+        _escalatorInRange.CharactersOnEscalator.Remove(this);
+
+        ElevatorRideComplete();
+        ElevatorRideComplete = null;
     }
 
-    virtual public void GoUpEscalator()
+    virtual public void GoUpEscalator(Action rideCompleteCallback)
     {
         if(transform.position.y < _escalatorInRange.transform.position.y && !_escalatorInRange.IsShutdown)
         {
+            ElevatorRideComplete = rideCompleteCallback;
             StopMove();
-            _escalatorInRange.EscalatorInUse = true;
+            //_escalatorInRange.EscalatorInUse = true;
+            _escalatorInRange.CharactersOnEscalator.Add(this);
             _escalatorRide = new EscalatorRide(_escalatorInRange.TargetBottom.position, _escalatorInRange.TargetTop.position, _escalatorInRange.EscDirectionVertical == Escalator.EscalatorDirectionVertical.Up ? _escalatorInRange.ProperDirectionEscalatorSpeed : _escalatorInRange.WrongDirectionEscalatorSpeed);
             _ridingEscalator = true;
         }
     }
 
-    virtual public void GoDownEscalator()
+    virtual public void GoDownEscalator(Action rideCompleteCallback)
     {
         if (transform.position.y > _escalatorInRange.transform.position.y && !_escalatorInRange.IsShutdown)
         {
+            ElevatorRideComplete = rideCompleteCallback;
             StopMove();
-            _escalatorInRange.EscalatorInUse = true;
+            //_escalatorInRange.EscalatorInUse = true;
+            _escalatorInRange.CharactersOnEscalator.Add(this);
             _escalatorRide = new EscalatorRide(_escalatorInRange.TargetTop.position, _escalatorInRange.TargetBottom.position, _escalatorInRange.EscDirectionVertical == Escalator.EscalatorDirectionVertical.Down ? _escalatorInRange.ProperDirectionEscalatorSpeed : _escalatorInRange.WrongDirectionEscalatorSpeed);
             _ridingEscalator = true;
         }
@@ -118,11 +129,6 @@ public class EntityController : MonoBehaviour {
 	virtual public void OnDieAnimEnd() {
 		Destroy(this.gameObject);
 	}
-
-    void OnParticleCollision(GameObject coll)
-    {
-        Debug.Log("Entity hit by: " + coll.gameObject.tag);
-    }
 
     public virtual void EnableEscalatoring(Escalator escalator)
     {

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class MapManager : MonoBehaviour {
@@ -22,6 +23,7 @@ public class MapManager : MonoBehaviour {
     private const int WIDTH_STARTING_POSITION = 0;
     private const int HEIGHT_STARTING_POSITION = 0;
     private const float ESCALATOR_VERTICAL_OFFSET = 0.2f;
+    private const int NUMBER_OF_ENTRANCES = 3;
 
     private const float SPRITE_HEIGHT_ORTHO_SIZE = 5f;  //this value is the orthographic size of the camera... don't ask
     private const float SPRITE_WIDTH_ORTHO_SIZE = SPRITE_HEIGHT_ORTHO_SIZE * (SCREEN_WIDTH / SCREEN_HEIGHT);
@@ -73,6 +75,9 @@ public class MapManager : MonoBehaviour {
     [SerializeField]
     private List<Sprite> _storefronts = new List<Sprite>();
 
+    [SerializeField]
+    private List<SpawnerController> _entrances = new List<SpawnerController>();
+
     private List<Sprite> _availableStorefronts = new List<Sprite>();
     private List<Sprite> _storefrontsInUse = new List<Sprite>();
 
@@ -90,6 +95,7 @@ public class MapManager : MonoBehaviour {
     {
         InitStorefronts();
         InitializeMap();
+        InitializeEntrances();
         InitializeEscalators();
     }
 
@@ -118,7 +124,7 @@ public class MapManager : MonoBehaviour {
 
                 float posY = Mathf.Lerp(-SPRITE_HEIGHT_ORTHO_SIZE, SPRITE_HEIGHT_ORTHO_SIZE, Mathf.InverseLerp(0, SCREEN_HEIGHT, (j * TILE_HEIGHT) + (TILE_HEIGHT / 2f)));
 
-                Vector3 tilePosition = new Vector3(posX, posY, 0);
+                Vector3 tilePosition = new Vector3(posX, posY, 2);
                 MapTile tempMapTile = Instantiate(_baseMapTile, tilePosition, Quaternion.identity, _mapParent);
                 tempMapTile.Init(this, tilePosition, GetTileSlideDirection(i, j), HandleStorefrontInit());
                 _currentMapTiles[(i * (int)MAP_HEIGHT_TILE_COUNT) +  j] = tempMapTile.transform;
@@ -154,6 +160,43 @@ public class MapManager : MonoBehaviour {
     private Sprite GetUnusedStorefront()
     {
         return _availableStorefronts[Random.Range(0, _availableStorefronts.Count)];
+    }
+
+    private void InitializeEntrances()
+    {
+        //turn all off to start...
+        foreach(SpawnerController entrance in _entrances)
+        {
+            entrance.gameObject.SetActive(false);
+        }
+
+        for(int i = 0; i < NUMBER_OF_ENTRANCES; i++)
+        {
+            int entranceToTurnOn = Random.Range(0, _entrances.Count);
+            if (_entrances[entranceToTurnOn].gameObject.activeSelf)
+            {
+                i--;
+            }
+            else
+            {
+                _entrances[entranceToTurnOn].gameObject.SetActive(true);
+            }
+        }
+    }
+
+    public List<NpcExit> GetActiveExits()
+    {
+        List<NpcExit> exits = new List<NpcExit>();
+
+        foreach (SpawnerController entrance in _entrances)
+        {
+            if(entrance.gameObject.activeSelf)
+            {
+                exits.Add(entrance.GetComponentInChildren<NpcExit>());
+            }
+        }
+
+        return exits;
     }
 
     private void InitializeEscalators()
@@ -238,12 +281,26 @@ public class MapManager : MonoBehaviour {
                 tempEscalator.transform.parent.SetAsFirstSibling();
                 escalatorSpawn.IsTaken = true;
                 _currentEscalators.Add(tempEscalator);
-                tempEscalator.Init(this, Random.Range(0, 2) > 0 ? Escalator.EscalatorDirectionVertical.Up : Escalator.EscalatorDirectionVertical.Down, dirH);
+                tempEscalator.Init(this, Random.Range(0, 2) > 0 ? Escalator.EscalatorDirectionVertical.Up : Escalator.EscalatorDirectionVertical.Down, dirH, floor);
                 _escalatorSlots[slot, floor] = tempEscalator;
             }
         }
 
         return spawnEscalator;
+    }
+
+    public Vector2 GetEscalatorFromFloorToFloor(int from, int to, bool down)
+    {
+        foreach (Escalator escalator in _currentEscalators)
+        {
+            if(escalator.FromFloor == from && escalator.ToFloor == to)
+            {
+                Vector2 target = new Vector2(down ? escalator.TargetTop.position.x : escalator.TargetBottom.position.x, down ? escalator.TargetTop.position.y : escalator.TargetBottom.position.y);
+                return target;
+            }
+        }
+
+        return Vector2.zero;
     }
 
     private List<EscalatorSpawn> GetEscalatorsForFloor(int floor)
