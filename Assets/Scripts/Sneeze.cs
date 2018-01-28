@@ -3,13 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Sneeze : DischargeController {
+    private AudioManager audioManager;
 
     void Start() {
         Debug.Log("Sneezed");
+
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     public void initiateSneeze()
     {
+        audioManager.PlaySound("sneezes");
+
         ParticleSystem sneezePS = this.GetComponent<ParticleSystem>();
 
         float rayDistance = 0f;
