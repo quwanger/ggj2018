@@ -37,6 +37,7 @@ public class SpawnerController : MonoBehaviour {
 			for(int i = 0; i < Random.Range(burstLowerLimit, burstUpperLimit); i++) {
 				yield return new WaitForSeconds(Random.Range(0.05f, 0.2f));
 				NpcController n = Instantiate(npcToSpawn, transform.position, Quaternion.identity);
+                GameManager.Instance.NPCManager.AllNpcs.Add(n);
                 n.Init(mallFloor);
 			}
             yield return new WaitForSeconds(Random.Range(offset + rateLowerLimit, offset + rateUpperLimit));

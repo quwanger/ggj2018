@@ -5,6 +5,8 @@ using UnityEngine;
 public class DischargeController : MonoBehaviour {
     public float dischargePower;
     public int dischargeLevel;
+    [SerializeField]
+    public float sneezeForce = 1300;
     public GameObject owner;
 
 
@@ -47,7 +49,7 @@ public class DischargeController : MonoBehaviour {
                     obj.layer == LayerMask.NameToLayer("Player"))
                 {
                     EntityController entity = obj.GetComponent<EntityController>();
-                    entity.GetComponent<Rigidbody2D>().AddForce(transform.parent.localScale * -1000.0f);
+                    entity.GetComponent<Rigidbody2D>().AddForce(transform.parent.localScale * -1 * sneezeForce * (dischargePower*0.5f+1));
                     // filteredHits.Add(hits[i]);
                 }
             }

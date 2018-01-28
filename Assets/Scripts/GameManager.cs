@@ -15,14 +15,14 @@ public class GameManager : MonoBehaviour {
     public PlayerController[] playerPrefabs;
 
     public static int numPlayers = 0;
-   // public static string[] playerSprites;
-
+    public static float gameTime = 210;
     public static List<string> playerSprites = new List<string>();
 
     public Text countdownText;
     public float countdownFrom;
 
     public bool gameStarted;
+    bool isTimerStarted = false;
 
     void Awake()
     {
@@ -36,8 +36,6 @@ public class GameManager : MonoBehaviour {
         gameStarted = false;
 
         List<PlayerController> players = new List<PlayerController>();
-
-
 
         for(int i = 0; i < numPlayers; i++) {
             //Debug.Log(playerPrefabs[i].name);
@@ -109,8 +107,24 @@ public class GameManager : MonoBehaviour {
         } else if (time <= 0.0f)
         {
             // countdownText.text = "GO";
-
             gameStarted = true;
+            if(!isTimerStarted)
+            {
+                StartCoroutine(GetWorldTime());
+                isTimerStarted = true;
+            }
+        }
+    }
+
+    float currCountdownValue = GameManager.gameTime;
+    public IEnumerator GetWorldTime()
+    {
+        //currCountdownValue = countdownValue;
+        while (currCountdownValue > 0)
+        {
+            GameManager.gameTime = currCountdownValue;
+            yield return new WaitForSeconds(1.0f);
+            currCountdownValue--;
         }
     }
 
