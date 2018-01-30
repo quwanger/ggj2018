@@ -6,7 +6,7 @@ public class DeathNotification : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
-        Destroy(this, 1f);
+        Destroy(this.gameObject, 1f);
 	}
 	
 }

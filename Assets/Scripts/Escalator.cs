@@ -43,11 +43,11 @@ public class EscalatorRide
 public class Escalator : MonoBehaviour
 {
     [SerializeField]
-    private float _properDirectionEscalatorSpeed;
+    private float _properDirectionEscalatorSpeed = 0;
     public float ProperDirectionEscalatorSpeed { get { return _properDirectionEscalatorSpeed; } }
 
     [SerializeField]
-    private float _wrongDirectionEscalatorSpeed;
+    private float _wrongDirectionEscalatorSpeed = 0;
     public float WrongDirectionEscalatorSpeed { get { return _wrongDirectionEscalatorSpeed; } }
 
     // Because I'm lazy, let's just assume:
@@ -58,14 +58,14 @@ public class Escalator : MonoBehaviour
     private Sprite[] _escalatorSprites = new Sprite[3];
 
     [SerializeField]
-    private SpriteRenderer _escalatorSpriteRenderer;
+    private SpriteRenderer _escalatorSpriteRenderer = null;
 
     [SerializeField]
-    private Transform _targetTop;
+    private Transform _targetTop = null;
     public Transform TargetTop { get { return _targetTop; } }
 
     [SerializeField]
-    private Transform _targetBottom;
+    private Transform _targetBottom = null;
     public Transform TargetBottom { get { return _targetBottom; } }
 
     public enum EscalatorDirectionVertical

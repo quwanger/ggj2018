@@ -28,20 +28,13 @@ public class MapTile : MonoBehaviour
     public string StoreName { get { return _storeName; } set { _storeName = value; } }
 
     [SerializeField]
-    private SpriteRenderer _storefrontSpriteRenderer;
+    private SpriteRenderer _storefrontSpriteRenderer = null;
     public Sprite CurrentSprite { get { return _storefrontSpriteRenderer.sprite; } }
 
     [SerializeField]
-    private GameObject _announcementGameObject;
+    private GameObject _announcementGameObject = null;
     [SerializeField]
     private SpriteRenderer _announcementSpriteRenderer;
-
-    [SerializeField]
-    private TextMesh _textName;
-    [SerializeField]
-    private TextMesh _textPosition;
-    [SerializeField]
-    private TextMesh _textSlideDirection;
 
     [SerializeField]
     private List<Sprite> _announcements = new List<Sprite>();

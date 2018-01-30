@@ -1829,9 +1829,7 @@ MonoBehaviour:
   - {fileID: 114966335671794918, guid: 06c427086ff05e9489360e83a6cf1132, type: 2}
   - {fileID: 114562941903643982, guid: 001dc0c8fcbdd914f99b713d241fe47f, type: 2}
   - {fileID: 114621380207603322, guid: e0c2fd8fb3f9cea498e169d4ed8a1589, type: 2}
-  numPlayers: 0
-  gameTime: 120
-  playerSprites: []
+  gameTime: 600
   countdownText: {fileID: 259963824}
   countDownSprite: {fileID: 493861520}
   countdownFrom: 3
@@ -1874,8 +1872,8 @@ MonoBehaviour:
   rateUpperLimit: 12
   rateOffset: 0
   startingRateOffset: 0
-  burstLowerLimit: 2
-  burstUpperLimit: 5
+  burstLowerLimit: 5
+  burstUpperLimit: 12
 --- !u!1001 &1099302928
 Prefab:
   m_ObjectHideFlags: 0
@@ -2433,8 +2431,8 @@ MonoBehaviour:
   _maxStoresInLiquidation: 2
   _minExpireTime: 10
   _maxExpireTime: 120
-  _minLiquidationTime: 2
-  _maxLiquidationTime: 5
+  _minLiquidationTime: 8
+  _maxLiquidationTime: 20
   _minEscalatorTime: 15
   _maxEscalatorTime: 120
   _escalatorShutdownTime: 5

@@ -6,6 +6,8 @@ public class NPCManager : MonoBehaviour {
 
     public List<SpawnerController> NpcSpawners = new List<SpawnerController>();
     public List<NpcController> AllNpcs = new List<NpcController>();
+    public Dictionary<Vector3, List<NpcController>> NpcsAtSales = new Dictionary<Vector3, List<NpcController>>();
+
     [Space(5)]
     [Header("Spawner Properties")]
     [SerializeField]
@@ -37,17 +39,32 @@ public class NPCManager : MonoBehaviour {
 
     public void SendNPCsToSale(int saleStrength, Transform store)
     {
+        NpcsAtSales.Add(store.position, new List<NpcController>());
+
         //sale strength will be out of 10 (10 meaning players have a 50% chance of changing direction to the sale
         foreach(NpcController npc in AllNpcs)
         {
-            npc.SendToSale(store);
-            int chanceOfGoingToSale = Random.Range(1, 21);
+            int chanceOfGoingToSale = Random.Range(1, 14);
             if(chanceOfGoingToSale <= saleStrength)
             {
                 //send them to the sale!
                 npc.SendToSale(store);
+                NpcsAtSales[store.position].Add(npc);
             }
         }
+    }
+
+    public void RerouteNpcsHeadingToExpiredSale(Transform store)
+    {
+        foreach(NpcController npc in NpcsAtSales[store.position])
+        {
+            if (npc)
+            {
+                npc.DecideNextTarget();
+            }
+        }
+
+        NpcsAtSales.Remove(store.position);
     }
 
     public void KillNPCsAtStore(Transform store)
@@ -68,7 +85,6 @@ public class NPCManager : MonoBehaviour {
 
         foreach (NpcController npc in npcsToKill)
         {
-            //Debug.Log("Killing NPC");
             npc.ExitNPC(true);
         }
     }

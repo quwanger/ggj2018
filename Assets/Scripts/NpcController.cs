@@ -1,11 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class NpcController : EntityController
 {
     // TODO
-    //  - make NPCs stop going to sales when the sale ends before they get there
     //  - add ability to have weights on stores when selecting a new random target
     //      - use this to make NPCs more likely to choose a store on the floor they are already on?
     //  - add systems that keep track of which stores (their transforms specifically) are on which floor
@@ -42,7 +42,6 @@ public class NpcController : EntityController
     private float npcLifespan;
     private bool npcIsDead = false;
 
-	private bool goalReached = false;
 	public bool leaving = false;
 	private Vector2 wanderPosition = Vector2.zero;
 	public bool isFlashSale = false;
@@ -55,7 +54,7 @@ public class NpcController : EntityController
     {
         if (GameManager.Instance.NPCManager.randomNpcSpeed)
         {
-            speed = Random.Range(GameManager.Instance.NPCManager.minNpcSpeed, GameManager.Instance.NPCManager.maxNpcSpeed);
+            speed = UnityEngine.Random.Range(GameManager.Instance.NPCManager.minNpcSpeed, GameManager.Instance.NPCManager.maxNpcSpeed);
         }
         audioManager = FindObjectOfType<AudioManager>();
     }
@@ -106,7 +105,7 @@ public class NpcController : EntityController
 
     public void Init(int floor)
     {
-        npcLifespan = Random.Range(30, 120);
+        npcLifespan = UnityEngine.Random.Range(30, 120);
         StartCoroutine("StartKillingShopper");
         currentFloor = floor;
         DecideNextTarget(true);
@@ -124,20 +123,43 @@ public class NpcController : EntityController
 
 	private void GoalReached() {
 		GetWanderPosition();
-		goalReached = true;
         ResetTimeout();
         StartCoroutine("Timeout");
 	}
 
     private void ResetTimeout()
     {
-        timeout = Random.Range(timeoutMin, timeoutMax);
+        timeout = UnityEngine.Random.Range(timeoutMin, timeoutMax);
     }
 
 	private void MoveToGoal() {
 		Vector2 direction = targetGoal.x > transform.position.x ? new Vector2(1f, 0f) : new Vector2(-1f, 0);
 		Move(direction, (isFlashSale ? flashSaleSpeedMultiplier : 1.0f));
 	}
+
+    public override void GoUpEscalator(Action rideCompleteCallback)
+    {
+        if(_escalatorInRange)
+        {
+            base.GoUpEscalator(rideCompleteCallback);
+        }
+        else
+        {
+            DecideNextTarget();
+        }
+    }
+
+    public override void GoDownEscalator(Action rideCompleteCallback)
+    {
+        if (_escalatorInRange)
+        {
+            base.GoDownEscalator(rideCompleteCallback);
+        }
+        else
+        {
+            DecideNextTarget();
+        }
+    }
 
     private void MoveToEscalator()
     {
@@ -227,7 +249,7 @@ public class NpcController : EntityController
 
 	private void GetWanderPosition() {
         ChangeNPCState(NPCState.Wandering);
-        wanderPosition = new Vector2(targetGoal.x + Random.Range(-2f, 2f), 0f);
+        wanderPosition = new Vector2(targetGoal.x + UnityEngine.Random.Range(-2f, 2f), 0f);
 	}
 
 	//timeout wander behavior - then find exit and leave
@@ -263,7 +285,7 @@ public class NpcController : EntityController
         ChangeNPCState(NPCState.MovingToExit);
         leaving = true;
         List<NpcExit> exits = GameManager.Instance.MapManager.GetActiveExits();
-		targetGoal = exits[Random.Range(0, exits.Count)].transform.position;
+        targetGoal = exits[UnityEngine.Random.Range(0, exits.Count)].transform.position;
         CheckIfTargetIsOnFloor();
     }
 
@@ -340,24 +362,34 @@ public class NpcController : EntityController
         return GameManager.Instance.MapManager.GetEscalatorFromFloorToFloor(currentFloor, currentFloor + 1, false);
     }
 
-    private void DecideNextTarget(bool justSpawed = false)
+    public void DecideNextTarget(bool justSpawed = false)
     {
-        int randomTarget = Random.Range(0, 100);
+       
         isFlashSale = false;
 
-        if (randomTarget < 20 && !justSpawed)
+        // always wander when getting to a target
+        if (_previousNpcState == NPCState.MovingToGoal || _previousNpcState == NPCState.MovingToSale)
         {
-            FindExit();
-        }
-        else if(randomTarget < 40 && !justSpawed)
-        {
-            // randomly wander around
             BeginToWander();
         }
         else
         {
-            // select new goal
-            FindStore();
+            int randomTarget = UnityEngine.Random.Range(0, 100);
+
+            if (randomTarget < 20 && !justSpawed)
+            {
+                FindExit();
+            }
+            else if (randomTarget < 40 && !justSpawed)
+            {
+                // randomly wander around
+                BeginToWander();
+            }
+            else
+            {
+                // select new goal
+                FindStore();
+            }
         }
     }
 

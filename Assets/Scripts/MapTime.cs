@@ -36,8 +36,5 @@ public class MapTime : MonoBehaviour {
             this.GetComponent<TextMesh>().text = "";
         }
 
-    
-         
-
 	}
 }

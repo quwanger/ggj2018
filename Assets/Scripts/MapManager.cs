@@ -34,43 +34,43 @@ public class MapManager : MonoBehaviour {
     public bool EnableTileReplace { get { return _enableTileReplace; } }
 
     [SerializeField]
-    private int _maxStoresInLiquidation;
+    private int _maxStoresInLiquidation = 0;
     public int MaxStoresInLiquidation { get { return _maxStoresInLiquidation; } }
 
     [SerializeField]
-    private float _minExpireTime;
+    private float _minExpireTime = 0 ;
     public float MinExpireTime { get { return _minExpireTime; } }
     [SerializeField]
-    private float _maxExpireTime;
+    private float _maxExpireTime = 0;
     public float MaxExpireTime { get { return _maxExpireTime; } }
 
     [SerializeField]
-    private float _minLiquidationTime;
+    private float _minLiquidationTime = 0;
     public float MinLiquidationTime { get { return _minLiquidationTime; } }
     [SerializeField]
-    private float _maxLiquidationTime;
+    private float _maxLiquidationTime = 0;
     public float MaxLiquidationTime { get { return _maxLiquidationTime; } }
 
     [SerializeField]
-    private float _minEscalatorTime;
+    private float _minEscalatorTime = 0;
     public float MinEscalatorTime { get { return _minEscalatorTime; } }
     [SerializeField]
-    private float _maxEscalatorTime;
+    private float _maxEscalatorTime = 0;
     public float MaxEscalatorTime { get { return _maxEscalatorTime; } }
     [SerializeField]
-    private float _escalatorShutdownTime;
+    private float _escalatorShutdownTime = 0;
     public float EscalatorShutdownTime { get { return _escalatorShutdownTime; } }
 
     [SerializeField]
-    private Transform _mapParent;
+    private Transform _mapParent = null;
 
     [SerializeField]
-    private Transform _escalatorParent;
+    private Transform _escalatorParent = null;
 
     [SerializeField]
-    private MapTile _baseMapTile;
+    private MapTile _baseMapTile = null;
     [SerializeField]
-    private Escalator _escalator;
+    private Escalator _escalator = null;
 
     [SerializeField]
     private List<Sprite> _storefronts = new List<Sprite>();
@@ -391,7 +391,7 @@ public class MapManager : MonoBehaviour {
     }
     public void TriggerReplaceStore(MapTile mapTile)
     {
-        //Debug.Log("Replacing store at position: " + mapTile.transform.position);
+        GameManager.Instance.NPCManager.RerouteNpcsHeadingToExpiredSale(mapTile.transform);
         GameManager.Instance.NPCManager.KillNPCsAtStore(mapTile.transform);
         _storesInLiquidation.Remove(mapTile);
         StartCoroutine("ReplaceStore", mapTile);

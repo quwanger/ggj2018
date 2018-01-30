@@ -121,7 +121,7 @@ public class EntityController : MonoBehaviour {
 
     virtual public void GoUpEscalator(Action rideCompleteCallback)
     {
-        if(transform.position.y < _escalatorInRange.transform.position.y && !_escalatorInRange.IsShutdown)
+        if (transform.position.y < _escalatorInRange.transform.position.y && !_escalatorInRange.IsShutdown)
         {
             ElevatorRideComplete = rideCompleteCallback;
             StopMove();
