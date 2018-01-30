@@ -4,13 +4,6 @@ using UnityEngine;
 
 public class NpcController : EntityController
 {
-    // TODO
-    //  - make NPCs stop going to sales when the sale ends before they get there
-    //  - add ability to have weights on stores when selecting a new random target
-    //      - use this to make NPCs more likely to choose a store on the floor they are already on?
-    //  - add systems that keep track of which stores (their transforms specifically) are on which floor
-    //      - keep track of the floor the NPC is on and we'll be able to do more cool things
-
     public enum NPCState
     {
         None = 0,
@@ -53,10 +46,6 @@ public class NpcController : EntityController
 
     void Start()
     {
-        if (GameManager.Instance.NPCManager.randomNpcSpeed)
-        {
-            speed = Random.Range(GameManager.Instance.NPCManager.minNpcSpeed, GameManager.Instance.NPCManager.maxNpcSpeed);
-        }
         audioManager = FindObjectOfType<AudioManager>();
     }
 	
@@ -106,7 +95,7 @@ public class NpcController : EntityController
 
     public void Init(int floor)
     {
-        npcLifespan = Random.Range(30, 120);
+        npcLifespan = Random.Range(10, 120);
         StartCoroutine("StartKillingShopper");
         currentFloor = floor;
         DecideNextTarget(true);
@@ -219,6 +208,7 @@ public class NpcController : EntityController
             int infectedBy = mostInfectedBy.GetComponent<PlayerController>().playerId;
             GameManager.Instance.PlayerScores[infectedBy] += powerOfLastCough;
             mostInfectedBy.GetComponent<EntityController>().SpawnPoints(powerOfLastCough);
+            Debug.Log("<color=blue>Player " + mostInfectedBy.name + " has just received " + powerOfLastCough + " points. They now have " + GameManager.Instance.PlayerScores[infectedBy].ToString() + " points.</color>");
         }
 
         GameManager.Instance.NPCManager.AllNpcs.Remove(this);

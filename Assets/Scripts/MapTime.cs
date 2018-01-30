@@ -21,7 +21,7 @@ public class MapTime : MonoBehaviour {
 
         if(myCurrStore.Equals("store_info"))
         {
-            float timer = GameManager.Instance.gameTime;
+            float timer = GameManager.gameTime;
 
             int minutes = Mathf.FloorToInt(timer / 60F);
             int seconds = Mathf.FloorToInt(timer - minutes * 60);

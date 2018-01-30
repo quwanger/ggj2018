@@ -95,15 +95,14 @@ public class EntityController : MonoBehaviour {
 
 	virtual public void Sneeze() {
  
-        _animator.SetTrigger("cough");
-        //_animator.SetTrigger("Sneeze");
+        _animator.SetTrigger("Sneeze");
 		// return GameObject.Instantiate(projectile, shootPoint.position, transform.rotation);
 	}
 
     virtual public void Cough()
     {
 
-        _animator.SetTrigger("cough");
+        _animator.SetTrigger("Cough");
         // return GameObject.Instantiate(projectile, shootPoint.position, transform.rotation);
     }
 

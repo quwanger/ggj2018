@@ -6,29 +6,6 @@ public class NPCManager : MonoBehaviour {
 
     public List<SpawnerController> NpcSpawners = new List<SpawnerController>();
     public List<NpcController> AllNpcs = new List<NpcController>();
-    [Space(5)]
-    [Header("Spawner Properties")]
-    [SerializeField]
-    public bool randomNpcSpeed;
-    [SerializeField]
-    public float minNpcSpeed;
-    [SerializeField]
-    public float maxNpcSpeed;
-
-    [Space(5)]
-    [Header("Spawner Properties")]
-    [SerializeField]
-    public float rateLowerLimit = 3;
-    [SerializeField]
-    public float rateUpperLimit = 5;
-    [SerializeField]
-    public float rateOffset = 0; //for flash sales - add this to lower and upper rate to increase or decrease spawn rate 
-    [SerializeField]
-    public float startingRateOffset = 0;
-    [SerializeField]
-    public int burstLowerLimit = 1;
-    [SerializeField]
-    public int burstUpperLimit = 10;
 
     public void SpawnNPCsForSale()
     {
@@ -41,7 +18,7 @@ public class NPCManager : MonoBehaviour {
         foreach(NpcController npc in AllNpcs)
         {
             npc.SendToSale(store);
-            int chanceOfGoingToSale = Random.Range(1, 21);
+            int chanceOfGoingToSale = Random.Range(1, 14);
             if(chanceOfGoingToSale <= saleStrength)
             {
                 //send them to the sale!

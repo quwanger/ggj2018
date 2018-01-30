@@ -5,6 +5,7 @@ using UnityEngine;
 public class MapTile : MonoBehaviour
 {
     private Animator _animator;
+    private AudioManager audioManager;
 
     private MapManager _mapManager;
     public MapManager MapManager { get { return _mapManager; } }
@@ -51,6 +52,7 @@ public class MapTile : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         brickPS.SetActive(false);
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     public void Update()
@@ -71,6 +73,10 @@ public class MapTile : MonoBehaviour
                 _liquidationDuration -= Time.deltaTime;
                 _announcementGameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, Random.Range(-3.0f, 3.0f)));
                 if(_liquidationDuration <= 1.0f) {
+                    if(brickPS.active == false)
+                    {
+                        audioManager.PlaySound("drilling");
+                    }
                     brickPS.SetActive(true);
                     transform.rotation = Quaternion.Euler(new Vector3(0, 0, Random.Range(-3.0f, 3.0f)));
                 }
@@ -93,6 +99,11 @@ public class MapTile : MonoBehaviour
 
         ResetLifeSpan();
         _isDying = true;
+
+        //TODO: set text (this will be removed)
+        _textName.text = _storeName;
+        _textPosition.text = "(" + _tilePosition.x.ToString() + ", " + _tilePosition.y + ")";
+        _textSlideDirection.text = slideDirection.ToString();
     }
 
     public void TriggerAnimation(MapManager.TileSlideDirection slideDirection, bool animateIn)
@@ -114,6 +125,8 @@ public class MapTile : MonoBehaviour
             default:
                 break;
         }
+
+        audioManager.PlaySound("swoosh");
     }
 
     private void ResetLifeSpan()
@@ -135,6 +148,39 @@ public class MapTile : MonoBehaviour
             _inLiquidation = true;
             _announcementGameObject.SetActive(true);
             _announcementSpriteRenderer.sprite = _announcements[Random.Range(0, _announcements.Count)];
+
+            string word = _announcementSpriteRenderer.sprite.name;
+            switch (word)
+            {
+                case "message_everything":
+                    audioManager.PlaySound("everything");
+                    break;
+
+                case "message_blackfriday":
+                    audioManager.PlaySound("black friday");
+                    break;
+
+                case "message_clearance":
+                    audioManager.PlaySound("clearance");
+                    break;
+
+                case "message_endofseason":
+                    audioManager.PlaySound("end of season");
+                    break;
+
+                case "message_firesale":
+                    audioManager.PlaySound("fire sale");
+                    break;
+
+                case "message_liquidation":
+                    audioManager.PlaySound("liquidation");
+                    break;
+
+                case "message_obama":
+                    audioManager.PlaySound("obama");
+                    break;
+            }
+            
         }
         else
         {

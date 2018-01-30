@@ -82,11 +82,6 @@ public class PlayerController : EntityController
     {
         base.Update();
 
-        if(transform.position.y < -10f)
-        {
-            transform.position = GameManager.Instance.spawnPoints[Random.Range(0, GameManager.Instance.spawnPoints.Count)].transform.position;
-        }
-
         if (isRegenerating)
         {
             // The 0.01 is just to make it feel smoother

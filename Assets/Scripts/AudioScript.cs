@@ -25,7 +25,7 @@ public class AudioScript : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        MusicSource.clip = MusicClip;
+        //MusicSource.clip = MusicClip;
         //MusicSource.Play();
     }
 	
