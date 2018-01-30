@@ -93,11 +93,6 @@ public class MapTile : MonoBehaviour
 
         ResetLifeSpan();
         _isDying = true;
-
-        //TODO: set text (this will be removed)
-        _textName.text = _storeName;
-        _textPosition.text = "(" + _tilePosition.x.ToString() + ", " + _tilePosition.y + ")";
-        _textSlideDirection.text = slideDirection.ToString();
     }
 
     public void TriggerAnimation(MapManager.TileSlideDirection slideDirection, bool animateIn)

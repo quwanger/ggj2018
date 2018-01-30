@@ -49,8 +49,6 @@ public class AudioManager : MonoBehaviour {
         switch (word)
         {
             case "player coughs":
-                Debug.Log(playerCoughs.Length);
-
                 sFX.PlayOneShot(playerCoughs[Random.Range(0, playerCoughs.Length)]);
                 break;
             case "npc coughs":

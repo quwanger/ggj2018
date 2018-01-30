@@ -107,7 +107,7 @@ public class MapManager : MonoBehaviour {
     public Vector2 FindGoodStore()
     {
         int goToSaleWeight = Random.Range(1, 11);
-        if(goToSaleWeight >= 5 && _storesInLiquidation.Count > 0)
+        if(goToSaleWeight >= 8 && _storesInLiquidation.Count > 0)
         {
             int randomTile = Random.Range(0, _storesInLiquidation.Count);
             Vector2 randomStorePosition = new Vector2(_storesInLiquidation[randomTile].transform.position.x, _storesInLiquidation[randomTile].transform.position.y);
@@ -369,7 +369,7 @@ public class MapManager : MonoBehaviour {
         {
             return TileSlideDirection.Left;
         }
-        else if(x == (MAP_WIDTH_TILE_COUNT + WIDTH_STARTING_POSITION) - 1)
+        else if(x == (int)(MAP_WIDTH_TILE_COUNT + WIDTH_STARTING_POSITION) - 1)
         {
             return TileSlideDirection.Right;
         }
@@ -377,7 +377,7 @@ public class MapManager : MonoBehaviour {
         {
             return TileSlideDirection.Down;
         }
-        else if(y == (MAP_HEIGHT_TILE_COUNT + HEIGHT_STARTING_POSITION) - 1)
+        else if(y == (int)(MAP_HEIGHT_TILE_COUNT + HEIGHT_STARTING_POSITION) - 1)
         {
             return TileSlideDirection.Up;
         }

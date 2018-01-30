@@ -77,15 +77,18 @@ LightmapSettings:
     m_PVRDirectSampleCount: 32
     m_PVRSampleCount: 500
     m_PVRBounces: 2
-    m_PVRFiltering: 0
+    m_PVRFilterTypeDirect: 0
+    m_PVRFilterTypeIndirect: 0
+    m_PVRFilterTypeAO: 0
     m_PVRFilteringMode: 1
     m_PVRCulling: 1
     m_PVRFilteringGaussRadiusDirect: 1
     m_PVRFilteringGaussRadiusIndirect: 5
     m_PVRFilteringGaussRadiusAO: 2
-    m_PVRFilteringAtrousColorSigma: 1
-    m_PVRFilteringAtrousNormalSigma: 1
-    m_PVRFilteringAtrousPositionSigma: 1
+    m_PVRFilteringAtrousPositionSigmaDirect: 0.5
+    m_PVRFilteringAtrousPositionSigmaIndirect: 2
+    m_PVRFilteringAtrousPositionSigmaAO: 1
+    m_ShowResolutionOverlay: 1
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -107,6 +110,8 @@ NavMeshSettings:
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
+    debug:
+      m_Flags: 0
   m_NavMeshData: {fileID: 0}
 --- !u!1 &108023320
 GameObject:
@@ -172,11 +177,11 @@ Camera:
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
-  m_StereoMirrorMode: 0
 --- !u!4 &108023325
 Transform:
   m_ObjectHideFlags: 0
@@ -411,6 +416,7 @@ SpriteRenderer:
   m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -426,6 +432,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -1822,6 +1829,9 @@ MonoBehaviour:
   - {fileID: 114966335671794918, guid: 06c427086ff05e9489360e83a6cf1132, type: 2}
   - {fileID: 114562941903643982, guid: 001dc0c8fcbdd914f99b713d241fe47f, type: 2}
   - {fileID: 114621380207603322, guid: e0c2fd8fb3f9cea498e169d4ed8a1589, type: 2}
+  numPlayers: 0
+  gameTime: 120
+  playerSprites: []
   countdownText: {fileID: 259963824}
   countDownSprite: {fileID: 493861520}
   countdownFrom: 3
@@ -1857,6 +1867,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NpcSpawners: []
   AllNpcs: []
+  randomNpcSpeed: 1
+  minNpcSpeed: 10
+  maxNpcSpeed: 17
+  rateLowerLimit: 2
+  rateUpperLimit: 12
+  rateOffset: 0
+  startingRateOffset: 0
+  burstLowerLimit: 2
+  burstUpperLimit: 5
 --- !u!1001 &1099302928
 Prefab:
   m_ObjectHideFlags: 0
@@ -2205,6 +2224,11 @@ Prefab:
     - target: {fileID: 4318852731407110, guid: 99367854c8c7be440b93a61c36b64225, type: 2}
       propertyPath: m_RootOrder
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 82695767292805016, guid: 99367854c8c7be440b93a61c36b64225,
+        type: 2}
+      propertyPath: Loop
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 99367854c8c7be440b93a61c36b64225, type: 2}

@@ -4,6 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+/*
+ * Game Bugs:
+ *  - points gameobject is flipping when players rotates
+*/
+
 public class GameManager : MonoBehaviour {
 
     public static GameManager Instance = null;
@@ -16,7 +21,7 @@ public class GameManager : MonoBehaviour {
     public PlayerController[] playerPrefabs;
 
     public static int numPlayers = 0;
-    public static float gameTime = 210;
+    public float gameTime = 210;
     public static List<string> playerSprites = new List<string>();
 
     public Text countdownText;
@@ -30,6 +35,7 @@ public class GameManager : MonoBehaviour {
 
     public bool gameStarted;
     bool isTimerStarted = false;
+    float currCountdownValue;
 
     public Dictionary<int, int> PlayerScores = new Dictionary<int, int>();
 
@@ -42,19 +48,17 @@ public class GameManager : MonoBehaviour {
     }
 
     void Start () {
+
         gameStarted = false;
+
+        currCountdownValue = gameTime;
 
         List<PlayerController> players = new List<PlayerController>();
 
         for(int i = 0; i < numPlayers; i++) {
-            //Debug.Log(playerPrefabs[i].name);
-
-            //Debug.Log(playerSprites[i]);
 
             if (playerSprites[i] == "red")
             {
-                //Debug.Log("red");
-
                 PlayerController playerName = playerPrefabs[0];
 
                 if (playerName.name == "Player")
@@ -66,8 +70,6 @@ public class GameManager : MonoBehaviour {
 
             if (playerSprites[i] == "green")
             {
-                //Debug.Log("green");
-
                 PlayerController playerName = playerPrefabs[1];
 
                 if (playerName.name == "Player2")
@@ -122,7 +124,6 @@ public class GameManager : MonoBehaviour {
             countdownText.text = "1";
         } else if (time <= 0.0f)
         {
-         //    countdownText.text = "GO";
             gameStarted = true;
             if(!isTimerStarted)
             {
@@ -138,21 +139,21 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    float currCountdownValue = GameManager.gameTime;
+
+
     public IEnumerator GetWorldTime()
     {
-        //currCountdownValue = countdownValue;
         while (currCountdownValue >= 0)
         {
-            GameManager.gameTime = currCountdownValue;
+            gameTime = currCountdownValue;
             yield return new WaitForSeconds(1.0f);
             currCountdownValue--;
 
             countDownSprite.GetComponent<SpriteRenderer>().enabled = false;
         }
+
         if (currCountdownValue < 0)
         {
-            Debug.Log("GAME ENDED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
             SceneManager.LoadScene(4);
         }
 

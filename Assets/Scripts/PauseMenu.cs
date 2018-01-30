@@ -39,7 +39,7 @@ public class PauseMenu : MonoBehaviour {
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
-        GameManager.gameTime = 210;
+        //GameManager.Instance.gameTime = 210;
 
         for (int i = 0; i < GameManager.Instance.PlayerScores.Count; i++ )
         {
